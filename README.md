@@ -1,4 +1,4 @@
-# unity-first-person-template
-A template for a first person game made with Unity. Includes a player prefab with camera, movement script, and look script.
+# Junk Science Prototype
+A prototype for and alchemy inspired game.
 
 Unity Version: `2019.4.20`
