@@ -11,7 +11,7 @@ X Basic 3D first-person environment
         - heat
     - element "state" behaviors:
         - solid
-        - liqud
+        - liquid
         - gas
 
     
