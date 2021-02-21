@@ -8,6 +8,11 @@ public class CircularMovementScript : MonoBehaviour
     // Applies circular movement to a game object
 
 
+    public enum Active {
+        On = 1,
+        Off = 2,
+    }
+    public Active isActive = Active.On;
     public Transform rotationCenter;
     public float rotationRadius = 2f;
     public float angularSpeed = 2f;
@@ -15,8 +20,13 @@ public class CircularMovementScript : MonoBehaviour
     private float posX, posZ, angle = 0f;
 
 
-    void Update()
-    {
+    public void Update() {
+        if(isActive == Active.On) {
+            CalculatePosition();
+        }
+    }
+
+    private void CalculatePosition() {
         posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius;
         posZ = rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius;
         transform.position = new Vector3(posX, transform.position.y, posZ);

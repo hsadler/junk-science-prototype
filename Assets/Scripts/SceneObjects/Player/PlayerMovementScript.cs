@@ -20,12 +20,13 @@ public class PlayerMovementScript : MonoBehaviour
 	}
 
 	void Update() {
+		HandlePlayerMove();
         // STUB: Potentially handle movement if player is active/inactive
-		if(true) {
-			HandlePlayerMove();
-		} else {
-			HandlePlayerInactiveMove();
-		}
+		// if(true) {
+		// 	HandlePlayerMove();
+		// } else {
+		// 	HandlePlayerInactiveMove();
+		// }
 	}
 
 	private void HandlePlayerMove() {
