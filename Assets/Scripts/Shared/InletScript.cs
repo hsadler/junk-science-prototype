@@ -38,8 +38,8 @@ public class InletScript : MonoBehaviour
     }
 
     void OnGUI() {
-        float fps = 1.0f / Time.smoothDeltaTime;
-        string displayText = "Spawn count: " + this.spawnCount.ToString() + ", Fps: " + fps.ToString("#.00");
+        int fps = (int)(1.0f / Time.smoothDeltaTime);
+        string displayText = "Spawn count: " + this.spawnCount.ToString() + ", Fps: " + fps.ToString();
         GUI.Label(
             this.guiRect, 
             displayText
