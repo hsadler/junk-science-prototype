@@ -460,6 +460,7 @@ MonoBehaviour:
   spawnColumnLength: 10
   propulsionForce: 0
   secondsPerSpawn: 1
+  spawnPoolSize: 10000
 --- !u!1 &1334561589
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,27 +928,27 @@ PrefabInstance:
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9970617
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.05199201
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0029295639
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.056180865
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 5.97
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
@@ -957,7 +958,7 @@ PrefabInstance:
     - target: {fileID: 1131349183648507167, guid: b5fbf750f409449a6809a9d0221eb4d0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -6.45
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5fbf750f409449a6809a9d0221eb4d0, type: 3}
