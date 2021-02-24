@@ -9,7 +9,6 @@ public class InletScript : MonoBehaviour
 
 
     public GameObject spawnObject;
-    public Transform spawnDumpTransform;
     public Transform spawnPointTransform;
     public bool spawnOn = false;
     public int spawnRowLength = 10;
@@ -30,11 +29,14 @@ public class InletScript : MonoBehaviour
         InvokeRepeating("CheckAndSpawnObjects", 0f, this.secondsPerSpawn);
     }
 
-    void Update() {}
+    void Update() {
+        this.LogPerformance();
+    }
 
     void OnGUI() {
         int fps = (int)(1.0f / Time.smoothDeltaTime);
-        string displayText = "Spawn count: " + this.spawnCount.ToString() + 
+        string displayText =
+            "Spawn count: " + this.spawnCount.ToString() + 
             ", Fps: " + fps.ToString();
         GUI.Label(
             this.guiRect, 
@@ -50,45 +52,41 @@ public class InletScript : MonoBehaviour
                 Quaternion.identity
             ) as GameObject;
             go.SetActive(false);
-            go.transform.parent = this.spawnDumpTransform;
+            go.transform.parent = this.spawnPointTransform;
             this.spawnPool.Push(go);
         }
     }
 
     private void CheckAndSpawnObjects() {
         if(this.spawnOn) {
-            foreach (GameObject go in this.GetGameObjectsToSpawn()) {
-                if(go != null) {
+            for (int i = 0; i < this.spawnColumnLength; i++) {
+                for (int j = 0; j < this.spawnRowLength; j++) {
+                    GameObject go = this.spawnPool.Pop();
+                    Vector3 localPos = go.transform.localPosition;
+                    //TODO: itemSpread is buggy here
+                    Vector3 newlocalPos = new Vector3(
+                        (localPos.x + (i * this.itemSpread)) - (this.spawnColumnLength / 2),
+                        localPos.y,
+                        (localPos.z + (j * this.itemSpread)) - (this.spawnRowLength / 2)
+                    );
+                    go.transform.localPosition = newlocalPos;
+                    go.transform.localRotation = Quaternion.identity;
                     go.SetActive(true);
+                    go.GetComponent<Rigidbody>().AddRelativeForce(
+                        Vector3.down * this.propulsionForce
+                    );
                     this.spawnCount += 1;
-                    
                 }
-            }
-            float fps = 1.0f / Time.smoothDeltaTime;
-            // fire logs if under fps threshold
-            if(fps < 35f) {
-                Debug.Log("Spawn count: " + this.spawnCount.ToString() + 
-                    ", Fps: " + fps.ToString("#.00"));
             }
         }
     }
 
-    private List<GameObject> GetGameObjectsToSpawn() {
-        var toSpawn = new List<GameObject>();
-        for(int i = 0; i < this.spawnColumnLength; i++) {
-            for(int j = 0; j < this.spawnRowLength; j++) {
-                GameObject go = this.spawnPool.Pop();
-                Vector3 localPos = go.transform.localPosition;
-                Vector3 newlocalPos = new Vector3(
-                    (localPos.x + (i * this.itemSpread)) - (this.spawnColumnLength / 2),
-                    localPos.y,
-                    (localPos.z + (j * this.itemSpread)) - (this.spawnRowLength / 2)
-                );
-                go.transform.localPosition = newlocalPos;
-                toSpawn.Add(go);
-            }    
+    private void LogPerformance() {
+        float fps = 1.0f / Time.smoothDeltaTime;
+        // fire logs if under fps threshold
+        if (fps < 35f) {
+            Debug.Log("Spawn count: " + this.spawnCount.ToString() + ", Fps: " + fps.ToString("#.00"));
         }
-        return toSpawn;
     }
 
 
