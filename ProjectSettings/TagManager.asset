@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - science-element-none
+  - science-element-water
+  - science-element-salt
+  - science-element-saline
   layers:
   - Default
   - TransparentFX

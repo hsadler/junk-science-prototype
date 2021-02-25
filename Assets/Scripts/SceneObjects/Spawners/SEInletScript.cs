@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InletScript : MonoBehaviour
+public class SEInletScript : MonoBehaviour
 {
 
-    // Spawner for continuous-flow object creation
+    // Spawner for continuous-flow science-element object creation
 
 
     public GameObject spawnObject;
+    public string scienceElementTag = "science-element-none";
+
     public Transform spawnPointTransform;
     public bool spawnOn = false;
     public int spawnRowLength = 10;
@@ -22,6 +24,8 @@ public class InletScript : MonoBehaviour
     private Stack<GameObject> spawnPool;
     private Rect guiRect = new Rect(10, 10, 210, 110);
 
+
+    // UNITY HOOKS
 
     void Start() {
         this.spawnPool = new Stack<GameObject>();
@@ -44,6 +48,8 @@ public class InletScript : MonoBehaviour
         );
     }
 
+    // IMPLEMENTATION METHODS
+
     private void FillSpawnPool() {
         for (int i = 0; i < this.spawnPoolSize; i++) {
             GameObject go = Instantiate(
@@ -53,6 +59,7 @@ public class InletScript : MonoBehaviour
             ) as GameObject;
             go.SetActive(false);
             go.transform.parent = this.spawnPointTransform;
+            go.tag = this.scienceElementTag;
             this.spawnPool.Push(go);
         }
     }
@@ -63,7 +70,7 @@ public class InletScript : MonoBehaviour
                 for (int j = 0; j < this.spawnRowLength; j++) {
                     GameObject go = this.spawnPool.Pop();
                     Vector3 localPos = go.transform.localPosition;
-                    //TODO: itemSpread is buggy here
+                    // TODO: itemSpread is buggy here
                     Vector3 newlocalPos = new Vector3(
                         (localPos.x + (i * this.itemSpread)) - (this.spawnColumnLength / 2),
                         localPos.y,
