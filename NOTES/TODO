@@ -5,13 +5,19 @@ TODO
 X Basic 3D first-person environment
 
 - Experiment with Unity sphere objects as "elements":
-    - scale for max amount in a scene
-    - elements affected by an outside force:
-        - element-to-element contact (chemical reactions)
-        - heat
+    X scale for max amount in a scene
+    X elements affected by an outside force:
+        X element-to-element contact (chemical reactions)
+        X heat
     - element "state" behaviors:
         - solid
         - liquid
         - gas
+
+- Elements to create:
+    - water
+    - salt
+    - saline
+    - steam
     
     

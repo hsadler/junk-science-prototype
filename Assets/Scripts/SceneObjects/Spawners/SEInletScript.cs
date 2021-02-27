@@ -68,6 +68,9 @@ public class SEInletScript : MonoBehaviour
         if(this.spawnOn) {
             for (int i = 0; i < this.spawnColumnLength; i++) {
                 for (int j = 0; j < this.spawnRowLength; j++) {
+                    if (this.spawnPool.Count < 1) {
+                        return;
+                    }
                     GameObject go = this.spawnPool.Pop();
                     Vector3 localPos = go.transform.localPosition;
                     // TODO: itemSpread is buggy here
