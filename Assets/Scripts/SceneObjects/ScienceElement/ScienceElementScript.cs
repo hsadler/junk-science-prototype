@@ -13,7 +13,8 @@ public class ScienceElementScript : MonoBehaviour
 
     private IDictionary<string, Material> tagToMaterial =
         new Dictionary<string, Material>();
-
+    private MeshRenderer meshR;
+ 
 
     // UNITY HOOKS
 
@@ -22,10 +23,12 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMaterial.Add("science-element-none", seNoneMaterial);
         this.tagToMaterial.Add("science-element-water", seWaterMaterial);
         this.tagToMaterial.Add("science-element-salt", seSaltMaterial);
-        this.tagToMaterial.Add("science-element-saline", seSaltMaterial);
+        this.tagToMaterial.Add("science-element-saline", seSalineMaterial);
     }
 
-    void Start() {}
+    void Start() {
+        this.meshR = GetComponent<MeshRenderer>();
+    }
 
     void Update() {
         CheckMaterial();
@@ -36,8 +39,10 @@ public class ScienceElementScript : MonoBehaviour
             this.gameObject.CompareTag("science-element-water") &&
             collision.gameObject.CompareTag("science-element-salt")
         ) {
-            Debug.Log("Water collided with salt!");
+            // turn water to saline and make salt disappear
+            // Debug.Log("Water collided with salt!");
             this.gameObject.tag = "science-element-saline";
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -45,7 +50,8 @@ public class ScienceElementScript : MonoBehaviour
 
     private void CheckMaterial()
     {
-        
+        Material applyMat = tagToMaterial[this.gameObject.tag];
+        this.meshR.material = applyMat;
     }
 
 
