@@ -80,7 +80,15 @@ public class ScienceElementScript : MonoBehaviour
             else if (this.gameObject.CompareTag("science-element-saline"))
             {
                 this.ConvertToSteam();
-                var saltGO = Instantiate(this.gameObject);
+                var saltGO = Instantiate(
+                    this.gameObject,
+                    new Vector3(
+                        this.transform.position.x,
+                        this.transform.position.y,
+                        this.transform.position.z
+                    ),
+                    Quaternion.identity
+                );
                 saltGO.GetComponent<ScienceElementScript>().ConvertToSalt();
             }
         }
@@ -88,13 +96,16 @@ public class ScienceElementScript : MonoBehaviour
 
     private void ConvertToWater()
     {
-        // stub
+        //Debug.Log("converting to water...");
+        this.gameObject.tag = "science-element-water";
+        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSaline()
     {
         //Debug.Log("converting to saline...");
         this.gameObject.tag = "science-element-saline";
+        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSteam()
@@ -108,6 +119,7 @@ public class ScienceElementScript : MonoBehaviour
     {
         //Debug.Log("converting to salt...");
         this.gameObject.tag = "science-element-salt";
+        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
     }
 
 

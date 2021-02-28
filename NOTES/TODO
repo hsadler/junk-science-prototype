@@ -4,6 +4,14 @@ TODO
 
 X Basic 3D first-person environment
 
+- POC reactions:
+    X water mix with salt makes saline
+    X water heated makes steam
+    X saline heated makes steam and salt
+    - steam cooled makes water
+    - water cooled makes ice
+    - saline cooled makes iceberg
+
 - Experiment with Unity sphere objects as "elements":
     X scale for max amount in a scene
     X elements affected by an outside force:
@@ -19,5 +27,5 @@ X Basic 3D first-person environment
     - salt
     - saline
     - steam
-    
-    
+
+   
