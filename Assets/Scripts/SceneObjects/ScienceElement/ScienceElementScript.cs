@@ -22,8 +22,10 @@ public class ScienceElementScript : MonoBehaviour
         new Dictionary<string, Material>();
     private MeshRenderer meshR;
 
+    // last temperature
+    private float lastTemperature;
     // consts
-    private const float BOIL_THRESHOLD = 100f;
+    private const float GAS_THRESHOLD = 100f;
  
 
     // UNITY HOOKS
@@ -35,6 +37,7 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMaterial.Add("science-element-salt", seSaltMaterial);
         this.tagToMaterial.Add("science-element-saline", seSalineMaterial);
         this.tagToMaterial.Add("science-element-steam", seSteamMaterial);
+        this.lastTemperature = this.temperature;
     }
 
     void Start() {
@@ -71,7 +74,7 @@ public class ScienceElementScript : MonoBehaviour
             this.temperature += this.receivingHeatAmount;
         }
         // do water type boil changes
-        if (this.temperature >= BOIL_THRESHOLD) {
+        if (this.lastTemperature < GAS_THRESHOLD && this.temperature >= GAS_THRESHOLD) {
             // handle water and saline differently
             if (this.gameObject.CompareTag("science-element-water"))
             {
@@ -91,7 +94,13 @@ public class ScienceElementScript : MonoBehaviour
                 );
                 saltGO.GetComponent<ScienceElementScript>().ConvertToSalt();
             }
+        } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {
+            if (this.gameObject.CompareTag("science-element-steam"))
+            {
+                this.ConvertToWater();
+            }
         }
+        this.lastTemperature = this.temperature;
     }
 
     private void ConvertToWater()

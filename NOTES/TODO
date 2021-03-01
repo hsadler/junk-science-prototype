@@ -4,28 +4,39 @@ TODO
 
 X Basic 3D first-person environment
 
+X Elements to create:
+    X water
+    X salt
+    X saline
+    X steam
+
+- play with change of SE sizes, colliders, and shapes
+
+- element "state" behaviors:
+    - solid
+    X liquid
+    X gas
+
 - POC reactions:
     X water mix with salt makes saline
     X water heated makes steam
     X saline heated makes steam and salt
-    - steam cooled makes water
+    X steam cooled makes water
     - water cooled makes ice
     - saline cooled makes iceberg
 
-- Experiment with Unity sphere objects as "elements":
-    X scale for max amount in a scene
-    X elements affected by an outside force:
-        X element-to-element contact (chemical reactions)
-        X heat
-    - element "state" behaviors:
-        - solid
-        - liquid
-        - gas
+- prototype UX:
+    - fills container with water
+    - transfers container to beaker and dumps
+    - fills container with salt
+    - transfers container to beaker and dumps
+    - mixes contents in beaker to produce saline
+    - takes beaker to heater
+    - heats saline to produce steam and salt
+    - fills container with water
+    - tranfers to cooler
+    - produces ice
 
-- Elements to create:
-    - water
-    - salt
-    - saline
-    - steam
+
 
    
