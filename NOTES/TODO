@@ -10,20 +10,27 @@ X Elements to create:
     X saline
     X steam
 
-- play with change of SE sizes, colliders, and shapes
-
-- element "state" behaviors:
-    - solid
+X element "state" behaviors:
     X liquid
     X gas
 
-- POC reactions:
+X POC reactions:
     X water mix with salt makes saline
     X water heated makes steam
     X saline heated makes steam and salt
     X steam cooled makes water
-    - water cooled makes ice
-    - saline cooled makes iceberg
+
+- play with change of SE sizes, colliders, and shapes
+
+- focus on player experience:
+    - lab environment
+    - lab equipment:
+        - SE despenser
+        - beaker
+        - mixer
+        - heater
+        - cooler
+    - player pick-up, transfer, and dump beakers
 
 - prototype UX:
     - fills container with water
@@ -33,10 +40,20 @@ X Elements to create:
     - mixes contents in beaker to produce saline
     - takes beaker to heater
     - heats saline to produce steam and salt
+    
+
+/////// defer ///////
+
+- more element "state" behaviors:
+    - solid
+
+- more POC reactions:
+    - water cooled makes ice
+    - saline cooled makes iceberg
+
+- more prototype UX:
     - fills container with water
     - tranfers to cooler
     - produces ice
-
-
 
    
