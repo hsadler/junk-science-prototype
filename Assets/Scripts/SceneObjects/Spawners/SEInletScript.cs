@@ -10,6 +10,7 @@ public class SEInletScript : MonoBehaviour
 
     public GameObject spawnObject;
     public string scienceElementTag = "science-element-none";
+    public Vector3 spawnObjectScale = new Vector3(1, 1, 1);
 
     public Transform spawnPointTransform;
     public bool spawnOn = false;
@@ -58,6 +59,12 @@ public class SEInletScript : MonoBehaviour
                 Quaternion.identity
             ) as GameObject;
             go.SetActive(false);
+            go.transform.parent = null;
+            //go.transform.localScale = new Vector3(
+            //    this.spawnObjectScale.x,
+            //    this.spawnObjectScale.y,
+            //    this.spawnObjectScale.z
+            //);
             go.transform.parent = this.spawnPointTransform;
             go.tag = this.scienceElementTag;
             this.spawnPool.Push(go);
@@ -71,6 +78,7 @@ public class SEInletScript : MonoBehaviour
                     if (this.spawnPool.Count < 1) {
                         return;
                     }
+                    Debug.Log("spawnging from inlet");
                     GameObject go = this.spawnPool.Pop();
                     Vector3 localPos = go.transform.localPosition;
                     // TODO: itemSpread is buggy here

@@ -624,6 +624,21 @@ PrefabInstance:
       propertyPath: spawnColumnLength
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7686925644147672647, guid: e65448a8479304e9694441981d73eaa1,
+        type: 3}
+      propertyPath: spawnObjectScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686925644147672647, guid: e65448a8479304e9694441981d73eaa1,
+        type: 3}
+      propertyPath: spawnObjectScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686925644147672647, guid: e65448a8479304e9694441981d73eaa1,
+        type: 3}
+      propertyPath: spawnObjectScale.z
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e65448a8479304e9694441981d73eaa1, type: 3}
 --- !u!1 &1841411423

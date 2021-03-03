@@ -20,8 +20,6 @@ X POC reactions:
     X saline heated makes steam and salt
     X steam cooled makes water
 
-- play with change of SE sizes, colliders, and shapes
-
 - focus on player experience:
     - lab environment
     - lab equipment:
@@ -31,6 +29,8 @@ X POC reactions:
         - heater
         - cooler
     - player pick-up, transfer, and dump beakers
+
+- play with change of SE sizes, colliders, and shapes
 
 - prototype UX:
     - fills container with water

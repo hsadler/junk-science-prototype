@@ -6,6 +6,9 @@ public class ScienceElementScript : MonoBehaviour
 {
 
 
+    // scale
+    public Vector3 scale = new Vector3(1, 1, 1);
+
     // element temperature
     public float temperature = 0f;
     public bool receivingHeat = false;
@@ -41,6 +44,10 @@ public class ScienceElementScript : MonoBehaviour
     }
 
     void Start() {
+        Transform parent = transform.parent;
+        transform.parent = null;
+        //transform.localScale = new Vector3(this.scale.x, this.scale.y, this.scale.z);
+        transform.parent = parent;
         this.meshR = GetComponent<MeshRenderer>();
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
     }
@@ -55,7 +62,6 @@ public class ScienceElementScript : MonoBehaviour
             collision.gameObject.CompareTag("science-element-salt")
         ) {
             // turn water to saline and make salt disappear
-            //Debug.Log("Chemical reaction!!!!!!!!");
             this.ConvertToSaline();
             collision.gameObject.SetActive(false);
         }
@@ -92,7 +98,16 @@ public class ScienceElementScript : MonoBehaviour
                     ),
                     Quaternion.identity
                 );
-                saltGO.GetComponent<ScienceElementScript>().ConvertToSalt();
+                var seScript = saltGO.GetComponent<ScienceElementScript>();
+                Transform parent = transform.parent;
+                transform.parent = null;
+                //seScript.transform.localScale = new Vector3(
+                //    this.scale.x,
+                //    this.scale.y,
+                //    this.scale.z
+                //);
+                transform.parent = parent;
+                seScript.ConvertToSalt();
             }
         } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {
             if (this.gameObject.CompareTag("science-element-steam"))
