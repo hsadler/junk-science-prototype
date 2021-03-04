@@ -59,12 +59,7 @@ public class SEInletScript : MonoBehaviour
                 Quaternion.identity
             ) as GameObject;
             go.SetActive(false);
-            go.transform.parent = null;
-            //go.transform.localScale = new Vector3(
-            //    this.spawnObjectScale.x,
-            //    this.spawnObjectScale.y,
-            //    this.spawnObjectScale.z
-            //);
+            go.GetComponent<ScienceElementScript>().scale = this.spawnObjectScale;
             go.transform.parent = this.spawnPointTransform;
             go.tag = this.scienceElementTag;
             this.spawnPool.Push(go);
