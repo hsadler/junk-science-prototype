@@ -73,7 +73,7 @@ public class SEInletScript : MonoBehaviour
                     if (this.spawnPool.Count < 1) {
                         return;
                     }
-                    Debug.Log("spawnging from inlet");
+                    //Debug.Log("spawnging from inlet");
                     GameObject go = this.spawnPool.Pop();
                     Vector3 localPos = go.transform.localPosition;
                     // TODO: itemSpread is buggy here
