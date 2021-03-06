@@ -27,8 +27,7 @@ public class PlayerLookScript : MonoBehaviour
 	// UNITY HOOKS
 
 	private void Update() {
-        // STUB: Potentially handle look if player is active/inactive
-		if(true) {
+		if(LabSceneManager.instance.playerActive) {
 			CalculateLookRotation();
 		}
 	}

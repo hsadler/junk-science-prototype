@@ -20,6 +20,12 @@ X POC reactions:
     X saline heated makes steam and salt
     X steam cooled makes water
 
+- eng & bugs pass:
+    X fix spawn-count and FPS tracking
+    - add reticle for first-person player with esc key toggle
+
+- take more videos
+
 - focus on player experience:
     X SE size relative to player
     - player pick-up, transfer, and dump beakers

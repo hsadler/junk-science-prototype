@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Test8_BeakerPickup.unity
+    guid: 2d61a54fc12574db292530e30dacf77e
   m_configObjects: {}

@@ -63,6 +63,7 @@ public class ScienceElementScript : MonoBehaviour
             // turn water to saline and make salt disappear
             this.ConvertToSaline();
             collision.gameObject.SetActive(false);
+            LabSceneManager.instance.scienceElementSpawnCount -= 1;
         }
     }
 
@@ -97,6 +98,7 @@ public class ScienceElementScript : MonoBehaviour
                     ),
                     Quaternion.identity
                 );
+                LabSceneManager.instance.scienceElementSpawnCount += 1;
                 var seScript = saltGO.GetComponent<ScienceElementScript>();
                 Transform parent = transform.parent;
                 transform.parent = null;

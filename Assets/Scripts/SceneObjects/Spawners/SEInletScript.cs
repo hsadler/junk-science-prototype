@@ -21,9 +21,7 @@ public class SEInletScript : MonoBehaviour
     public float secondsPerSpawn = 1f;
     public int spawnPoolSize = 10000;
 
-    private int spawnCount = 0;
     private Stack<GameObject> spawnPool;
-    private Rect guiRect = new Rect(10, 10, 210, 110);
 
 
     // UNITY HOOKS
@@ -34,20 +32,7 @@ public class SEInletScript : MonoBehaviour
         InvokeRepeating("CheckAndSpawnObjects", 0f, this.secondsPerSpawn);
     }
 
-    void Update() {
-        this.LogPerformance();
-    }
-
-    void OnGUI() {
-        int fps = (int)(1.0f / Time.smoothDeltaTime);
-        string displayText =
-            "Spawn count: " + this.spawnCount.ToString() + 
-            ", Fps: " + fps.ToString();
-        GUI.Label(
-            this.guiRect, 
-            displayText
-        );
-    }
+    void Update() {}
 
     // IMPLEMENTATION METHODS
 
@@ -88,17 +73,9 @@ public class SEInletScript : MonoBehaviour
                     go.GetComponent<Rigidbody>().AddRelativeForce(
                         Vector3.down * this.propulsionForce
                     );
-                    this.spawnCount += 1;
+                    LabSceneManager.instance.scienceElementSpawnCount += 1;
                 }
             }
-        }
-    }
-
-    private void LogPerformance() {
-        float fps = 1.0f / Time.smoothDeltaTime;
-        // fire logs if under fps threshold
-        if (fps < 35f) {
-            Debug.Log("Spawn count: " + this.spawnCount.ToString() + ", Fps: " + fps.ToString("#.00"));
         }
     }
 

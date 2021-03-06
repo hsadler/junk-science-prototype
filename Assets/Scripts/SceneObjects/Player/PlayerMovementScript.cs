@@ -20,14 +20,15 @@ public class PlayerMovementScript : MonoBehaviour
 	}
 
 	void Update() {
-		HandlePlayerMove();
-        // STUB: Potentially handle movement if player is active/inactive
-		// if(true) {
-		// 	HandlePlayerMove();
-		// } else {
-		// 	HandlePlayerInactiveMove();
-		// }
-	}
+        if (LabSceneManager.instance.playerActive)
+        {
+            HandlePlayerMove();
+        }
+        else
+        {
+            HandlePlayerInactiveMove();
+        }
+    }
 
 	private void HandlePlayerMove() {
 		// Move direction directly from axes
