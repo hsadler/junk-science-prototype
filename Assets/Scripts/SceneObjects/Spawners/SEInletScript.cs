@@ -10,7 +10,7 @@ public class SEInletScript : MonoBehaviour
 
     public GameObject spawnObject;
     public string scienceElementTag = "science-element-none";
-    public Vector3 spawnObjectScale = new Vector3(1, 1, 1);
+    public float spawnObjectScale = 1f;
 
     public Transform spawnPointTransform;
     public bool spawnOn = false;
@@ -59,7 +59,7 @@ public class SEInletScript : MonoBehaviour
                 Quaternion.identity
             ) as GameObject;
             go.SetActive(false);
-            go.GetComponent<ScienceElementScript>().scale = this.spawnObjectScale;
+            go.GetComponent<ScienceElementScript>().elementScale = this.spawnObjectScale;
             go.transform.parent = this.spawnPointTransform;
             go.tag = this.scienceElementTag;
             this.spawnPool.Push(go);

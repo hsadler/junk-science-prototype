@@ -22,6 +22,7 @@ X POC reactions:
 
 - focus on player experience:
     X SE size relative to player
+    - player pick-up, transfer, and dump beakers
     - lab environment
     - lab equipment:
         - SE despenser
@@ -29,7 +30,6 @@ X POC reactions:
         - mixer
         - heater
         - cooler
-    - player pick-up, transfer, and dump beakers
 
 - play with change of SE sizes, colliders, and shapes
 

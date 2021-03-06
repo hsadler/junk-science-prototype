@@ -6,8 +6,8 @@ public class ScienceElementScript : MonoBehaviour
 {
 
 
-    // scale
-    public Vector3 scale = new Vector3(1, 1, 1);
+    // element scale
+    public float elementScale = 1f;
 
     // element temperature
     public float temperature = 0f;
@@ -45,11 +45,7 @@ public class ScienceElementScript : MonoBehaviour
     void Start() {
         Transform parent = transform.parent;
         transform.parent = null;
-        transform.localScale = new Vector3(
-            this.scale.x,
-            this.scale.y,
-            this.scale.z
-        );
+        transform.localScale = Vector3.one * this.elementScale;
         transform.parent = parent;
         this.meshR = GetComponent<MeshRenderer>();
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
@@ -104,11 +100,7 @@ public class ScienceElementScript : MonoBehaviour
                 var seScript = saltGO.GetComponent<ScienceElementScript>();
                 Transform parent = transform.parent;
                 transform.parent = null;
-                seScript.transform.localScale = new Vector3(
-                    this.scale.x,
-                    this.scale.y,
-                    this.scale.z
-                );
+                seScript.transform.localScale = Vector3.one * this.elementScale;
                 transform.parent = parent;
                 seScript.ConvertToSalt();
             }
