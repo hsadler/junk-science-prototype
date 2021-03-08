@@ -20,9 +20,9 @@ X POC reactions:
     X saline heated makes steam and salt
     X steam cooled makes water
 
-- eng & bugs pass:
+X eng & bugs pass:
     X fix spawn-count and FPS tracking
-    - add reticle for first-person player with esc key toggle
+    X add reticle for first-person player with esc key toggle
 
 - take more videos
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LabSceneManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class LabSceneManager : MonoBehaviour
 
 	// player
 	public bool playerActive = true;
+	public UnityEvent playerSetActive;
+	public UnityEvent playerSetInactive;
 
 	// scene telemetry
 	public int scienceElementSpawnCount = 0;
@@ -69,10 +72,12 @@ public class LabSceneManager : MonoBehaviour
 		{
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
+			this.playerSetActive.Invoke();
 		} else
         {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
+			this.playerSetInactive.Invoke();
 		}
     }
 
