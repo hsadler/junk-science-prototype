@@ -366,7 +366,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-175190
+  m_Name: pb_Mesh14986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6386,7 +6386,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-175188
+  m_Name: pb_Mesh14926
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14369,6 +14369,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577156046}
   m_CullTransparentMesh: 0
+--- !u!20 &1610493067 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2177553916953090586, guid: 096a7a943ee964775ad1c68d607d5c32,
+    type: 3}
+  m_PrefabInstance: {fileID: 2076573405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1610953926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14448,6 +14454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1626447303}
   - component: {fileID: 1626447302}
+  - component: {fileID: 1626447301}
   m_Layer: 0
   m_Name: BeakerMedium
   m_TagString: Untagged
@@ -14455,6 +14462,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1626447301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626447300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42abe2472da244e0781f2160f1d48b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1626447302
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16640,6 +16659,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
+        type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1610493067}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 096a7a943ee964775ad1c68d607d5c32, type: 3}
 --- !u!1001 &3955758924702919964
