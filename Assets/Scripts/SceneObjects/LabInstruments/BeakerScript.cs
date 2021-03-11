@@ -23,7 +23,6 @@ public class BeakerScript : MonoBehaviour
     public void PlayerLeftClickInteraction(PlayerInteractionMessage message)
     {
         Debug.Log("player clicked a beaker");
-        transform.parent = message.player.transform;
     }
 
 
