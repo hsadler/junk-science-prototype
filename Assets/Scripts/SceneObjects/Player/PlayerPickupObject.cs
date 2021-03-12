@@ -7,69 +7,60 @@ public class PlayerPickupObject : MonoBehaviour
 
 
 	public GameObject playerCameraGO;
-	public float distance;
+	public float carryDistance;
 	public float smooth;
 
 	private Camera playerCamera;
-	private bool carrying = false;
+	private bool isCarrying = false;
 	private GameObject carriedObject;
 
 
 	// UNITY HOOKS
 
-    void Start()
+	void Start()
 	{
 		this.playerCamera = playerCameraGO.GetComponent<Camera>();
 	}
 
 	void Update()
 	{
-		if (carrying)
+		if (this.isCarrying)
 		{
 			Carry(carriedObject);
 			CheckDrop();
-			//RotateObject();
 		}
 		else
 		{
-			Pickup();
+			CheckPickup();
 		}
 	}
 
 	// IMPLEMENTATION METHODS
 
-	void RotateObject()
+	void Carry(GameObject go)
 	{
-		carriedObject.transform.Rotate(5, 10, 15);
-	}
-
-	void Carry(GameObject o)
-	{
-		o.transform.position = Vector3.Lerp(
-			o.transform.position,
-			this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * distance,
+		go.transform.position = Vector3.Lerp(
+			go.transform.position,
+			this.playerCameraGO.transform.position +
+				this.playerCameraGO.transform.forward * this.carryDistance,
 			Time.deltaTime * smooth
 		);
 	}
 
-	void Pickup()
+	void CheckPickup()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			//Debug.Log("Checking pickup");
 			RaycastHit hit;
 			Ray ray = this.playerCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
 			if (Physics.Raycast(ray, out hit))
 			{
-				//Debug.Log("Hit: " + hit.transform.gameObject.name);
 				bool pickupable = (hit.transform.gameObject.GetComponent<PickupableScript>() != null);
 				if (pickupable)
 				{
-					//Debug.Log("Picking up pickupable");
-					carrying = true;
+					this.isCarrying = true;
 					carriedObject = hit.transform.gameObject;
-                    //hit.transform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                }
+				}
 			}
 		}
 	}
@@ -84,8 +75,7 @@ public class PlayerPickupObject : MonoBehaviour
 
 	void DropObject()
 	{
-		carrying = false;
-		//carriedObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+		this.isCarrying= false;
 		carriedObject = null;
 	}
 }
