@@ -9,7 +9,8 @@ public class PlayerInteractionScript : MonoBehaviour
 	public GameObject playerCameraGO;
 	public float carryDistance;
 	public float carrySmooth;
-
+	public float rotateSpeed;
+	public float rotateSmooth;
 
 	private Camera playerCamera;
 	private bool isCarrying = false;
@@ -31,7 +32,8 @@ public class PlayerInteractionScript : MonoBehaviour
         }
 		if (this.isCarrying)
 		{
-			this.Carry(carriedObject);
+			this.CarryObject(carriedObject);
+			this.CheckAndTurnObject(carriedObject);
 			this.CheckDrop();
 		}
 		else
@@ -56,7 +58,7 @@ public class PlayerInteractionScript : MonoBehaviour
 				gameObject,
 				hit
 			);
-			// send standard ray hit message
+			// send standard aim hit message
 			objectHit.SendMessageUpwards(
 				"PlayerRayHitInteraction",
 				playerInteractionMessage,
@@ -89,16 +91,7 @@ public class PlayerInteractionScript : MonoBehaviour
 		}
 	}
 
-	void Carry(GameObject go)
-	{
-		go.transform.position = Vector3.Lerp(
-			go.transform.position,
-			this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
-			Time.deltaTime * this.carrySmooth
-		);
-	}
-
-	void CheckPickup()
+	private void CheckPickup()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -116,7 +109,7 @@ public class PlayerInteractionScript : MonoBehaviour
 		}
 	}
 
-	void CheckDrop()
+	private void CheckDrop()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -124,7 +117,47 @@ public class PlayerInteractionScript : MonoBehaviour
 		}
 	}
 
-	void DropObject()
+	private void CarryObject(GameObject go)
+	{
+		go.transform.position = Vector3.Lerp(
+			go.transform.position,
+			this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
+			Time.deltaTime * this.carrySmooth
+		);
+	}
+
+	private void CheckAndTurnObject(GameObject go)
+	{
+		float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+		bool isMouseWheelUp = (mouseWheel > 0);
+		bool isMouseWheelDown = (mouseWheel < 0);
+		Vector3 rotVector = Vector3.zero;
+		if (isMouseWheelUp)
+		{
+			Debug.Log("turn carried object right");
+			rotVector = Vector3.forward;
+		}
+		else if (isMouseWheelDown)
+		{
+			Debug.Log("turn carried object left");
+			rotVector = Vector3.back;
+		}
+		if (rotVector != Vector3.zero)
+        {
+			Debug.Log("lerping rotation...");
+			Quaternion toRotation = go.transform.localRotation *
+				Quaternion.AngleAxis(this.rotateSpeed, rotVector);
+			go.transform.rotation = toRotation;
+			// TODO: maybe figure out how to use Lerp here in the future
+			//go.transform.rotation = Quaternion.Lerp(
+			//	go.transform.rotation,
+			//	toRotation,
+			//	Time.deltaTime * this.rotateSmooth
+			//);
+        }
+	}
+
+	private void DropObject()
 	{
 		this.isCarrying = false;
 		this.carriedObject = null;

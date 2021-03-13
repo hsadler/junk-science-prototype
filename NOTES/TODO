@@ -29,7 +29,6 @@ X eng & bugs pass:
 - focus on player experience:
     X SE size relative to player
     - player pick-up, transfer, and dump beakers
-        https://github.com/hsadler/BlockGame/blob/master/Assets/Scripts/SceneObjects/Player/PlayerBlockInteractionScript.cs
     - lab environment
     - lab equipment:
         - SE despenser
