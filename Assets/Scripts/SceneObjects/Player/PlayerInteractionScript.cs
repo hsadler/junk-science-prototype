@@ -6,15 +6,22 @@ public class PlayerInteractionScript : MonoBehaviour
 {
 
 
-	public Camera playerCamera;
+	public GameObject playerCameraGO;
+	public float carryDistance;
+	public float carrySmooth;
 
 
-    // UNITY HOOKS
+	private Camera playerCamera;
+	private bool isCarrying = false;
+	private GameObject carriedObject;
 
-    void Start()
+
+	// UNITY HOOKS
+
+	void Start()
     {
-        
-    }
+		this.playerCamera = playerCameraGO.GetComponent<Camera>();
+	}
 
     void Update()
     {
@@ -22,15 +29,24 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             this.CheckAimInteractions();
         }
+		if (this.isCarrying)
+		{
+			this.Carry(carriedObject);
+			this.CheckDrop();
+		}
+		else
+		{
+			this.CheckPickup();
+		}
 
-    }
+	}
 
     // IMPLEMENTATION METHODS
 
     private void CheckAimInteractions()
     {
 		RaycastHit hit;
-		Ray ray = playerCamera.ViewportPointToRay(
+		Ray ray = this.playerCamera.ViewportPointToRay(
 			new Vector3(0.5F, 0.5F, 0)
 		);
 		if (Physics.Raycast(ray, out hit))
@@ -71,6 +87,47 @@ public class PlayerInteractionScript : MonoBehaviour
 				);
 			}
 		}
+	}
+
+	void Carry(GameObject go)
+	{
+		go.transform.position = Vector3.Lerp(
+			go.transform.position,
+			this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
+			Time.deltaTime * this.carrySmooth
+		);
+	}
+
+	void CheckPickup()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			RaycastHit hit;
+			Ray ray = this.playerCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+			if (Physics.Raycast(ray, out hit))
+			{
+				bool pickupable = (hit.transform.gameObject.GetComponent<PickupableScript>() != null);
+				if (pickupable)
+				{
+					this.isCarrying = true;
+					this.carriedObject = hit.transform.gameObject;
+				}
+			}
+		}
+	}
+
+	void CheckDrop()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			this.DropObject();
+		}
+	}
+
+	void DropObject()
+	{
+		this.isCarrying = false;
+		this.carriedObject = null;
 	}
 
 

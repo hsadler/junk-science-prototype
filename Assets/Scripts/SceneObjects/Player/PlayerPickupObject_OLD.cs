@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPickupObject : MonoBehaviour
+public class PlayerPickupObject_OLD : MonoBehaviour
 {
 
 
 	public GameObject playerCameraGO;
 	public float carryDistance;
-	public float smooth;
+	public float carrySmooth;
 
 	private Camera playerCamera;
 	private bool isCarrying = false;
@@ -43,7 +43,7 @@ public class PlayerPickupObject : MonoBehaviour
 			go.transform.position,
 			this.playerCameraGO.transform.position +
 				this.playerCameraGO.transform.forward * this.carryDistance,
-			Time.deltaTime * smooth
+			Time.deltaTime * this.carrySmooth
 		);
 	}
 
