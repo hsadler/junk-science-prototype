@@ -29,7 +29,10 @@ X eng & bugs pass:
 - focus on player experience:
     X SE size relative to player
     - player pick-up, transfer, and dump beakers
-    - lab environment
+    - lab environment:
+        - room
+        - tables
+        - lights
     - lab equipment:
         - SE despenser
         - beaker

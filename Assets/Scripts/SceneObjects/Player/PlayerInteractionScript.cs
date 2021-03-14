@@ -134,17 +134,17 @@ public class PlayerInteractionScript : MonoBehaviour
 		Vector3 rotVector = Vector3.zero;
 		if (isMouseWheelUp)
 		{
-			Debug.Log("turn carried object right");
+			//Debug.Log("turn carried object right");
 			rotVector = Vector3.forward;
 		}
 		else if (isMouseWheelDown)
 		{
-			Debug.Log("turn carried object left");
+			//Debug.Log("turn carried object left");
 			rotVector = Vector3.back;
 		}
 		if (rotVector != Vector3.zero)
         {
-			Debug.Log("lerping rotation...");
+			//Debug.Log("lerping rotation...");
 			Quaternion toRotation = go.transform.localRotation *
 				Quaternion.AngleAxis(this.rotateSpeed, rotVector);
 			go.transform.rotation = toRotation;
