@@ -28,19 +28,22 @@ X eng & bugs pass:
 
 - focus on player experience:
     X SE size relative to player
-    - player pick-up, transfer, and dump beakers
-    - lab environment:
-        - room
-        - tables
-        - lights
+    X player pick-up object
+    X lab environment:
+        X room
+        X tables
+        X lights
     - lab equipment:
-        - SE despenser
+        - science-element despenser
         - beaker
         - mixer
         - heater
         - cooler
 
-- play with change of SE sizes, colliders, and shapes
+refine UX:
+    - beaker 3d model design in Blender
+    - player pick-up, transfer, and dump beakers
+    - play with change of SE sizes, colliders, and shapes
 
 - prototype UX:
     - fills container with water
