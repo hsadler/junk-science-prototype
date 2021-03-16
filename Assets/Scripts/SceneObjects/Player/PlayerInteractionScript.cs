@@ -104,6 +104,7 @@ public class PlayerInteractionScript : MonoBehaviour
 				{
 					this.isCarrying = true;
 					this.carriedObject = hit.transform.gameObject;
+					this.carriedObject.GetComponent<Rigidbody>().isKinematic = true;
 				}
 			}
 		}
@@ -159,6 +160,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
 	private void DropObject()
 	{
+		this.carriedObject.GetComponent<Rigidbody>().isKinematic = false;
 		this.isCarrying = false;
 		this.carriedObject = null;
 	}
