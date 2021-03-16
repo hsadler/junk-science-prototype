@@ -42,6 +42,7 @@ X eng & bugs pass:
 
 refine UX:
     - beaker 3d model design in Blender
+    https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
     - player pick-up, transfer, and dump beakers
     - play with change of SE sizes, colliders, and shapes
 
