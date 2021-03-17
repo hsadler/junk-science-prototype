@@ -63,7 +63,7 @@ public class ScienceElementScript : MonoBehaviour
             // turn water to saline and make salt disappear
             this.ConvertToSaline();
             collision.gameObject.SetActive(false);
-            LabSceneManager.instance.scienceElementSpawnCount -= 1;
+            LabSceneManager.instance.GiveScienceElementBackToPool(collision.gameObject);
         }
     }
 
@@ -89,22 +89,22 @@ public class ScienceElementScript : MonoBehaviour
             else if (this.gameObject.CompareTag("science-element-saline"))
             {
                 this.ConvertToSteam();
-                var saltGO = Instantiate(
-                    this.gameObject,
-                    new Vector3(
+                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
+                if (saltGO != null)
+                {
+                    saltGO.transform.position = new Vector3(
                         this.transform.position.x,
                         this.transform.position.y,
                         this.transform.position.z
-                    ),
-                    Quaternion.identity
-                );
-                LabSceneManager.instance.scienceElementSpawnCount += 1;
-                var seScript = saltGO.GetComponent<ScienceElementScript>();
-                Transform parent = transform.parent;
-                transform.parent = null;
-                seScript.transform.localScale = Vector3.one * this.elementScale;
-                transform.parent = parent;
-                seScript.ConvertToSalt();
+                    );
+                    saltGO.transform.rotation = Quaternion.identity;
+                    var seScript = saltGO.GetComponent<ScienceElementScript>();
+                    Transform parent = transform.parent;
+                    transform.parent = null;
+                    seScript.transform.localScale = Vector3.one * this.elementScale;
+                    transform.parent = parent;
+                    seScript.ConvertToSalt();
+                }
             }
         } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {
             if (this.gameObject.CompareTag("science-element-steam"))

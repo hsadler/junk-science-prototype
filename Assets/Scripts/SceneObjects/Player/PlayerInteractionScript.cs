@@ -7,13 +7,15 @@ public class PlayerInteractionScript : MonoBehaviour
 
 
 	public GameObject playerCameraGO;
-	public float carryDistance;
-	public float carrySmooth;
+	public float maxPickupDistance = 100f;
+	public float maxCarrySpeedPerSecond = 100f;
+	public float carrySmooth = 1f;
 	public float rotateSpeed;
 	public float rotateSmooth;
 
 	private Camera playerCamera;
 	private bool isCarrying = false;
+	private float carryDistance;
 	private GameObject carriedObject;
 
 
@@ -26,10 +28,12 @@ public class PlayerInteractionScript : MonoBehaviour
 
     void Update()
     {
+		// aim and clicks
         if (LabSceneManager.instance.playerActive)
         {
             this.CheckAimInteractions();
         }
+		// carrying objects
 		if (this.isCarrying)
 		{
 			this.CarryObject(carriedObject);
@@ -100,9 +104,10 @@ public class PlayerInteractionScript : MonoBehaviour
 			if (Physics.Raycast(ray, out hit))
 			{
 				bool pickupable = (hit.transform.gameObject.GetComponent<PickupableScript>() != null);
-				if (pickupable)
+				if (pickupable && hit.distance < this.maxPickupDistance)
 				{
 					this.isCarrying = true;
+					this.carryDistance = hit.distance;
 					this.carriedObject = hit.transform.gameObject;
 					this.carriedObject.GetComponent<Rigidbody>().isKinematic = true;
 				}
@@ -120,11 +125,17 @@ public class PlayerInteractionScript : MonoBehaviour
 
 	private void CarryObject(GameObject go)
 	{
-		go.transform.position = Vector3.Lerp(
-			go.transform.position,
-			this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
-			Time.deltaTime * this.carrySmooth
-		);
+        Vector3 newPos = Vector3.Lerp(
+            go.transform.position,
+            this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
+            Time.deltaTime * this.carrySmooth
+        );
+		//Vector3 newPos = Vector3.MoveTowards(
+		//	go.transform.position,
+		//	this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
+		//	this.maxCarrySpeedPerSecond * Time.deltaTime
+		//);
+		go.transform.position = newPos;	
 	}
 
 	private void CheckAndTurnObject(GameObject go)

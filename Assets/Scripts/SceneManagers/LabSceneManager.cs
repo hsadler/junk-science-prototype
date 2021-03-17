@@ -16,6 +16,11 @@ public class LabSceneManager : MonoBehaviour
 	public int scienceElementSpawnCount = 0;
 	private Rect guiRect = new Rect(10, 10, 210, 110);
 
+	// science element game object pool
+	public GameObject spawnObject;
+	public int spawnPoolSize = 10000;
+	private Stack<GameObject> scienceElementPool = new Stack<GameObject>();
+
 
 	// the static reference to the singleton instance
 	public static LabSceneManager instance { get; private set; }
@@ -36,7 +41,7 @@ public class LabSceneManager : MonoBehaviour
 
 	void Start()
 	{
-
+		this.FillSpawnPool();
 	}
 
 	void Update()
@@ -63,6 +68,25 @@ public class LabSceneManager : MonoBehaviour
 		);
 	}
 
+	// INTERFACE METHODS
+
+	public GameObject GetScienceElementFromPool()
+    {
+		var go = this.scienceElementPool.Pop();
+		if (go != null)
+		{
+			this.scienceElementSpawnCount += 1;
+		}
+		return go;
+	}
+
+	public void GiveScienceElementBackToPool(GameObject go)
+    {
+		go.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		this.scienceElementPool.Push(go);
+		this.scienceElementSpawnCount -= 1;
+	}
+
 	// IMPLEMENTATION METHODS
 
 	private void TogglePlayerActive()
@@ -80,6 +104,20 @@ public class LabSceneManager : MonoBehaviour
 			this.playerSetInactive.Invoke();
 		}
     }
+
+	private void FillSpawnPool()
+	{
+		for (int i = 0; i < this.spawnPoolSize; i++)
+		{
+			GameObject go = Instantiate(
+				this.spawnObject,
+				transform.position,
+				Quaternion.identity
+			) as GameObject;
+			go.SetActive(false);
+			this.scienceElementPool.Push(go);
+		}
+	}
 
 	private void LogPerformance()
 	{
