@@ -34,11 +34,40 @@ X eng & bugs pass:
         X tables
         X lights
     - lab equipment:
-        - science-element despenser
-        - beaker
-        - mixer
+        - science-element despenser:
+            X design
+            X create/destroy science-elements
+            - physical button for element type and on/off
+        - beaker despenser
+            - design
+            - create beaker with push of button
+        - beaker:
+            - sizes:
+                - small
+                - medium
+                - large 
+            - shapes:
+                - cube
+                - cylindar (maybe)
+                - flask (maybe)
+            - behavior:
+                - pickup
+                - carry
+                - drop
+                - dump
+        - mixer:
+            - design:
+                - plate
+                - button
+            - behavior:
+                - button press does on/off
+                - placement of beaker + turn on locks beaker and mixes contents
         - heater
+            - design: TODO
+            - behavior: TODO
         - cooler
+            - design: TODO
+            - behavior: TODO
 
 refine UX:
     - beaker 3d model design in Blender
