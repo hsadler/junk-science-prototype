@@ -34,10 +34,10 @@ X eng & bugs pass:
         X tables
         X lights
     - lab equipment:
-        - science-element dispenser:
+        X science-element dispenser:
             X design
             X create/destroy science-elements
-            - physical button for element type and on/off
+            X physical button for element type and on/off
         - beaker dispenser
             - design
             - create beaker with push of button
