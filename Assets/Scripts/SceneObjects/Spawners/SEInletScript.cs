@@ -8,11 +8,10 @@ public class SEInletScript : MonoBehaviour
     // Spawner for continuous-flow science-element object creation
 
 
+    public bool spawnOn = false;
     public string scienceElementTag = "science-element-none";
     public float spawnObjectScale = 1f;
-
     public Transform spawnPointTransform;
-    public bool spawnOn = false;
     public int spawnRowLength = 10;
     public int spawnColumnLength = 10;
     public float itemSpread = 1;
@@ -26,12 +25,12 @@ public class SEInletScript : MonoBehaviour
         InvokeRepeating("CheckAndSpawnObjects", 0f, this.secondsPerSpawn);
     }
 
-    void Update() {}
+    void Update() { }
 
     // IMPLEMENTATION METHODS
 
     private void CheckAndSpawnObjects() {
-        if(this.spawnOn) {
+        if (this.spawnOn) {
             for (int i = 0; i < this.spawnColumnLength; i++) {
                 for (int j = 0; j < this.spawnRowLength; j++) {
                     var go = LabSceneManager.instance.GetScienceElementFromPool();
@@ -58,6 +57,31 @@ public class SEInletScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TurnOff()
+    {
+        this.spawnOn = false;
+    }
+
+    public void TurnOn(
+        string scienceElementTag,
+        float spawnObjectScale = 1f,
+        int spawnRowLength = 1,
+        int spawnColumnLength = 1,
+        float itemSpread = 1f,
+        float propulsionForce = 0f,
+        float secondsPerSpawn = 1f
+    )
+    {
+        this.scienceElementTag = scienceElementTag;
+        this.spawnObjectScale = spawnObjectScale;
+        this.spawnRowLength = spawnRowLength;
+        this.spawnColumnLength = spawnColumnLength;
+        this.itemSpread = itemSpread;
+        this.propulsionForce = propulsionForce;
+        this.secondsPerSpawn = secondsPerSpawn;
+        this.spawnOn = true;
     }
 
 
