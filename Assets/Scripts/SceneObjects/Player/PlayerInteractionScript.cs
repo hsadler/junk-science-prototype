@@ -18,6 +18,8 @@ public class PlayerInteractionScript : MonoBehaviour
 	private float carryDistance;
 	private GameObject carriedObject;
 
+	private Quaternion lastRotation = Quaternion.identity;
+
 
 	// UNITY HOOKS
 
@@ -130,6 +132,7 @@ public class PlayerInteractionScript : MonoBehaviour
             this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
             Time.deltaTime * this.carrySmooth
         );
+		// ALT IMPLEMENTATION
 		//Vector3 newPos = Vector3.MoveTowards(
 		//	go.transform.position,
 		//	this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
@@ -146,27 +149,33 @@ public class PlayerInteractionScript : MonoBehaviour
 		Vector3 rotVector = Vector3.zero;
 		if (isMouseWheelUp)
 		{
-			//Debug.Log("turn carried object right");
 			rotVector = Vector3.forward;
 		}
 		else if (isMouseWheelDown)
 		{
-			//Debug.Log("turn carried object left");
 			rotVector = Vector3.back;
 		}
 		if (rotVector != Vector3.zero)
-        {
-			//Debug.Log("lerping rotation...");
+		{
 			Quaternion toRotation = go.transform.localRotation *
 				Quaternion.AngleAxis(this.rotateSpeed, rotVector);
-			go.transform.rotation = toRotation;
-			// TODO: maybe figure out how to use Lerp here in the future
-			//go.transform.rotation = Quaternion.Lerp(
-			//	go.transform.rotation,
-			//	toRotation,
-			//	Time.deltaTime * this.rotateSmooth
-			//);
-        }
+			go.transform.rotation = Quaternion.Lerp(
+				go.transform.rotation,
+				toRotation,
+				Time.deltaTime * this.rotateSmooth
+			);
+			lastRotation = toRotation;
+		}
+		else
+		{
+			if (lastRotation != Quaternion.identity) {
+				go.transform.rotation = Quaternion.Lerp(
+					go.transform.rotation,
+					lastRotation,
+					Time.deltaTime * this.rotateSmooth
+				);
+			}
+		}
 	}
 
 	private void DropObject()
@@ -174,6 +183,7 @@ public class PlayerInteractionScript : MonoBehaviour
 		this.carriedObject.GetComponent<Rigidbody>().isKinematic = false;
 		this.isCarrying = false;
 		this.carriedObject = null;
+		this.lastRotation = Quaternion.identity;
 	}
 
 

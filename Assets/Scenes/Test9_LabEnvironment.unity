@@ -2906,31 +2906,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
-        type: 3}
-      propertyPath: carrySmooth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
-        type: 3}
-      propertyPath: rotateSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
-        type: 3}
-      propertyPath: rotateSmooth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
-        type: 3}
-      propertyPath: maxPickupDistance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207164621757678433, guid: 096a7a943ee964775ad1c68d607d5c32,
-        type: 3}
-      propertyPath: maxCarrySpeedPerSecond
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 096a7a943ee964775ad1c68d607d5c32, type: 3}
 --- !u!1 &2140349983
