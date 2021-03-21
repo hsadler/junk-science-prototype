@@ -12,6 +12,14 @@ public class LabSceneManager : MonoBehaviour
 	public UnityEvent playerSetActive;
 	public UnityEvent playerSetInactive;
 
+	// scene gravity
+	public enum GravityEnum
+	{
+		ninePointEight,
+		seventy
+	};
+	public GravityEnum sceneGravity = GravityEnum.ninePointEight;
+	
 	// scene telemetry
 	public int scienceElementSpawnCount = 0;
 	private Rect guiRect = new Rect(10, 10, 210, 110);
@@ -41,6 +49,7 @@ public class LabSceneManager : MonoBehaviour
 
 	void Start()
 	{
+		SetSceneGravity();
 		this.FillSpawnPool();
 	}
 
@@ -71,14 +80,17 @@ public class LabSceneManager : MonoBehaviour
 	// INTERFACE METHODS
 
 	public GameObject GetScienceElementFromPool()
-    {
-		var go = this.scienceElementPool.Pop();
-		if (go != null)
+	{
+		if (this.scienceElementPool.Count > 0)
 		{
+			var go = this.scienceElementPool.Pop();
 			this.scienceElementSpawnCount += 1;
-		}
-		return go;
-	}
+			return go;
+		} else
+        {
+			return null;
+        }
+	} 
 
 	public void GiveScienceElementBackToPool(GameObject go)
     {
@@ -88,6 +100,19 @@ public class LabSceneManager : MonoBehaviour
 	}
 
 	// IMPLEMENTATION METHODS
+
+	private void SetSceneGravity()
+	{
+		float grav = 0f;
+		if (this.sceneGravity == GravityEnum.ninePointEight)
+        {
+			grav = -9.8f;
+        } else if (this.sceneGravity == GravityEnum.seventy)
+        {
+			grav = -70f;
+        }
+		Physics.gravity = new Vector3(0, grav, 0);
+	}
 
 	private void TogglePlayerActive()
     {
