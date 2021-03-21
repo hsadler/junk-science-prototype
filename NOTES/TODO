@@ -38,20 +38,18 @@ X eng & bugs pass:
             X design
             X create/destroy science-elements
             X physical button for element type and on/off
-        - beaker:
+        X beaker:
             X sizes:
                 X small
                 X medium
                 X large 
-            - shapes:
+            X shapes:
                 X cube
-                - cylindar (maybe)
-                - flask (maybe)
-            - behavior:
+            X behavior:
                 X pickup
                 X carry
                 X drop
-                - dump (needs refinement)
+                X dump
         - mixer:
             - design:
                 - plate
