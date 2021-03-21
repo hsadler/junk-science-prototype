@@ -88,8 +88,13 @@ public class ScienceElementScript : MonoBehaviour
             }
             else if (this.gameObject.CompareTag("science-element-saline"))
             {
+                // convert current element to steam
                 this.ConvertToSteam();
-                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
+                // also create a salt as a by-product
+                // **temp impl to get around some spawn-pool limitations
+                var saltGO = Instantiate(this.gameObject);
+                // **the actual way (switch to this when possible)
+                //var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
                 if (saltGO != null)
                 {
                     saltGO.transform.position = new Vector3(
