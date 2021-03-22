@@ -92,9 +92,9 @@ public class ScienceElementScript : MonoBehaviour
                 this.ConvertToSteam();
                 // also create a salt as a by-product
                 // **temp impl to get around some spawn-pool limitations
-                var saltGO = Instantiate(this.gameObject);
+                //var saltGO = Instantiate(this.gameObject);
                 // **the actual way (switch to this when possible)
-                //var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
+                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
                 if (saltGO != null)
                 {
                     saltGO.transform.position = new Vector3(
