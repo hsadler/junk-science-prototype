@@ -585,8 +585,9 @@ GameObject:
   - component: {fileID: 147772531}
   - component: {fileID: 147772530}
   - component: {fileID: 147772529}
+  - component: {fileID: 147772532}
   m_Layer: 0
-  m_Name: Plate
+  m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,7 +615,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147772527}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -666,6 +667,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147772527}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &147772532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147772527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6692c5e36c554c00a7b8040231df1aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labInstrumentMixerScript: {fileID: 1341194574}
 --- !u!4 &155968028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3955758924779545260, guid: 3007c2411c46d40bbb08287627cc1418,
@@ -2401,6 +2415,7 @@ MonoBehaviour:
   labInstrumentMixerButtonScript: {fileID: 67917240}
   buttonOnMaterial: {fileID: 2100000, guid: bafe4727236be40f8854ff22f34d3484, type: 2}
   buttonOffMaterial: {fileID: 2100000, guid: 4fef008424bd34d42a6996d78847bfa7, type: 2}
+  mixGO: {fileID: 0}
 --- !u!1001 &1345232149
 PrefabInstance:
   m_ObjectHideFlags: 0

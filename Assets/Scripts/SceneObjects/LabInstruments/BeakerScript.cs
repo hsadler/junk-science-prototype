@@ -22,7 +22,7 @@ public class BeakerScript : MonoBehaviour
 
     public void PlayerLeftClickInteraction(PlayerInteractionMessage message)
     {
-        Debug.Log("player clicked a beaker");
+        //Debug.Log("player clicked a beaker");
     }
 
 

@@ -51,11 +51,11 @@ X eng & bugs pass:
                 X drop
                 X dump
         - mixer:
-            - design:
-                - plate
-                - button
+            X design:
+                X plate
+                X button
             - behavior:
-                - button press does on/off
+                X button press does on/off
                 - placement of beaker + turn on locks beaker and mixes contents
         - heater
             - design: TODO

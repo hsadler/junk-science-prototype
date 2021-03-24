@@ -13,6 +13,9 @@ public class LabInstrumentMixerScript : MonoBehaviour
     public Material buttonOnMaterial;
     public Material buttonOffMaterial;
 
+    // object to mix
+    public GameObject mixGO;
+
 
     // UNITY HOOKS
 
@@ -34,13 +37,27 @@ public class LabInstrumentMixerScript : MonoBehaviour
         {
             this.isOn = false;
             this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOffMaterial;
+            this.StopMixing();
         }
         else
         {
             this.isOn = true;
             this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOnMaterial;
+            this.StartMixing();
         }
 
+    }
+
+    // IMPLEMENTATION METHODS
+
+    private void StartMixing()
+    {
+        // stub
+    }
+
+    private void StopMixing()
+    {
+        // stub
     }
 
 
