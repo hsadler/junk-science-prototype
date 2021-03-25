@@ -23,19 +23,24 @@ public class LabInstrumentMixerSensorScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("LabInstrumentMixerSensorScript OnCollisionEnter()");
         bool mixable = (collision.gameObject.GetComponent<MixableScript>() != null);
-        if (mixable && this.labInstrumentMixerScript.mixGO == null)
+        if (mixable)
         {
-            Debug.Log("Setting GO to be mixed..");
             this.labInstrumentMixerScript.mixGO = collision.gameObject;
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        Debug.Log("Unsetting GO to be mixed..");
-        this.labInstrumentMixerScript.mixGO = null;
+
+        // TODO: FIGURE THIS OUT SINCE WE DON'T WANT TO UNBIND AND TURN OFF WHEN
+        // MIXING AND THEREFOR NO LONGER COLLIDING
+        //// object exiting collision is same object currently being mixed
+        //if (collision.gameObject == this.labInstrumentMixerScript.mixGO)
+        //{
+        //    this.labInstrumentMixerScript.mixGO = null;
+        //    this.labInstrumentMixerScript.TurnOff();
+        //}
     }
 
 

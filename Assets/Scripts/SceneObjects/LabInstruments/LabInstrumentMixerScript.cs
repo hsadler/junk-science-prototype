@@ -16,48 +16,76 @@ public class LabInstrumentMixerScript : MonoBehaviour
     // object to mix
     public GameObject mixGO;
 
+    // rotation
+    private float rotateSpeed = 60f;
+    private float rotateSmooth = 3f;
+    private Vector3 currentRotationVector = Vector3.zero;
+
 
     // UNITY HOOKS
 
     void Start()
     {
-        
+        InvokeRepeating("ChangeRotationVector", 0f, 0.2f);
     }
 
     void Update()
     {
-        
+        if(this.isOn)
+        {
+            this.Mix();
+        }
     }
 
     // INTERFACE METHODS
 
+    public void TurnOn()
+    {
+        this.isOn = true;
+        this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOnMaterial;
+    }
+
+    public void TurnOff()
+    {
+        this.isOn = false;
+        this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOffMaterial;
+    }
+
     public void ToggleOnOff()
     {
-        if (this.isOn)
+        if (!this.isOn && this.mixGO != null)
         {
-            this.isOn = false;
-            this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOffMaterial;
-            this.StopMixing();
+            this.TurnOn();
         }
-        else
+        else if(this.isOn)
         {
-            this.isOn = true;
-            this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOnMaterial;
-            this.StartMixing();
+            this.TurnOff();
         }
 
     }
 
     // IMPLEMENTATION METHODS
 
-    private void StartMixing()
+    private void Mix()
     {
-        // stub
+        Quaternion toRotation = this.mixGO.transform.localRotation *
+            Quaternion.AngleAxis(this.rotateSpeed, this.currentRotationVector);
+        this.mixGO.transform.rotation = Quaternion.Lerp(
+            this.mixGO.transform.rotation,
+            toRotation,
+            Time.deltaTime * this.rotateSmooth
+        );
     }
 
-    private void StopMixing()
+    private void ChangeRotationVector()
     {
-        // stub
+        if (this.currentRotationVector == Vector3.forward)
+        {
+            this.currentRotationVector = Vector3.back;
+        } else
+        {
+            this.currentRotationVector = Vector3.forward;
+        }
     }
 
 
