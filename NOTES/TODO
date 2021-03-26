@@ -50,13 +50,14 @@ X eng & bugs pass:
                 X carry
                 X drop
                 X dump
-        - mixer:
+        X mixer:
             X design:
                 X plate
                 X button
-            - behavior:
+            X behavior:
                 X button press does on/off
-                - placement of beaker + turn on locks beaker and mixes contents
+                X placement of beaker + turn on locks beaker and mixes contents
+                X refinements
         - heater
             - design: TODO
             - behavior: TODO

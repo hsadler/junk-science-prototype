@@ -8,6 +8,8 @@ public class LabInstrumentMixerSensorScript : MonoBehaviour
 
     public LabInstrumentMixerScript labInstrumentMixerScript;
 
+    private float distanceThreshold = 15f;
+
 
     // UNITY HOOKS
 
@@ -18,7 +20,10 @@ public class LabInstrumentMixerSensorScript : MonoBehaviour
 
     void Update()
     {
-        
+        if(this.labInstrumentMixerScript.mixGO != null)
+        {
+            this.CheckMixableIsWithinDistanceThreshold();
+        }    
     }
 
     void OnCollisionEnter(Collision collision)
@@ -30,17 +35,19 @@ public class LabInstrumentMixerSensorScript : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision collision)
-    {
+    // IMPLEMENTATION METHODS
 
-        // TODO: FIGURE THIS OUT SINCE WE DON'T WANT TO UNBIND AND TURN OFF WHEN
-        // MIXING AND THEREFOR NO LONGER COLLIDING
-        //// object exiting collision is same object currently being mixed
-        //if (collision.gameObject == this.labInstrumentMixerScript.mixGO)
-        //{
-        //    this.labInstrumentMixerScript.mixGO = null;
-        //    this.labInstrumentMixerScript.TurnOff();
-        //}
+    private void CheckMixableIsWithinDistanceThreshold()
+    {
+        float distance = Vector3.Distance(
+            transform.position,
+            this.labInstrumentMixerScript.mixGO.transform.position
+        );
+        if (distance > this.distanceThreshold)
+        {
+            this.labInstrumentMixerScript.mixGO = null;
+            this.labInstrumentMixerScript.TurnOff();
+        }
     }
 
 
