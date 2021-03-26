@@ -66,10 +66,11 @@ X eng & bugs pass:
             - behavior: TODO
 
 refine UX:
-    - beaker 3d model design in Blender
+    X beaker 3d model design in Blender
     https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
-    - player pick-up, transfer, and dump beakers
+    X player pick-up, transfer, and dump beakers
     - play with change of SE sizes, colliders, and shapes
+    - refine button interaction (this is buggy)
 
 - prototype UX:
     - fills container with water
