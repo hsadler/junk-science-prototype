@@ -12,24 +12,30 @@ public class LabInstrumentHeaterScript : MonoBehaviour
     public LabInstrumentHeaterButtonScript labInstrumentHeaterButtonScript;
     public Material buttonOnMaterial;
     public Material buttonOffMaterial;
+    public Material heatSurfaceOnMaterial;
+    public Material heatSurfaceOffMaterial;
 
-    // object to heat
-    public GameObject heatGO;
+    // heat surface
+    public GameObject heatSurfaceGO;
+    private MeshRenderer heatSurfaceMeshRenderer;
+
+    // heat area
+    public GameObject heatAreaGO;
+    private HeatAreaScript heatAreaScript;
 
 
     // UNITY HOOKS
 
     void Start()
     {
-
+        this.heatSurfaceMeshRenderer = heatSurfaceGO.GetComponent<MeshRenderer>();
+        this.heatAreaScript = heatAreaGO.GetComponent<HeatAreaScript>();
+        this.heatAreaGO.SetActive(false);
     }
 
     void Update()
     {
-        if(this.isOn)
-        {
-            this.ApplyHeatToObject();
-        }
+        
     }
 
     // INTERFACE METHODS
@@ -38,17 +44,21 @@ public class LabInstrumentHeaterScript : MonoBehaviour
     {
         this.isOn = true;
         this.labInstrumentHeaterButtonScript.meshRenderer.material = this.buttonOnMaterial;
+        this.heatSurfaceMeshRenderer.material = this.heatSurfaceOnMaterial;
+        this.heatAreaGO.SetActive(true);
     }
 
     public void TurnOff()
     {
         this.isOn = false;
         this.labInstrumentHeaterButtonScript.meshRenderer.material = this.buttonOffMaterial;
+        this.heatSurfaceMeshRenderer.material = this.heatSurfaceOffMaterial;
+        this.heatAreaGO.SetActive(false);
     }
 
     public void ToggleOnOff()
     {
-        if (!this.isOn && this.heatGO != null)
+        if (!this.isOn)
         {
             this.TurnOn();
         }
@@ -60,10 +70,6 @@ public class LabInstrumentHeaterScript : MonoBehaviour
     }
 
     // IMPLEMENTATION METHODS
-
-    private void ApplyHeatToObject()
-    {
-        // TODO: STUB
-    }
+    
 
 }
