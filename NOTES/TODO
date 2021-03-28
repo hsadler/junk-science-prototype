@@ -24,7 +24,7 @@ X eng & bugs pass:
     X fix spawn-count and FPS tracking
     X add reticle for first-person player with esc key toggle
 
-- take more videos
+X take more videos
 
 - focus on player experience:
     X SE size relative to player
@@ -58,19 +58,26 @@ X eng & bugs pass:
                 X button press does on/off
                 X placement of beaker + turn on locks beaker and mixes contents
                 X refinements
-        - heater
-            - design: TODO
-            - behavior: TODO
+        X heater
+            X design
+            X behavior
         - cooler
             - design: TODO
             - behavior: TODO
+
+- take more videos
 
 refine UX:
     X beaker 3d model design in Blender
     https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
     X player pick-up, transfer, and dump beakers
     - play with change of SE sizes, colliders, and shapes
-    - refine button interaction (this is buggy)
+    - walk mode for player when shift is pressed
+
+- bugs:
+    - buggy physical-button interaction
+    - saline not turning to steam and salt in lab scene
+    - cannot pick-up beaker when heater is on
 
 - prototype UX:
     - fills container with water

@@ -91,12 +91,10 @@ public class ScienceElementScript : MonoBehaviour
                 // convert current element to steam
                 this.ConvertToSteam();
                 // also create a salt as a by-product
-                // **temp impl to get around some spawn-pool limitations
-                //var saltGO = Instantiate(this.gameObject);
-                // **the actual way (switch to this when possible)
                 var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
                 if (saltGO != null)
                 {
+                    Debug.Log("Creating a salt...");
                     saltGO.transform.position = new Vector3(
                         this.transform.position.x,
                         this.transform.position.y,
@@ -138,7 +136,8 @@ public class ScienceElementScript : MonoBehaviour
     {
         //Debug.Log("converting to steam...");
         this.gameObject.tag = "science-element-steam";
-        GetComponent<ConstantForce>().force = new Vector3(0, 1.7f, 0);
+        float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
+        GetComponent<ConstantForce>().force = new Vector3(0, forceUp, 0);
     }
 
     private void ConvertToSalt()
