@@ -62,8 +62,10 @@ X take more videos
             X design
             X behavior
         - cooler
-            - design: TODO
-            - behavior: TODO
+            X design
+            - behavior
+        - beaker-stand:
+            - design
 
 - take more videos
 
