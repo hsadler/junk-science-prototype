@@ -54,10 +54,11 @@ public class PlayerInteractionScript : MonoBehaviour
     private void CheckAimInteractions()
     {
 		RaycastHit hit;
-		Ray ray = this.playerCamera.ViewportPointToRay(
-			new Vector3(0.5F, 0.5F, 0)
-		);
-		if (Physics.Raycast(ray, out hit))
+		Vector3 cameraPos = this.playerCamera.transform.position;
+		Vector3 direction = this.playerCamera.transform.forward;
+		float distance = Mathf.Infinity;
+		int playerInteractableMask = 1 << 8;
+		if (Physics.Raycast(cameraPos, direction, out hit, distance, playerInteractableMask))
 		{
 			GameObject objectHit = hit.transform.gameObject;
 			var playerInteractionMessage = new PlayerInteractionMessage(
@@ -102,8 +103,11 @@ public class PlayerInteractionScript : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			RaycastHit hit;
-			Ray ray = this.playerCamera.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-			if (Physics.Raycast(ray, out hit))
+			Vector3 cameraPos = this.playerCamera.transform.position;
+			Vector3 direction = this.playerCamera.transform.forward;
+			float distance = Mathf.Infinity;
+			int playerInteractableMask = 1 << 8;
+			if (Physics.Raycast(cameraPos, direction, out hit, distance, playerInteractableMask))
 			{
 				bool pickupable = (hit.transform.gameObject.GetComponent<PickupableScript>() != null);
 				if (pickupable && hit.distance < this.maxPickupDistance)
