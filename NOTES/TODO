@@ -58,12 +58,13 @@ X take more videos
                 X button press does on/off
                 X placement of beaker + turn on locks beaker and mixes contents
                 X refinements
-        X heater
+        - heater
             X design
             X behavior
+            - refactor: put a shelf above which beakers can be placed on but the elements fall through
         - cooler
             X design
-            - behavior
+            - behavior: putting elements into the space should cool them
         X beaker-stand:
             X design
 
