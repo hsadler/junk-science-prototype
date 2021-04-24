@@ -2,70 +2,15 @@
 
 TODO
 
-X Basic 3D first-person environment
-
-X Elements to create:
-    X water
-    X salt
-    X saline
-    X steam
-
-X element "state" behaviors:
-    X liquid
-    X gas
-
-X POC reactions:
-    X water mix with salt makes saline
-    X water heated makes steam
-    X saline heated makes steam and salt
-    X steam cooled makes water
-
-X eng & bugs pass:
-    X fix spawn-count and FPS tracking
-    X add reticle for first-person player with esc key toggle
-
-X take more videos
-
-- focus on player experience:
-    X SE size relative to player
-    X player pick-up object
-    X lab environment:
-        X room
-        X tables
-        X lights
-    - lab equipment:
-        X science-element dispenser:
-            X design
-            X create/destroy science-elements
-            X physical button for element type and on/off
-        X beaker:
-            X sizes:
-                X small
-                X medium
-                X large 
-            X shapes:
-                X cube
-            X behavior:
-                X pickup
-                X carry
-                X drop
-                X dump
-        X mixer:
-            X design:
-                X plate
-                X button
-            X behavior:
-                X button press does on/off
-                X placement of beaker + turn on locks beaker and mixes contents
-                X refinements
-        X heater
-            X design
-            X behavior
-        X cooler
-            X design
-            X behavior: putting elements into the space should cool them
-        X beaker-stand:
-            X design
+X prototype UX:
+    X fills container with water
+    X transfers container to beaker and dumps
+    X fills container with salt
+    X transfers container to beaker and dumps
+    X mixes contents in beaker to produce saline
+    X takes beaker to heater
+    X heats saline to produce steam and salt
+    X cool steam to produce water
 
 - refactor heater: put a shelf above which beakers can be placed on but the elements fall through
 - refactor cooler: add a shelf for beaker which elements pass through
@@ -77,23 +22,16 @@ refine UX:
     https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
     X player pick-up, transfer, and dump beakers
     - walk mode for player when shift is pressed
+    - add upper bound and lower bounds for heat of elements 
+        (so that water isn't allowed to be less than freezing, for instance)
     - play with change of SE sizes, colliders, and shapes
 
 - bugs:
-    - buggy physical-button interaction
+    - buggy physical-button interaction (only on iOS?)
     - saline not turning to steam and salt in lab scene
-    - cannot pick-up beaker when heater is on
+    X cannot pick-up beaker when heater is on
 
-- prototype UX:
-    - fills container with water
-    - transfers container to beaker and dumps
-    - fills container with salt
-    - transfers container to beaker and dumps
-    - mixes contents in beaker to produce saline
-    - takes beaker to heater
-    - heats saline to produce steam and salt
     
-
 /////// defer ///////
 
 - more element "state" behaviors:
