@@ -12,8 +12,8 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
-- refactor heater: put a shelf above which beakers can be placed on but the elements fall through
-- refactor cooler: add a shelf for beaker which elements pass through
+X refactor heater: put a shelf above which beakers can be placed on but the elements fall through
+X refactor cooler: add a shelf for beaker which elements pass through
 
 - take more videos
 
@@ -21,9 +21,7 @@ refine UX:
     X beaker 3d model design in Blender
     https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
     X player pick-up, transfer, and dump beakers
-    - walk mode for player when shift is pressed
-    - add upper bound and lower bounds for heat of elements 
-        (so that water isn't allowed to be less than freezing, for instance)
+    X walk mode for player when shift is pressed
     - play with change of SE sizes, colliders, and shapes
 
 - bugs:
@@ -33,6 +31,10 @@ refine UX:
 
     
 /////// defer ///////
+
+- refine UX:
+    - add upper bound and lower bounds for heat of elements 
+        (so that water isn't allowed to be less than freezing, for instance)
 
 - more element "state" behaviors:
     - solid

@@ -31,9 +31,10 @@ public class PlayerMovementScript : MonoBehaviour
     }
 
 	private void HandlePlayerMove() {
+		float calcMoveSpeed = this.moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? 0.5f : 1f);
 		// Move direction directly from axes
-		float deltaX = Input.GetAxis("Horizontal") * moveSpeed;
-		float deltaZ = Input.GetAxis("Vertical") * moveSpeed;
+		float deltaX = Input.GetAxis("Horizontal") * calcMoveSpeed;
+		float deltaZ = Input.GetAxis("Vertical") * calcMoveSpeed;
 		_moveDirection = new Vector3(deltaX, _moveDirection.y, deltaZ);
 		// Accept jump input if grounded
 		if (_charCont.isGrounded) {
