@@ -12,24 +12,15 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
-X refactor heater: put a shelf above which beakers can be placed on but the elements fall through
-X refactor cooler: add a shelf for beaker which elements pass through
-
-- take more videos
-
-refine UX:
-    X beaker 3d model design in Blender
-    https://www.udemy.com/course/learn-blender-3d-modeling-for-unity-video-game-development/
-    X player pick-up, transfer, and dump beakers
-    X walk mode for player when shift is pressed
-    - play with change of SE sizes, colliders, and shapes
-
 - bugs:
     - buggy physical-button interaction (only on iOS?)
     - saline not turning to steam and salt in lab scene
-    X cannot pick-up beaker when heater is on
 
+refine UX:
+    - play with change of SE sizes, colliders, and shapes
     
+- take more videos
+
 /////// defer ///////
 
 - refine UX:
@@ -48,4 +39,3 @@ refine UX:
     - tranfers to cooler
     - produces ice
 
-   
