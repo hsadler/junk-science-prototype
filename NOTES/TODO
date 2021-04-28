@@ -13,15 +13,20 @@ X prototype UX:
     X cool steam to produce water
 
 - bugs:
-    - buggy physical-button interaction (only on iOS?)
     - saline not turning to steam and salt in lab scene
 
 refine UX:
     - play with change of SE sizes, colliders, and shapes
+    - make lab scene smaller and with as few instruments and tables as possible
+    - destroy science-elements when they hit the floor or ceiling
+    - lower max amount of science elements in global pool to 3k
     
 - take more videos
 
 /////// defer ///////
+
+- bugs:
+    - buggy physical-button interaction (only on iOS?)
 
 - refine UX:
     - add upper bound and lower bounds for heat of elements 
