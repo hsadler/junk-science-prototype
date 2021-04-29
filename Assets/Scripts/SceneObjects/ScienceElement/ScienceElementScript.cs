@@ -75,7 +75,6 @@ public class ScienceElementScript : MonoBehaviour
     }
 
     private void CheckHeatChange() {
-        // Debug.Log("Checking heat change for SE with tag: " + this.gameObject.tag);
         if (this.receivingHeat)
         {
             this.temperature += this.receivingHeatAmount;
@@ -95,7 +94,6 @@ public class ScienceElementScript : MonoBehaviour
                 var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
                 if (saltGO != null)
                 {
-                    // Debug.Log("Creating a salt...");
                     saltGO.transform.position = new Vector3(
                         this.transform.position.x,
                         this.transform.position.y,
@@ -108,6 +106,7 @@ public class ScienceElementScript : MonoBehaviour
                     seScript.transform.localScale = Vector3.one * this.elementScale;
                     transform.parent = parent;
                     seScript.ConvertToSalt();
+                    saltGO.SetActive(true);
                 }
             }
         } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {

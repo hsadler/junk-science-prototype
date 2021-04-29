@@ -13,7 +13,7 @@ X prototype UX:
     X cool steam to produce water
 
 - bugs:
-    - saline not turning to steam and salt in lab scene
+    X saline not turning to steam and salt in lab scene
 
 refine UX:
     - play with change of SE sizes, colliders, and shapes
