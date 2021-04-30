@@ -5,6 +5,16 @@ using UnityEngine;
 public class ScienceElementScript : MonoBehaviour
 {
 
+    
+    // component caches
+    private MeshFilter meshF;
+    private MeshRenderer meshR;
+    private ConstantForce constantF;
+
+    // meshes
+    public Mesh sphereMesh;
+    public Mesh cubeMesh;
+    private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
 
     // element scale
     public float elementScale = 1f;
@@ -21,9 +31,7 @@ public class ScienceElementScript : MonoBehaviour
     public Material seSaltMaterial;
     public Material seSalineMaterial;
     public Material seSteamMaterial;
-    private IDictionary<string, Material> tagToMaterial =
-        new Dictionary<string, Material>();
-    private MeshRenderer meshR;
+    private IDictionary<string, Material> tagToMaterial = new Dictionary<string, Material>();
 
     // last temperature
     private float lastTemperature;
@@ -34,25 +42,35 @@ public class ScienceElementScript : MonoBehaviour
     // UNITY HOOKS
 
     void Awake() {
+        // tag to material map
         this.tagToMaterial.Add("science-element-none", seNoneMaterial);
         this.tagToMaterial.Add("science-element-water", seWaterMaterial);
         this.tagToMaterial.Add("science-element-salt", seSaltMaterial);
         this.tagToMaterial.Add("science-element-saline", seSalineMaterial);
         this.tagToMaterial.Add("science-element-steam", seSteamMaterial);
+        // tag to mesh map
+        this.tagToMesh.Add("science-element-none", sphereMesh);
+        this.tagToMesh.Add("science-element-water", sphereMesh);
+        this.tagToMesh.Add("science-element-salt", cubeMesh);
+        this.tagToMesh.Add("science-element-saline", sphereMesh);
+        this.tagToMesh.Add("science-element-steam", sphereMesh);
         this.lastTemperature = this.temperature;
     }
 
     void Start() {
+        this.meshF = GetComponent<MeshFilter>();
+        this.meshR = GetComponent<MeshRenderer>();
+        this.constantF = GetComponent<ConstantForce>();
         Transform parent = transform.parent;
         transform.parent = null;
         transform.localScale = Vector3.one * this.elementScale;
         transform.parent = parent;
-        this.meshR = GetComponent<MeshRenderer>();
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
     }
 
     void Update() {
         CheckMaterial();
+        CheckMesh();
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -72,6 +90,11 @@ public class ScienceElementScript : MonoBehaviour
     private void CheckMaterial() {
         Material applyMat = tagToMaterial[this.gameObject.tag];
         this.meshR.material = applyMat;
+    }
+
+    private void CheckMesh() {
+        Mesh applyMesh = tagToMesh[this.gameObject.tag];
+        this.meshF.mesh = applyMesh;
     }
 
     private void CheckHeatChange() {
@@ -122,14 +145,14 @@ public class ScienceElementScript : MonoBehaviour
     {
         // Debug.Log("converting to water...");
         this.gameObject.tag = "science-element-water";
-        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
+        this.constantF.force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSaline()
     {
         //Debug.Log("converting to saline...");
         this.gameObject.tag = "science-element-saline";
-        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
+        this.constantF.force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSteam()
@@ -137,14 +160,14 @@ public class ScienceElementScript : MonoBehaviour
         //Debug.Log("converting to steam...");
         this.gameObject.tag = "science-element-steam";
         float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
-        GetComponent<ConstantForce>().force = new Vector3(0, forceUp, 0);
+        this.constantF.force = new Vector3(0, forceUp, 0);
     }
 
     private void ConvertToSalt()
     {
         //Debug.Log("converting to salt...");
         this.gameObject.tag = "science-element-salt";
-        GetComponent<ConstantForce>().force = new Vector3(0, 0, 0);
+        this.constantF.force = new Vector3(0, 0, 0);
     }
 
 

@@ -12,14 +12,9 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
-- bugs:
-    X saline not turning to steam and salt in lab scene
-
 refine UX:
     - play with change of SE sizes, colliders, and shapes
     - make lab scene smaller and with as few instruments and tables as possible
-    - destroy science-elements when they hit the floor or ceiling
-    - lower max amount of science elements in global pool to 3k
     
 - take more videos
 
@@ -31,6 +26,8 @@ refine UX:
 - refine UX:
     - add upper bound and lower bounds for heat of elements 
         (so that water isn't allowed to be less than freezing, for instance)
+    - destroy science-elements when they hit the floor or ceiling
+    - lower max amount of science elements in global pool to 3k
 
 - more element "state" behaviors:
     - solid

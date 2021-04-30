@@ -37,9 +37,10 @@ public class SEInletScript : MonoBehaviour
                     if (go == null) {
                         return;
                     }
+                    ScienceElementScript seScript = go.GetComponent<ScienceElementScript>();
                     go.transform.parent = this.spawnPointTransform;
                     go.transform.localPosition = Vector3.zero;
-                    go.GetComponent<ScienceElementScript>().elementScale = this.spawnObjectScale;
+                    seScript.elementScale = this.spawnObjectScale;
                     go.tag = this.scienceElementTag;
                     Vector3 localPos = go.transform.localPosition;
                     // TODO: itemSpread is buggy here
