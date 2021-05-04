@@ -13,7 +13,12 @@ X prototype UX:
     X cool steam to produce water
 
 refine UX:
-    - play with change of SE sizes, colliders, and shapes
+    - play with change of SE sizes, colliders, and shapes:
+        X make salt cube shaped
+        - make salt cube collider
+        - make steam larger shape
+    - try images for science elements instead of color texture
+    - show element type string display on element hover
     - make lab scene smaller and with as few instruments and tables as possible
     
 - take more videos
