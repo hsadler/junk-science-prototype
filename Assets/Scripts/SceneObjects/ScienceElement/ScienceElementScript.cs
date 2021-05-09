@@ -17,7 +17,7 @@ public class ScienceElementScript : MonoBehaviour
     private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
 
     // element scale
-    public float elementScale = 1f;
+    private IDictionary<string, float> tagToScale = new Dictionary<string, float>();
 
     // element temperature
     public float temperature = 0f;
@@ -54,6 +54,12 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMesh.Add("science-element-salt", cubeMesh);
         this.tagToMesh.Add("science-element-saline", sphereMesh);
         this.tagToMesh.Add("science-element-steam", sphereMesh);
+        // tag to scale map
+        this.tagToScale.Add("science-element-none", 1.5f);
+        this.tagToScale.Add("science-element-water", 1.5f);
+        this.tagToScale.Add("science-element-salt", 0.8f);
+        this.tagToScale.Add("science-element-saline", 1.5f);
+        this.tagToScale.Add("science-element-steam", 3f);
         this.lastTemperature = this.temperature;
     }
 
@@ -63,7 +69,6 @@ public class ScienceElementScript : MonoBehaviour
         this.constantF = GetComponent<ConstantForce>();
         Transform parent = transform.parent;
         transform.parent = null;
-        transform.localScale = Vector3.one * this.elementScale;
         transform.parent = parent;
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
     }
@@ -71,6 +76,7 @@ public class ScienceElementScript : MonoBehaviour
     void Update() {
         CheckMaterial();
         CheckMesh();
+        CheckScale();
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -95,6 +101,11 @@ public class ScienceElementScript : MonoBehaviour
     private void CheckMesh() {
         Mesh applyMesh = tagToMesh[this.gameObject.tag];
         this.meshF.mesh = applyMesh;
+    }
+
+    private void CheckScale() {
+        float scale = tagToScale[this.gameObject.tag];
+        transform.localScale = Vector3.one * scale;
     }
 
     private void CheckHeatChange() {
@@ -126,7 +137,6 @@ public class ScienceElementScript : MonoBehaviour
                     var seScript = saltGO.GetComponent<ScienceElementScript>();
                     Transform parent = transform.parent;
                     transform.parent = null;
-                    seScript.transform.localScale = Vector3.one * this.elementScale;
                     transform.parent = parent;
                     seScript.ConvertToSalt();
                     saltGO.SetActive(true);

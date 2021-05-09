@@ -33,7 +33,6 @@ public class DispenserButtonManagerScript : MonoBehaviour
         button.TurnButtonOn();
         seInletScript.TurnOn(
             scienceElementTag: button.scienceElementTag,
-            spawnObjectScale: 1f,
             spawnRowLength: 2,
             spawnColumnLength: 2,
             itemSpread: 1f,

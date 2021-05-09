@@ -15,10 +15,9 @@ X prototype UX:
 refine UX:
     - play with change of SE sizes, colliders, and shapes:
         X make salt cube shaped
-        - make salt cube collider
         - make steam larger shape
-    - try images for science elements instead of color texture
     - show element type string display on element hover
+    - show discovery of element when created for the first time
     - make lab scene smaller and with as few instruments and tables as possible
     
 - take more videos
@@ -29,6 +28,8 @@ refine UX:
     - buggy physical-button interaction (only on iOS?)
 
 - refine UX:
+    - make salt cube collider
+    - try images for science elements instead of color texture
     - add upper bound and lower bounds for heat of elements 
         (so that water isn't allowed to be less than freezing, for instance)
     - destroy science-elements when they hit the floor or ceiling

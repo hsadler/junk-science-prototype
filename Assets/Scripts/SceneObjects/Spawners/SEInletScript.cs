@@ -10,7 +10,6 @@ public class SEInletScript : MonoBehaviour
 
     public bool spawnOn = false;
     public string scienceElementTag = "science-element-none";
-    public float spawnObjectScale = 1f;
     public Transform spawnPointTransform;
     public int spawnRowLength = 10;
     public int spawnColumnLength = 10;
@@ -40,7 +39,6 @@ public class SEInletScript : MonoBehaviour
                     ScienceElementScript seScript = go.GetComponent<ScienceElementScript>();
                     go.transform.parent = this.spawnPointTransform;
                     go.transform.localPosition = Vector3.zero;
-                    seScript.elementScale = this.spawnObjectScale;
                     go.tag = this.scienceElementTag;
                     Vector3 localPos = go.transform.localPosition;
                     // TODO: itemSpread is buggy here
@@ -67,7 +65,6 @@ public class SEInletScript : MonoBehaviour
 
     public void TurnOn(
         string scienceElementTag,
-        float spawnObjectScale = 1f,
         int spawnRowLength = 1,
         int spawnColumnLength = 1,
         float itemSpread = 1f,
@@ -76,7 +73,6 @@ public class SEInletScript : MonoBehaviour
     )
     {
         this.scienceElementTag = scienceElementTag;
-        this.spawnObjectScale = spawnObjectScale;
         this.spawnRowLength = spawnRowLength;
         this.spawnColumnLength = spawnColumnLength;
         this.itemSpread = itemSpread;
