@@ -16,6 +16,12 @@ public class ScienceElementScript : MonoBehaviour
     public Mesh cubeMesh;
     private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
 
+    // collider GOs
+    public GameObject sphereColliderGO;
+    public GameObject cubeColliderGO;
+    private GameObject currColliderGO;
+    private IDictionary<string, GameObject> tagToColliderGO = new Dictionary<string, GameObject>();
+
     // element scale
     private IDictionary<string, float> tagToScale = new Dictionary<string, float>();
 
@@ -54,6 +60,12 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMesh.Add("science-element-salt", cubeMesh);
         this.tagToMesh.Add("science-element-saline", sphereMesh);
         this.tagToMesh.Add("science-element-steam", sphereMesh);
+        // tag to colliderGO map
+        this.tagToColliderGO.Add("science-element-none", sphereColliderGO);
+        this.tagToColliderGO.Add("science-element-water", sphereColliderGO);
+        this.tagToColliderGO.Add("science-element-salt", cubeColliderGO);
+        this.tagToColliderGO.Add("science-element-saline", sphereColliderGO);
+        this.tagToColliderGO.Add("science-element-steam", sphereColliderGO);
         // tag to scale map
         this.tagToScale.Add("science-element-none", 1.5f);
         this.tagToScale.Add("science-element-water", 1.5f);
@@ -76,6 +88,7 @@ public class ScienceElementScript : MonoBehaviour
     void Update() {
         CheckMaterial();
         CheckMesh();
+        CheckCollider();
         CheckScale();
     }
 
@@ -94,16 +107,30 @@ public class ScienceElementScript : MonoBehaviour
     // IMPLEMENTATION METHODS
 
     private void CheckMaterial() {
+        // TODO: optimize if needed 
         Material applyMat = tagToMaterial[this.gameObject.tag];
         this.meshR.material = applyMat;
     }
 
     private void CheckMesh() {
+        // TODO: optimize if needed 
         Mesh applyMesh = tagToMesh[this.gameObject.tag];
         this.meshF.mesh = applyMesh;
     }
 
+    private void CheckCollider() {
+        GameObject colliderGO = tagToColliderGO[this.gameObject.tag];
+        if(currColliderGO != colliderGO) {
+            if(currColliderGO != null) {
+                currColliderGO.SetActive(false);
+            }
+            colliderGO.SetActive(true);
+            currColliderGO = colliderGO;
+        }
+    }
+
     private void CheckScale() {
+        // TODO: optimize if needed 
         float scale = tagToScale[this.gameObject.tag];
         transform.localScale = Vector3.one * scale;
     }
