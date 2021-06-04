@@ -13,7 +13,7 @@ X prototype UX:
     X cool steam to produce water
 
 bugs:
-    - water type elements no longer changing to steam
+    X water type elements no longer changing to steam
 
 refine UX:
     X play with change of SE sizes, colliders, and shapes:

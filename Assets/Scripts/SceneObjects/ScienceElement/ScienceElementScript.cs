@@ -194,7 +194,7 @@ public class ScienceElementScript : MonoBehaviour
 
     private void ConvertToSteam()
     {
-        //Debug.Log("converting to steam...");
+        // Debug.Log("converting to steam...");
         this.gameObject.tag = "science-element-steam";
         float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
         this.constantF.force = new Vector3(0, forceUp, 0);

@@ -17,18 +17,22 @@ public class HeatAreaScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        var seScript = other.gameObject.GetComponent<ScienceElementScript>();
-        if (seScript == null) return;
-        seScript.receivingHeat = true;
-        seScript.receivingHeatAmount = this.heatApplied;
+        var seColliderScript = other.gameObject.GetComponent<ScienceElementColliderScript>();
+        if (seColliderScript == null) {
+            return;
+        }
+        seColliderScript.seScript.receivingHeat = true;
+        seColliderScript.seScript.receivingHeatAmount = this.heatApplied;
     }
 
     void OnTriggerExit(Collider other)
     {
-        var seScript = other.gameObject.GetComponent<ScienceElementScript>();
-        if (seScript == null) return;
-        seScript.receivingHeat = false;
-        seScript.receivingHeatAmount = 0f;
+        var seColliderScript = other.gameObject.GetComponent<ScienceElementColliderScript>();
+        if (seColliderScript == null) {
+            return;
+        }
+        seColliderScript.seScript.receivingHeat = false;
+        seColliderScript.seScript.receivingHeatAmount = 0f;
     }
 
     // IMPLEMENTATION METHODS
