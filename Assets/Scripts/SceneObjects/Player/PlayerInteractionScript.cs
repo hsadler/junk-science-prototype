@@ -96,6 +96,12 @@ public class PlayerInteractionScript : MonoBehaviour
 				);
 			}
 		}
+		// HARRY WORKING
+		// RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, playerInteractableMask);
+		// foreach (var currHit in hits)
+		// {
+		// 	Debug.Log("current hit object name: " + currHit.transform.gameObject.name);
+		// }
 	}
 
 	private void CheckPickup()
@@ -136,12 +142,6 @@ public class PlayerInteractionScript : MonoBehaviour
             this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
             Time.deltaTime * this.carrySmooth
         );
-		// ALT IMPLEMENTATION
-		//Vector3 newPos = Vector3.MoveTowards(
-		//	go.transform.position,
-		//	this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
-		//	this.maxCarrySpeedPerSecond * Time.deltaTime
-		//);
 		go.transform.position = newPos;	
 	}
 

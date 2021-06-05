@@ -12,19 +12,15 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
-bugs:
-    X water type elements no longer changing to steam
-
 refine UX:
-    X play with change of SE sizes, colliders, and shapes:
-        X make salt cube shaped
-        X make steam larger shape
-        X make salt cube collider
     - show element type string display on element hover
     - show discovery of element when created for the first time
     - make lab scene smaller and with as few instruments and tables as possible
     
 - take more videos
+
+- add more discoverable science elements
+
 
 /////// defer ///////
 
