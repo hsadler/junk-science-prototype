@@ -13,8 +13,8 @@ X prototype UX:
     X cool steam to produce water
 
 refine UX:
-    - show element type string display on element hover
     - show discovery of element when created for the first time
+    - show element type and info display on element hover
     - make lab scene smaller and with as few instruments and tables as possible
     
 - take more videos

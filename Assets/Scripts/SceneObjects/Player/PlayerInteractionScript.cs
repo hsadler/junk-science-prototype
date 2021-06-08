@@ -96,9 +96,10 @@ public class PlayerInteractionScript : MonoBehaviour
 				);
 			}
 		}
-		// HARRY WORKING
+		// TODO: Use this for element display on hover
 		// RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, playerInteractableMask);
-		// foreach (var currHit in hits)
+		// Debug.Log("hits length: " + hits.Length.ToString());
+		// foreach (RaycastHit currHit in hits)
 		// {
 		// 	Debug.Log("current hit object name: " + currHit.transform.gameObject.name);
 		// }
