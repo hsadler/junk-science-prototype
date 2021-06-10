@@ -12,6 +12,9 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
+bugs:
+    - science elements not being destroyed by destroyers
+
 refine UX:
     - show discovery of element when created for the first time
     - show element type and info display on element hover
