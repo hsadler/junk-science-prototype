@@ -161,12 +161,9 @@ public class ScienceElementScript : MonoBehaviour
                         this.transform.position.z
                     );
                     saltGO.transform.rotation = Quaternion.identity;
-                    var seScript = saltGO.GetComponent<ScienceElementScript>();
-                    Transform parent = transform.parent;
-                    transform.parent = null;
-                    transform.parent = parent;
-                    seScript.ConvertToSalt();
                     saltGO.SetActive(true);
+                    var seScript = saltGO.GetComponent<ScienceElementScript>();
+                    seScript.ConvertToSalt();
                 }
             }
         } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {

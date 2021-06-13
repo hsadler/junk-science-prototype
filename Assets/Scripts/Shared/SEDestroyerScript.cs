@@ -20,11 +20,12 @@ public class SEDestroyerScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        bool isSE = (other.gameObject.GetComponent<ScienceElementScript>() != null);
-        if (isSE)
+        var seColliderScript = other.gameObject.GetComponent<ScienceElementColliderScript>();
+        if (seColliderScript != null)
         {
-            other.gameObject.SetActive(false);
-            LabSceneManager.instance.GiveScienceElementBackToPool(other.gameObject);
+            var seGO = seColliderScript.seScript.gameObject;
+            seGO.SetActive(false);
+            LabSceneManager.instance.GiveScienceElementBackToPool(seGO);
         }
     }
 

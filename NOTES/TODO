@@ -13,12 +13,13 @@ X prototype UX:
     X cool steam to produce water
 
 bugs:
-    - science elements not being destroyed by destroyers
+    X science elements not being destroyed by destroyers
 
 refine UX:
     - show discovery of element when created for the first time
     - show element type and info display on element hover
     - make lab scene smaller and with as few instruments and tables as possible
+    - add alignment UI for elements in a picked-up state
     
 - take more videos
 
