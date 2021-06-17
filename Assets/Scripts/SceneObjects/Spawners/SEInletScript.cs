@@ -9,7 +9,7 @@ public class SEInletScript : MonoBehaviour
 
 
     public bool spawnOn = false;
-    public string scienceElementTag = "science-element-none";
+    public string scienceElementTag = Constants.SE_NONE_TAG;
     public Transform spawnPointTransform;
     public int spawnRowLength = 10;
     public int spawnColumnLength = 10;

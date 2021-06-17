@@ -49,29 +49,30 @@ public class ScienceElementScript : MonoBehaviour
 
     void Awake() {
         // tag to material map
-        this.tagToMaterial.Add("science-element-none", seNoneMaterial);
-        this.tagToMaterial.Add("science-element-water", seWaterMaterial);
-        this.tagToMaterial.Add("science-element-salt", seSaltMaterial);
-        this.tagToMaterial.Add("science-element-saline", seSalineMaterial);
-        this.tagToMaterial.Add("science-element-steam", seSteamMaterial);
+        this.tagToMaterial.Add(Constants.SE_NONE_TAG, seNoneMaterial);
+        this.tagToMaterial.Add(Constants.SE_WATER_TAG, seWaterMaterial);
+        this.tagToMaterial.Add(Constants.SE_SALT_TAG, seSaltMaterial);
+        this.tagToMaterial.Add(Constants.SE_SALINE_TAG, seSalineMaterial);
+        this.tagToMaterial.Add(Constants.SE_STEAM_TAG, seSteamMaterial);
         // tag to mesh map
-        this.tagToMesh.Add("science-element-none", sphereMesh);
-        this.tagToMesh.Add("science-element-water", sphereMesh);
-        this.tagToMesh.Add("science-element-salt", cubeMesh);
-        this.tagToMesh.Add("science-element-saline", sphereMesh);
-        this.tagToMesh.Add("science-element-steam", sphereMesh);
+        this.tagToMesh.Add(Constants.SE_NONE_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_WATER_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_SALT_TAG, cubeMesh);
+        this.tagToMesh.Add(Constants.SE_SALINE_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_STEAM_TAG, sphereMesh);
         // tag to colliderGO map
-        this.tagToColliderGO.Add("science-element-none", sphereColliderGO);
-        this.tagToColliderGO.Add("science-element-water", sphereColliderGO);
-        this.tagToColliderGO.Add("science-element-salt", cubeColliderGO);
-        this.tagToColliderGO.Add("science-element-saline", sphereColliderGO);
-        this.tagToColliderGO.Add("science-element-steam", sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_NONE_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_WATER_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_SALT_TAG, cubeColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_SALINE_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_STEAM_TAG, sphereColliderGO);
         // tag to scale map
-        this.tagToScale.Add("science-element-none", 1.5f);
-        this.tagToScale.Add("science-element-water", 1.5f);
-        this.tagToScale.Add("science-element-salt", 0.8f);
-        this.tagToScale.Add("science-element-saline", 1.5f);
-        this.tagToScale.Add("science-element-steam", 3f);
+        this.tagToScale.Add(Constants.SE_NONE_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_WATER_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_SALT_TAG, 0.8f);
+        this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_STEAM_TAG, 3f);
+        
         this.lastTemperature = this.temperature;
     }
 
@@ -94,8 +95,8 @@ public class ScienceElementScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if (
-            this.gameObject.CompareTag("science-element-water") &&
-            collision.gameObject.CompareTag("science-element-salt")
+            this.gameObject.CompareTag(Constants.SE_WATER_TAG) &&
+            collision.gameObject.CompareTag(Constants.SE_SALT_TAG)
         ) {
             // turn water to saline and make salt disappear
             this.ConvertToSaline();
@@ -143,11 +144,11 @@ public class ScienceElementScript : MonoBehaviour
         // do water type boil changes
         if (this.lastTemperature < GAS_THRESHOLD && this.temperature >= GAS_THRESHOLD) {
             // handle water and saline differently
-            if (this.gameObject.CompareTag("science-element-water"))
+            if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
             {
                 this.ConvertToSteam();
             }
-            else if (this.gameObject.CompareTag("science-element-saline"))
+            else if (this.gameObject.CompareTag(Constants.SE_SALINE_TAG))
             {
                 // convert current element to steam
                 this.ConvertToSteam();
@@ -167,7 +168,7 @@ public class ScienceElementScript : MonoBehaviour
                 }
             }
         } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {
-            if (this.gameObject.CompareTag("science-element-steam"))
+            if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
             {
                 this.ConvertToWater();
             }
@@ -178,21 +179,21 @@ public class ScienceElementScript : MonoBehaviour
     private void ConvertToWater()
     {
         // Debug.Log("converting to water...");
-        this.gameObject.tag = "science-element-water";
+        this.gameObject.tag = Constants.SE_WATER_TAG;
         this.constantF.force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSaline()
     {
         //Debug.Log("converting to saline...");
-        this.gameObject.tag = "science-element-saline";
+        this.gameObject.tag = Constants.SE_SALINE_TAG;
         this.constantF.force = new Vector3(0, 0, 0);
     }
 
     private void ConvertToSteam()
     {
         // Debug.Log("converting to steam...");
-        this.gameObject.tag = "science-element-steam";
+        this.gameObject.tag = Constants.SE_STEAM_TAG;
         float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
         this.constantF.force = new Vector3(0, forceUp, 0);
     }
@@ -200,7 +201,7 @@ public class ScienceElementScript : MonoBehaviour
     private void ConvertToSalt()
     {
         //Debug.Log("converting to salt...");
-        this.gameObject.tag = "science-element-salt";
+        this.gameObject.tag = Constants.SE_SALT_TAG;
         this.constantF.force = new Vector3(0, 0, 0);
     }
 
