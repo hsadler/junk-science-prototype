@@ -29,9 +29,13 @@ public class LabSceneManager : MonoBehaviour
 	public int spawnPoolSize = 10000;
 	private Stack<GameObject> scienceElementPool = new Stack<GameObject>();
 
+	// unity events
+	public ScienceElementDiscoveredEvent scienceElementDiscoveredEvent = new ScienceElementDiscoveredEvent();
+
 
 	// the static reference to the singleton instance
 	public static LabSceneManager instance { get; private set; }
+
 
 	// UNITY HOOKS
 
@@ -144,14 +148,5 @@ public class LabSceneManager : MonoBehaviour
 		}
 	}
 
-	private void LogPerformance()
-	{
-		float fps = 1.0f / Time.smoothDeltaTime;
-		// fire logs if under fps threshold
-		if (fps < 35f)
-		{
-			Debug.Log("Spawn count: " + this.scienceElementSpawnCount.ToString() + ", FPS: " + fps.ToString("#.00"));
-		}
-	}
 
 }

@@ -104,6 +104,10 @@ public class ScienceElementScript : MonoBehaviour
             LabSceneManager.instance.GiveScienceElementBackToPool(collision.gameObject);
         }
     }
+    
+    void OnEnable() {
+        this.procDiscovered();
+    }
 
     // IMPLEMENTATION METHODS
 
@@ -181,6 +185,15 @@ public class ScienceElementScript : MonoBehaviour
         // Debug.Log("converting to water...");
         this.gameObject.tag = Constants.SE_WATER_TAG;
         this.constantF.force = new Vector3(0, 0, 0);
+        procDiscovered();
+    }
+    
+    private void ConvertToSalt()
+    {
+        //Debug.Log("converting to salt...");
+        this.gameObject.tag = Constants.SE_SALT_TAG;
+        this.constantF.force = new Vector3(0, 0, 0);
+        procDiscovered();
     }
 
     private void ConvertToSaline()
@@ -188,6 +201,7 @@ public class ScienceElementScript : MonoBehaviour
         //Debug.Log("converting to saline...");
         this.gameObject.tag = Constants.SE_SALINE_TAG;
         this.constantF.force = new Vector3(0, 0, 0);
+        procDiscovered();
     }
 
     private void ConvertToSteam()
@@ -196,13 +210,13 @@ public class ScienceElementScript : MonoBehaviour
         this.gameObject.tag = Constants.SE_STEAM_TAG;
         float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
         this.constantF.force = new Vector3(0, forceUp, 0);
+        procDiscovered();
     }
 
-    private void ConvertToSalt()
-    {
-        //Debug.Log("converting to salt...");
-        this.gameObject.tag = Constants.SE_SALT_TAG;
-        this.constantF.force = new Vector3(0, 0, 0);
+    private void procDiscovered() {
+        if(this.gameObject.tag != Constants.SE_NONE_TAG) {
+            LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
+        }
     }
 
 
