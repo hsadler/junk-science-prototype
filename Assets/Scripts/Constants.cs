@@ -17,5 +17,8 @@ public static class Constants
     public const string SE_STEAM_TAG = "science-element-steam";
     public const string SE_STEAM_DISPLAY_NAME = "steam";
 
+    
+    public const int DISCOVERY_DISPLAY_DURATION = 2;
+
 
 }

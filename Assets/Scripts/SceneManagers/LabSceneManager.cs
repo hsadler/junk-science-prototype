@@ -7,6 +7,9 @@ public class LabSceneManager : MonoBehaviour
 {
 
 
+	// manager components
+	public ScienceElementData scienceElementData = new ScienceElementData();
+
 	// player
 	public bool playerActive = true;
 	public UnityEvent playerSetActive;
