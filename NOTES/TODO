@@ -14,6 +14,7 @@ X prototype UX:
 
 bugs:
     X science elements not being destroyed by destroyers
+    X element discovery displays need to be queued
 
 refine UX:
     X show discovery of element when created for the first time
