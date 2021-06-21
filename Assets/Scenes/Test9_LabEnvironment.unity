@@ -873,6 +873,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SEDispenser2
       objectReference: {fileID: 0}
+    - target: {fileID: 4580084069304607963, guid: 4950aef986c2647c39e61bb66cc5a09b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4950aef986c2647c39e61bb66cc5a09b, type: 3}
 --- !u!4 &310157362 stripped

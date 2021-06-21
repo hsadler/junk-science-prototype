@@ -13,12 +13,9 @@ X prototype UX:
     X cool steam to produce water
 
 bugs:
-    X science elements not being destroyed by destroyers
-    X element discovery displays need to be queued
     - fix buggy button aim
 
 refine UX:
-    X show discovery of element when created for the first time
     - make lab scene smaller and with as few instruments and tables as possible
     - add spatial alignment UI for elements in a picked-up state
     - pre-place beaker on mixer so that button press shows function
