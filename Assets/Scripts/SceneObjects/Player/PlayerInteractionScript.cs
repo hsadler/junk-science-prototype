@@ -7,6 +7,7 @@ public class PlayerInteractionScript : MonoBehaviour
 
 
 	public GameObject playerCameraGO;
+	public GameObject carriedObjectPositionIndicatorGO;
 	public float maxPickupDistance = 100f;
 	public float maxCarrySpeedPerSecond = 100f;
 	public float carrySmooth = 1f;
@@ -26,6 +27,7 @@ public class PlayerInteractionScript : MonoBehaviour
 	void Start()
     {
 		this.playerCamera = playerCameraGO.GetComponent<Camera>();
+		this.carriedObjectPositionIndicatorGO.SetActive(false);
 	}
 
     void Update()
@@ -123,6 +125,7 @@ public class PlayerInteractionScript : MonoBehaviour
 					this.carryDistance = hit.distance;
 					this.carriedObject = hit.transform.gameObject;
 					this.carriedObject.GetComponent<Rigidbody>().isKinematic = true;
+					this.carriedObjectPositionIndicatorGO.SetActive(true);
 				}
 			}
 		}
@@ -144,8 +147,7 @@ public class PlayerInteractionScript : MonoBehaviour
             Time.deltaTime * this.carrySmooth
         );
 		go.transform.position = newPos;
-		// TODO: add position lines here
-		Debug.DrawRay(newPos, Vector3.left, Color.green);
+		this.carriedObjectPositionIndicatorGO.transform.position = newPos;
 	}
 
 	private void CheckAndTurnObject(GameObject go)
@@ -191,6 +193,7 @@ public class PlayerInteractionScript : MonoBehaviour
 		this.isCarrying = false;
 		this.carriedObject = null;
 		this.lastRotation = Quaternion.identity;
+		this.carriedObjectPositionIndicatorGO.SetActive(false);
 	}
 
 
