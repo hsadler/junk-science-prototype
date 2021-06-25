@@ -16,7 +16,7 @@ bugs:
     - fix buggy button aim
 
 refine UX:
-    - make lab scene smaller and with as few instruments and tables as possible
+    X make lab scene smaller and with as few instruments and tables as possible
     - add spatial alignment UI for elements in a picked-up state
     - pre-place beaker on mixer so that button press shows function
     - tweak physics and element size for better beaker carrying UX

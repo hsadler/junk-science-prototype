@@ -143,7 +143,9 @@ public class PlayerInteractionScript : MonoBehaviour
             this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
             Time.deltaTime * this.carrySmooth
         );
-		go.transform.position = newPos;	
+		go.transform.position = newPos;
+		// TODO: add position lines here
+		Debug.DrawRay(newPos, Vector3.left, Color.green);
 	}
 
 	private void CheckAndTurnObject(GameObject go)
