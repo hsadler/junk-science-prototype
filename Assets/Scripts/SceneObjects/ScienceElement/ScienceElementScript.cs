@@ -68,10 +68,10 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToColliderGO.Add(Constants.SE_SALINE_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_STEAM_TAG, sphereColliderGO);
         // tag to scale map
-        this.tagToScale.Add(Constants.SE_NONE_TAG, 1.5f);
-        this.tagToScale.Add(Constants.SE_WATER_TAG, 1.5f);
-        this.tagToScale.Add(Constants.SE_SALT_TAG, 0.8f);
-        this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_NONE_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_WATER_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_SALT_TAG, 1f);
+        this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.7f);
         this.tagToScale.Add(Constants.SE_STEAM_TAG, 3f);
 
         this.lastTemperature = this.temperature;
