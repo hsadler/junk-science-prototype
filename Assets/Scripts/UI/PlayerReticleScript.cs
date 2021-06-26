@@ -19,7 +19,7 @@ public class PlayerReticleScript : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     // IMPLEMENTATION METHODS

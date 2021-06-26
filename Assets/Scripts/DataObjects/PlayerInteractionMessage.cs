@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerInteractionMessage
 {
 
-	public RaycastHit hit;
-	public GameObject player;
+    public RaycastHit hit;
+    public GameObject player;
 
-	public PlayerInteractionMessage(GameObject player, RaycastHit hit)
-	{
-		this.player = player;
-		this.hit = hit;
-	}
+    public PlayerInteractionMessage(GameObject player, RaycastHit hit)
+    {
+        this.player = player;
+        this.hit = hit;
+    }
 
 }

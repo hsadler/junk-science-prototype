@@ -7,149 +7,152 @@ public class LabSceneManager : MonoBehaviour
 {
 
 
-	// manager components
-	public ScienceElementData scienceElementData = new ScienceElementData();
+    // manager components
+    public ScienceElementData scienceElementData = new ScienceElementData();
 
-	// player
-	public bool playerActive = true;
-	public UnityEvent playerSetActive;
-	public UnityEvent playerSetInactive;
+    // player
+    public bool playerActive = true;
+    public UnityEvent playerSetActive;
+    public UnityEvent playerSetInactive;
 
-	// scene gravity
-	public enum GravityEnum
-	{
-		ninePointEight,
-		seventy
-	};
-	public GravityEnum sceneGravity = GravityEnum.ninePointEight;
-	
-	// scene telemetry
-	public int scienceElementSpawnCount = 0;
-	private Rect guiRect = new Rect(10, 10, 210, 110);
-
-	// science element game object pool
-	public GameObject spawnObject;
-	public int spawnPoolSize = 10000;
-	private Stack<GameObject> scienceElementPool = new Stack<GameObject>();
-
-	// unity events
-	public ScienceElementDiscoveredEvent scienceElementDiscoveredEvent = new ScienceElementDiscoveredEvent();
-
-
-	// the static reference to the singleton instance
-	public static LabSceneManager instance { get; private set; }
-
-
-	// UNITY HOOKS
-
-	void Awake()
-	{
-		if (instance == null)
-		{
-			instance = this;
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
-	}
-
-	void Start()
-	{
-		SetSceneGravity();
-		this.FillSpawnPool();
-	}
-
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			this.TogglePlayerActive();
-		}
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-			Application.Quit();
-        }
-	}
-
-	void OnGUI()
-	{
-		int fps = (int)(1.0f / Time.smoothDeltaTime);
-		string displayText =
-			"Spawn count: " + this.scienceElementSpawnCount.ToString() +
-			", FPS: " + fps.ToString();
-		GUI.Label(
-			this.guiRect,
-			displayText
-		);
-	}
-
-	// INTERFACE METHODS
-
-	public GameObject GetScienceElementFromPool()
-	{
-		if (this.scienceElementPool.Count > 0)
-		{
-			var go = this.scienceElementPool.Pop();
-			this.scienceElementSpawnCount += 1;
-			return go;
-		} else
-        {
-			return null;
-        }
-	} 
-
-	public void GiveScienceElementBackToPool(GameObject go)
+    // scene gravity
+    public enum GravityEnum
     {
-		go.GetComponent<Rigidbody>().velocity = Vector3.zero;
-		this.scienceElementPool.Push(go);
-		this.scienceElementSpawnCount -= 1;
-	}
+        ninePointEight,
+        seventy
+    };
+    public GravityEnum sceneGravity = GravityEnum.ninePointEight;
 
-	// IMPLEMENTATION METHODS
+    // scene telemetry
+    public int scienceElementSpawnCount = 0;
+    private Rect guiRect = new Rect(10, 10, 210, 110);
 
-	private void SetSceneGravity()
-	{
-		float grav = 0f;
-		if (this.sceneGravity == GravityEnum.ninePointEight)
-        {
-			grav = -9.8f;
-        } else if (this.sceneGravity == GravityEnum.seventy)
-        {
-			grav = -70f;
-        }
-		Physics.gravity = new Vector3(0, grav, 0);
-	}
+    // science element game object pool
+    public GameObject spawnObject;
+    public int spawnPoolSize = 10000;
+    private Stack<GameObject> scienceElementPool = new Stack<GameObject>();
 
-	private void TogglePlayerActive()
+    // unity events
+    public ScienceElementDiscoveredEvent scienceElementDiscoveredEvent = new ScienceElementDiscoveredEvent();
+
+
+    // the static reference to the singleton instance
+    public static LabSceneManager instance { get; private set; }
+
+
+    // UNITY HOOKS
+
+    void Awake()
     {
-		this.playerActive = !this.playerActive;
-		if (this.playerActive)
-		{
-			Cursor.visible = false;
-			Cursor.lockState = CursorLockMode.Locked;
-			this.playerSetActive.Invoke();
-		} else
+        if (instance == null)
         {
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.None;
-			this.playerSetInactive.Invoke();
-		}
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-	private void FillSpawnPool()
-	{
-		for (int i = 0; i < this.spawnPoolSize; i++)
-		{
-			GameObject go = Instantiate(
-				this.spawnObject,
-				transform.position,
-				Quaternion.identity
-			) as GameObject;
-			go.SetActive(false);
-			this.scienceElementPool.Push(go);
-		}
-	}
+    void Start()
+    {
+        SetSceneGravity();
+        this.FillSpawnPool();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            this.TogglePlayerActive();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Application.Quit();
+        }
+    }
+
+    void OnGUI()
+    {
+        int fps = (int)(1.0f / Time.smoothDeltaTime);
+        string displayText =
+            "Spawn count: " + this.scienceElementSpawnCount.ToString() +
+            ", FPS: " + fps.ToString();
+        GUI.Label(
+            this.guiRect,
+            displayText
+        );
+    }
+
+    // INTERFACE METHODS
+
+    public GameObject GetScienceElementFromPool()
+    {
+        if (this.scienceElementPool.Count > 0)
+        {
+            var go = this.scienceElementPool.Pop();
+            this.scienceElementSpawnCount += 1;
+            return go;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void GiveScienceElementBackToPool(GameObject go)
+    {
+        go.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.scienceElementPool.Push(go);
+        this.scienceElementSpawnCount -= 1;
+    }
+
+    // IMPLEMENTATION METHODS
+
+    private void SetSceneGravity()
+    {
+        float grav = 0f;
+        if (this.sceneGravity == GravityEnum.ninePointEight)
+        {
+            grav = -9.8f;
+        }
+        else if (this.sceneGravity == GravityEnum.seventy)
+        {
+            grav = -70f;
+        }
+        Physics.gravity = new Vector3(0, grav, 0);
+    }
+
+    private void TogglePlayerActive()
+    {
+        this.playerActive = !this.playerActive;
+        if (this.playerActive)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            this.playerSetActive.Invoke();
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            this.playerSetInactive.Invoke();
+        }
+    }
+
+    private void FillSpawnPool()
+    {
+        for (int i = 0; i < this.spawnPoolSize; i++)
+        {
+            GameObject go = Instantiate(
+                this.spawnObject,
+                transform.position,
+                Quaternion.identity
+            ) as GameObject;
+            go.SetActive(false);
+            this.scienceElementPool.Push(go);
+        }
+    }
 
 
 }

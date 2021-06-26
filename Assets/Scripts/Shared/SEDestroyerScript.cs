@@ -10,12 +10,12 @@ public class SEDestroyerScript : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter(Collider other)

@@ -35,7 +35,7 @@ public class LabInstrumentHeaterScript : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     // INTERFACE METHODS
@@ -62,7 +62,7 @@ public class LabInstrumentHeaterScript : MonoBehaviour
         {
             this.TurnOn();
         }
-        else if(this.isOn)
+        else if (this.isOn)
         {
             this.TurnOff();
         }
@@ -70,6 +70,6 @@ public class LabInstrumentHeaterScript : MonoBehaviour
     }
 
     // IMPLEMENTATION METHODS
-    
+
 
 }

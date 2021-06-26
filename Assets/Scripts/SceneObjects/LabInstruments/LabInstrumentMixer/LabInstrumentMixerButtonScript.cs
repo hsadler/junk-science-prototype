@@ -20,7 +20,7 @@ public class LabInstrumentMixerButtonScript : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     // INTERFACE METHODS

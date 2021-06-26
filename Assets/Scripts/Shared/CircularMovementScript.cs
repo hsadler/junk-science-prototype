@@ -16,18 +16,22 @@ public class CircularMovementScript : MonoBehaviour
     private float posX, posZ, angle = 0f;
 
 
-    public void Update() {
-        if(isActive) {
+    public void Update()
+    {
+        if (isActive)
+        {
             CalculatePosition();
         }
     }
 
-    private void CalculatePosition() {
+    private void CalculatePosition()
+    {
         posX = rotationCenter.position.x + Mathf.Cos(angle) * rotationRadius;
         posZ = rotationCenter.position.z + Mathf.Sin(angle) * rotationRadius;
         transform.position = new Vector3(posX, transform.position.y, posZ);
         angle += Time.smoothDeltaTime * angularSpeed;
-        if(angle >= 360f) {
+        if (angle >= 360f)
+        {
             angle = 0f;
         }
     }

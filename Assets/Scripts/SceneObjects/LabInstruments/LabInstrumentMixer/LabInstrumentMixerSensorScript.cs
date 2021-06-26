@@ -15,15 +15,15 @@ public class LabInstrumentMixerSensorScript : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if(this.labInstrumentMixerScript.mixGO != null)
+        if (this.labInstrumentMixerScript.mixGO != null)
         {
             this.CheckMixableIsWithinDistanceThreshold();
-        }    
+        }
     }
 
     void OnCollisionEnter(Collision collision)

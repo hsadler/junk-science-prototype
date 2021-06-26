@@ -13,11 +13,12 @@ X prototype UX:
     X cool steam to produce water
 
 bugs:
+    - fix shaky carried object lerped position
     - fix buggy button aim
 
 refine UX:
     X make lab scene smaller and with as few instruments and tables as possible
-    - add spatial alignment UI for elements in a picked-up state
+    X add spatial alignment UI for elements in a picked-up state
     - pre-place beaker on mixer so that button press shows function
     - tweak physics and element size for better beaker carrying UX
     - (maybe) show element type and info display on element hover

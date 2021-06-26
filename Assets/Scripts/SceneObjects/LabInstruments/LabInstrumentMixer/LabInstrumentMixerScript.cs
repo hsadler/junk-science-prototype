@@ -31,7 +31,7 @@ public class LabInstrumentMixerScript : MonoBehaviour
 
     void Update()
     {
-        if(this.isOn)
+        if (this.isOn)
         {
             this.Mix();
         }
@@ -57,7 +57,7 @@ public class LabInstrumentMixerScript : MonoBehaviour
         {
             this.TurnOn();
         }
-        else if(this.isOn)
+        else if (this.isOn)
         {
             this.TurnOff();
         }
@@ -82,7 +82,8 @@ public class LabInstrumentMixerScript : MonoBehaviour
         if (this.currentRotationVector == Vector3.forward)
         {
             this.currentRotationVector = Vector3.back;
-        } else
+        }
+        else
         {
             this.currentRotationVector = Vector3.forward;
         }

@@ -20,7 +20,8 @@ public class SEInletScript : MonoBehaviour
 
     // UNITY HOOKS
 
-    void Start() {
+    void Start()
+    {
         InvokeRepeating("CheckAndSpawnObjects", 0f, this.secondsPerSpawn);
     }
 
@@ -28,12 +29,17 @@ public class SEInletScript : MonoBehaviour
 
     // IMPLEMENTATION METHODS
 
-    private void CheckAndSpawnObjects() {
-        if (this.spawnOn) {
-            for (int i = 0; i < this.spawnColumnLength; i++) {
-                for (int j = 0; j < this.spawnRowLength; j++) {
+    private void CheckAndSpawnObjects()
+    {
+        if (this.spawnOn)
+        {
+            for (int i = 0; i < this.spawnColumnLength; i++)
+            {
+                for (int j = 0; j < this.spawnRowLength; j++)
+                {
                     var go = LabSceneManager.instance.GetScienceElementFromPool();
-                    if (go == null) {
+                    if (go == null)
+                    {
                         return;
                     }
                     ScienceElementScript seScript = go.GetComponent<ScienceElementScript>();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScienceElementScript : MonoBehaviour
 {
 
-    
+
     // component caches
     private MeshFilter meshF;
     private MeshRenderer meshR;
@@ -43,11 +43,12 @@ public class ScienceElementScript : MonoBehaviour
     private float lastTemperature;
     // consts
     private const float GAS_THRESHOLD = 100f;
- 
+
 
     // UNITY HOOKS
 
-    void Awake() {
+    void Awake()
+    {
         // tag to material map
         this.tagToMaterial.Add(Constants.SE_NONE_TAG, seNoneMaterial);
         this.tagToMaterial.Add(Constants.SE_WATER_TAG, seWaterMaterial);
@@ -72,11 +73,12 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToScale.Add(Constants.SE_SALT_TAG, 0.8f);
         this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.5f);
         this.tagToScale.Add(Constants.SE_STEAM_TAG, 3f);
-        
+
         this.lastTemperature = this.temperature;
     }
 
-    void Start() {
+    void Start()
+    {
         this.meshF = GetComponent<MeshFilter>();
         this.meshR = GetComponent<MeshRenderer>();
         this.constantF = GetComponent<ConstantForce>();
@@ -86,47 +88,56 @@ public class ScienceElementScript : MonoBehaviour
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
     }
 
-    void Update() {
+    void Update()
+    {
         CheckMaterial();
         CheckMesh();
         CheckCollider();
         CheckScale();
     }
 
-    void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter(Collision collision)
+    {
         if (
             this.gameObject.CompareTag(Constants.SE_WATER_TAG) &&
             collision.gameObject.CompareTag(Constants.SE_SALT_TAG)
-        ) {
+        )
+        {
             // turn water to saline and make salt disappear
             this.ConvertToSaline();
             collision.gameObject.SetActive(false);
             LabSceneManager.instance.GiveScienceElementBackToPool(collision.gameObject);
         }
     }
-    
-    void OnEnable() {
+
+    void OnEnable()
+    {
         this.procDiscovered();
     }
 
     // IMPLEMENTATION METHODS
 
-    private void CheckMaterial() {
+    private void CheckMaterial()
+    {
         // TODO: optimize if needed 
         Material applyMat = tagToMaterial[this.gameObject.tag];
         this.meshR.material = applyMat;
     }
 
-    private void CheckMesh() {
+    private void CheckMesh()
+    {
         // TODO: optimize if needed 
         Mesh applyMesh = tagToMesh[this.gameObject.tag];
         this.meshF.mesh = applyMesh;
     }
 
-    private void CheckCollider() {
+    private void CheckCollider()
+    {
         GameObject colliderGO = tagToColliderGO[this.gameObject.tag];
-        if(currColliderGO != colliderGO) {
-            if(currColliderGO != null) {
+        if (currColliderGO != colliderGO)
+        {
+            if (currColliderGO != null)
+            {
                 currColliderGO.SetActive(false);
             }
             colliderGO.SetActive(true);
@@ -134,19 +145,22 @@ public class ScienceElementScript : MonoBehaviour
         }
     }
 
-    private void CheckScale() {
+    private void CheckScale()
+    {
         // TODO: optimize if needed 
         float scale = tagToScale[this.gameObject.tag];
         transform.localScale = Vector3.one * scale;
     }
 
-    private void CheckHeatChange() {
+    private void CheckHeatChange()
+    {
         if (this.receivingHeat)
         {
             this.temperature += this.receivingHeatAmount;
         }
         // do water type boil changes
-        if (this.lastTemperature < GAS_THRESHOLD && this.temperature >= GAS_THRESHOLD) {
+        if (this.lastTemperature < GAS_THRESHOLD && this.temperature >= GAS_THRESHOLD)
+        {
             // handle water and saline differently
             if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
             {
@@ -171,7 +185,9 @@ public class ScienceElementScript : MonoBehaviour
                     seScript.ConvertToSalt();
                 }
             }
-        } else if(this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD) {
+        }
+        else if (this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD)
+        {
             if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
             {
                 this.ConvertToWater();
@@ -187,7 +203,7 @@ public class ScienceElementScript : MonoBehaviour
         this.constantF.force = new Vector3(0, 0, 0);
         procDiscovered();
     }
-    
+
     private void ConvertToSalt()
     {
         //Debug.Log("converting to salt...");
@@ -213,8 +229,10 @@ public class ScienceElementScript : MonoBehaviour
         procDiscovered();
     }
 
-    private void procDiscovered() {
-        if(this.gameObject.tag != Constants.SE_NONE_TAG) {
+    private void procDiscovered()
+    {
+        if (this.gameObject.tag != Constants.SE_NONE_TAG)
+        {
             LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
         }
     }

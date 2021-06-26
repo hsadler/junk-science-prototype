@@ -9,9 +9,9 @@ public class ScienceElementColliderScript : MonoBehaviour
     public ScienceElementScript seScript;
 
 
-    void Start() {}
+    void Start() { }
 
-    void Update() {}
+    void Update() { }
 
 
 }

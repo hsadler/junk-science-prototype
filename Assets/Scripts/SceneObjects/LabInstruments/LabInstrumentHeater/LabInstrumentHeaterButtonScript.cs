@@ -20,7 +20,7 @@ public class LabInstrumentHeaterButtonScript : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     // INTERFACE METHODS
