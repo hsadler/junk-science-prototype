@@ -125,7 +125,6 @@ public class PlayerInteractionScript : MonoBehaviour
                     this.carryDistance = hit.distance;
                     this.carriedObject = hit.transform.gameObject;
                     this.carriedObject.GetComponent<Rigidbody>().isKinematic = true;
-                    this.carriedObjectPositionIndicatorGO.SetActive(true);
                 }
             }
         }
@@ -142,13 +141,16 @@ public class PlayerInteractionScript : MonoBehaviour
     private void CarryObject(GameObject go)
     {
         // TODO: this lerp calc results in shaky, janky looking carried objects and position indicator lines
+        // set carried object position
         Vector3 newPos = Vector3.Lerp(
             go.transform.position,
             this.playerCameraGO.transform.position + this.playerCameraGO.transform.forward * this.carryDistance,
             Time.deltaTime * this.carrySmooth
         );
         go.transform.position = newPos;
+        // set carried object position indicator lines
         this.carriedObjectPositionIndicatorGO.transform.position = newPos;
+        this.carriedObjectPositionIndicatorGO.SetActive(true);
     }
 
     private void CheckAndTurnObject(GameObject go)
