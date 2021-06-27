@@ -119,16 +119,20 @@ public class ScienceElementScript : MonoBehaviour
 
     private void CheckMaterial()
     {
-        // TODO: optimize if needed 
         Material applyMat = tagToMaterial[this.gameObject.tag];
-        this.meshR.material = applyMat;
+        if (this.meshR != applyMat)
+        {
+            this.meshR.material = applyMat;
+        }
     }
 
     private void CheckMesh()
     {
-        // TODO: optimize if needed 
         Mesh applyMesh = tagToMesh[this.gameObject.tag];
-        this.meshF.mesh = applyMesh;
+        if (this.meshF != applyMesh)
+        {
+            this.meshF.mesh = applyMesh;
+        }
     }
 
     private void CheckCollider()
@@ -147,9 +151,12 @@ public class ScienceElementScript : MonoBehaviour
 
     private void CheckScale()
     {
-        // TODO: optimize if needed 
         float scale = tagToScale[this.gameObject.tag];
-        transform.localScale = Vector3.one * scale;
+        Vector3 newScale = Vector3.one * scale;
+        if (transform.localScale != newScale)
+        {
+            transform.localScale = newScale;
+        }
     }
 
     private void CheckHeatChange()
