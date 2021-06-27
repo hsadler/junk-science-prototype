@@ -13,8 +13,8 @@ X prototype UX:
     X cool steam to produce water
 
 bugs:
-    - fix shaky carried object lerped position
-    - fix buggy button aim
+    X fix shaky carried object lerped position
+    X fix buggy button aim
 
 refine UX:
     - (maybe) show element type and info display on element hover
@@ -22,7 +22,7 @@ refine UX:
 - take more videos
 
 - last minute features (for fun):
-    - rage throw 
+    - rage throw
     - rage table flip
     - beakers break when dropped
 

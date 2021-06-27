@@ -3,13 +3,13 @@
 GOALS
 
 X Basic 3D first-person environment
-- Player pickup element
-- Player "discovers" new element upon pickup
+X Player pickup element
+X Player "discovers" new element upon creation
 - Player place element
 - Player able to retrieve known elements (element vault UI)
-- Player interact with burner aparatus
-- Player place element in burner aparatus
-- Active burner aparatus tranforms element
+X Player interact with burner aparatus
+X Player place element in burner aparatus
+X Active burner aparatus tranforms element
 - Element web definition
 - Use element web during gameplay to inform what happens to elements under the 
     right conditions

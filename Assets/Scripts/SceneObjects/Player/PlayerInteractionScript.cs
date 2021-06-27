@@ -140,7 +140,6 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private void CarryObject(GameObject go)
     {
-        // TODO: this lerp calc results in shaky, janky looking carried objects and position indicator lines
         // set carried object position
         Vector3 newPos = Vector3.Lerp(
             go.transform.position,
