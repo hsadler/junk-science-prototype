@@ -12,21 +12,28 @@ X prototype UX:
     X heats saline to produce steam and salt
     X cool steam to produce water
 
-bugs:
-    X fix shaky carried object lerped position
-    X fix buggy button aim
+- add more science elements:
+    - earth
+    - mud
+    - stone
+    - ore
+    - slag
+    - metal
+    - lava
+    - clay
+    - brick
 
-refine UX:
+- refine UX:
     - (maybe) show element type and info display on element hover
 
 - take more videos
+
+- bugs:
 
 - last minute features (for fun):
     - rage throw
     - rage table flip
     - beakers break when dropped
-
-- add more discoverable science elements
 
 
 /////// defer ///////
