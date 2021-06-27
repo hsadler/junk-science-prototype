@@ -1,0 +1,12 @@
+
+
+SCIENCE ELEMENT ADDITION PROCESS
+
+
+1. Create constants tag and display name
+2. Create material
+3. Create mesh (if needed)
+4. Create collider (if needed)
+5. Add mappings in ScienceElementScript
+6. Add collision logic to ScienceElementScript
+7. Add heat change logic to ScienceElementScript
