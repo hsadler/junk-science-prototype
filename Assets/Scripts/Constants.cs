@@ -32,6 +32,9 @@ public static class Constants
     public const string SE_SLAG_TAG = "science-element-slag";
     public const string SE_SLAG_DISPLAY_NAME = "slag";
 
+    public const string SE_MOLTEN_METAL_TAG = "science-element-molten-metal";
+    public const string SE_MOLTEN_METAL_DISPLAY_NAME = "molten metal";
+
     public const string SE_METAL_TAG = "science-element-metal";
     public const string SE_METAL_DISPLAY_NAME = "metal";
 
