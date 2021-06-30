@@ -37,6 +37,18 @@ public class ScienceElementScript : MonoBehaviour
     public Material seSaltMaterial;
     public Material seSalineMaterial;
     public Material seSteamMaterial;
+    public Material seEarthMaterial;
+    public Material seMudMaterial;
+    public Material seStoneMaterial;
+    public Material seOreMaterial;
+    public Material seSlagMaterial;
+    public Material seMoltenMetalMaterial;
+    public Material seMetalMaterial;
+    public Material seLavaMaterial;
+    public Material seClayMaterial;
+    public Material seBrickMaterial;
+
+
     private IDictionary<string, Material> tagToMaterial = new Dictionary<string, Material>();
 
     // last temperature
@@ -55,24 +67,67 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMaterial.Add(Constants.SE_SALT_TAG, seSaltMaterial);
         this.tagToMaterial.Add(Constants.SE_SALINE_TAG, seSalineMaterial);
         this.tagToMaterial.Add(Constants.SE_STEAM_TAG, seSteamMaterial);
+        this.tagToMaterial.Add(Constants.SE_EARTH_TAG, seEarthMaterial);
+        this.tagToMaterial.Add(Constants.SE_MUD_TAG, seMudMaterial);
+        this.tagToMaterial.Add(Constants.SE_STONE_TAG, seStoneMaterial);
+        this.tagToMaterial.Add(Constants.SE_ORE_TAG, seOreMaterial);
+        this.tagToMaterial.Add(Constants.SE_SLAG_TAG, seSlagMaterial);
+        this.tagToMaterial.Add(Constants.SE_MOLTEN_METAL_TAG, seMoltenMetalMaterial);
+        this.tagToMaterial.Add(Constants.SE_METAL_TAG, seMetalMaterial);
+        this.tagToMaterial.Add(Constants.SE_LAVA_TAG, seLavaMaterial);
+        this.tagToMaterial.Add(Constants.SE_CLAY_TAG, seClayMaterial);
+        this.tagToMaterial.Add(Constants.SE_BRICK_TAG, seBrickMaterial);
+
         // tag to mesh map
         this.tagToMesh.Add(Constants.SE_NONE_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_WATER_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_SALT_TAG, cubeMesh);
         this.tagToMesh.Add(Constants.SE_SALINE_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_STEAM_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_EARTH_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_MUD_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_STONE_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_ORE_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_SLAG_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_MOLTEN_METAL_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_METAL_TAG, cubeMesh);
+        this.tagToMesh.Add(Constants.SE_LAVA_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_CLAY_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_BRICK_TAG, cubeMesh);
+
         // tag to colliderGO map
         this.tagToColliderGO.Add(Constants.SE_NONE_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_WATER_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_SALT_TAG, cubeColliderGO);
         this.tagToColliderGO.Add(Constants.SE_SALINE_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_STEAM_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_EARTH_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_MUD_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_STONE_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_ORE_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_SLAG_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_MOLTEN_METAL_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_METAL_TAG, cubeColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_LAVA_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_CLAY_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_BRICK_TAG, cubeColliderGO);
+
         // tag to scale map
         this.tagToScale.Add(Constants.SE_NONE_TAG, 1.7f);
         this.tagToScale.Add(Constants.SE_WATER_TAG, 1.7f);
         this.tagToScale.Add(Constants.SE_SALT_TAG, 1f);
         this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.7f);
         this.tagToScale.Add(Constants.SE_STEAM_TAG, 3f);
+        this.tagToScale.Add(Constants.SE_EARTH_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_MUD_TAG, 2f);
+        this.tagToScale.Add(Constants.SE_STONE_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_ORE_TAG, 2f);
+        this.tagToScale.Add(Constants.SE_SLAG_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_MOLTEN_METAL_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_METAL_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_LAVA_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_CLAY_TAG, 2f);
+        this.tagToScale.Add(Constants.SE_BRICK_TAG, 2f);
 
         this.lastTemperature = this.temperature;
     }
