@@ -38,7 +38,6 @@ public class DispenserButtonScript : MonoBehaviour
             if (_isOn)
             {
                 dispenserButtonManagerScript.TurnOffButton(this);
-
             }
             else
             {

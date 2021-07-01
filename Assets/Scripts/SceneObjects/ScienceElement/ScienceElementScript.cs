@@ -159,7 +159,7 @@ public class ScienceElementScript : MonoBehaviour
         )
         {
             // turn water to saline and make salt disappear
-            this.ConvertToSaline();
+            this.ConvertElement(Constants.SE_SALINE_TAG);
             collision.gameObject.SetActive(false);
             LabSceneManager.instance.GiveScienceElementBackToPool(collision.gameObject);
         }
@@ -226,12 +226,12 @@ public class ScienceElementScript : MonoBehaviour
             // handle water and saline differently
             if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
             {
-                this.ConvertToSteam();
+                this.ConvertElement(Constants.SE_STEAM_TAG, true);
             }
             else if (this.gameObject.CompareTag(Constants.SE_SALINE_TAG))
             {
                 // convert current element to steam
-                this.ConvertToSteam();
+                this.ConvertElement(Constants.SE_STEAM_TAG, true);
                 // also create a salt as a by-product
                 var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
                 if (saltGO != null)
@@ -244,7 +244,7 @@ public class ScienceElementScript : MonoBehaviour
                     saltGO.transform.rotation = Quaternion.identity;
                     saltGO.SetActive(true);
                     var seScript = saltGO.GetComponent<ScienceElementScript>();
-                    seScript.ConvertToSalt();
+                    seScript.ConvertElement(Constants.SE_SALT_TAG);
                 }
             }
         }
@@ -252,43 +252,18 @@ public class ScienceElementScript : MonoBehaviour
         {
             if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
             {
-                this.ConvertToWater();
+                this.ConvertElement(Constants.SE_WATER_TAG);
             }
         }
         this.lastTemperature = this.temperature;
     }
 
-    private void ConvertToWater()
+    private void ConvertElement(string seTag, bool isGas = false)
     {
-        // Debug.Log("converting to water...");
-        this.gameObject.tag = Constants.SE_WATER_TAG;
-        this.constantF.force = new Vector3(0, 0, 0);
-        procDiscovered();
-    }
-
-    private void ConvertToSalt()
-    {
-        //Debug.Log("converting to salt...");
-        this.gameObject.tag = Constants.SE_SALT_TAG;
-        this.constantF.force = new Vector3(0, 0, 0);
-        procDiscovered();
-    }
-
-    private void ConvertToSaline()
-    {
-        //Debug.Log("converting to saline...");
-        this.gameObject.tag = Constants.SE_SALINE_TAG;
-        this.constantF.force = new Vector3(0, 0, 0);
-        procDiscovered();
-    }
-
-    private void ConvertToSteam()
-    {
-        // Debug.Log("converting to steam...");
-        this.gameObject.tag = Constants.SE_STEAM_TAG;
-        float forceUp = Mathf.Abs(Physics.gravity.y) / 19f;
+        this.gameObject.tag = seTag;
+        float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
         this.constantF.force = new Vector3(0, forceUp, 0);
-        procDiscovered();
+        this.procDiscovered();
     }
 
     private void procDiscovered()

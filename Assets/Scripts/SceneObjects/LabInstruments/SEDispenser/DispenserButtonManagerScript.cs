@@ -26,7 +26,7 @@ public class DispenserButtonManagerScript : MonoBehaviour
 
     public void TurnOnButton(DispenserButtonScript button)
     {
-        foreach(var dbScript in this.dispenserButtons)
+        foreach (var dbScript in this.dispenserButtons)
         {
             dbScript.TurnButtonOff();
         }

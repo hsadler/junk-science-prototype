@@ -9,6 +9,16 @@ TagManager:
   - science-element-salt
   - science-element-saline
   - science-element-steam
+  - science-element-earth
+  - science-element-mud
+  - science-element-stone
+  - science-element-ore
+  - science-element-slag
+  - science-element-molten-metal
+  - science-element-metal
+  - science-element-lava
+  - science-element-clay
+  - science-element-brick
   layers:
   - Default
   - TransparentFX
