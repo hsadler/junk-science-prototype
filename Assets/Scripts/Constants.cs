@@ -47,6 +47,7 @@ public static class Constants
     public const string SE_BRICK_TAG = "science-element-brick";
     public const string SE_BRICK_DISPLAY_NAME = "brick";
 
+    public const float GAS_THRESHOLD = 100f;
 
     public const int DISCOVERY_DISPLAY_DURATION = 2;
 

@@ -24,6 +24,10 @@ X prototype UX:
     - clay
     - brick
 
+- eng:
+    - refactor
+    - add min/max heat to elements
+
 - refine UX:
     - (maybe) show element type and info display on element hover
 

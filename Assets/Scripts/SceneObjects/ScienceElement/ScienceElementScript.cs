@@ -27,6 +27,7 @@ public class ScienceElementScript : MonoBehaviour
 
     // element temperature
     public float temperature = 0f;
+    private float lastTemperature;
     public bool receivingHeat = false;
     public float receivingHeatAmount = 0f;
     public float secondsPerHeat = 1f;
@@ -48,13 +49,7 @@ public class ScienceElementScript : MonoBehaviour
     public Material seClayMaterial;
     public Material seBrickMaterial;
 
-
     private IDictionary<string, Material> tagToMaterial = new Dictionary<string, Material>();
-
-    // last temperature
-    private float lastTemperature;
-    // consts
-    private const float GAS_THRESHOLD = 100f;
 
 
     // UNITY HOOKS
@@ -150,7 +145,12 @@ public class ScienceElementScript : MonoBehaviour
         CheckCollider();
         CheckScale();
     }
+    void OnEnable()
+    {
+        this.procDiscovered();
+    }
 
+    // TODO: convert this to use a tag->collision_handler map
     void OnCollisionEnter(Collision collision)
     {
         if (
@@ -165,12 +165,68 @@ public class ScienceElementScript : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    // IMPLEMENTATION METHODS
+
+    // TODO: convert this to use a tag->heat_change_handler map
+    private void CheckHeatChange()
     {
+        if (this.receivingHeat)
+        {
+            this.temperature += this.receivingHeatAmount;
+        }
+        // do water type boil changes
+        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
+        {
+            // handle water and saline differently
+            if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
+            {
+                this.ConvertElement(Constants.SE_STEAM_TAG, true);
+            }
+            else if (this.gameObject.CompareTag(Constants.SE_SALINE_TAG))
+            {
+                // convert current element to steam
+                this.ConvertElement(Constants.SE_STEAM_TAG, true);
+                // also create a salt as a by-product
+                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
+                if (saltGO != null)
+                {
+                    saltGO.transform.position = new Vector3(
+                        this.transform.position.x,
+                        this.transform.position.y,
+                        this.transform.position.z
+                    );
+                    saltGO.transform.rotation = Quaternion.identity;
+                    saltGO.SetActive(true);
+                    var seScript = saltGO.GetComponent<ScienceElementScript>();
+                    seScript.ConvertElement(Constants.SE_SALT_TAG);
+                }
+            }
+        }
+        else if (this.lastTemperature <= Constants.GAS_THRESHOLD && this.temperature < Constants.GAS_THRESHOLD)
+        {
+            if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
+            {
+                this.ConvertElement(Constants.SE_WATER_TAG);
+            }
+        }
+        this.lastTemperature = this.temperature;
+    }
+
+    private void ConvertElement(string seTag, bool isGas = false)
+    {
+        this.gameObject.tag = seTag;
+        float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
+        this.constantF.force = new Vector3(0, forceUp, 0);
         this.procDiscovered();
     }
 
-    // IMPLEMENTATION METHODS
+    private void procDiscovered()
+    {
+        if (this.gameObject.tag != Constants.SE_NONE_TAG)
+        {
+            LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
+        }
+    }
 
     private void CheckMaterial()
     {
@@ -211,66 +267,6 @@ public class ScienceElementScript : MonoBehaviour
         if (transform.localScale != newScale)
         {
             transform.localScale = newScale;
-        }
-    }
-
-    private void CheckHeatChange()
-    {
-        if (this.receivingHeat)
-        {
-            this.temperature += this.receivingHeatAmount;
-        }
-        // do water type boil changes
-        if (this.lastTemperature < GAS_THRESHOLD && this.temperature >= GAS_THRESHOLD)
-        {
-            // handle water and saline differently
-            if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
-            {
-                this.ConvertElement(Constants.SE_STEAM_TAG, true);
-            }
-            else if (this.gameObject.CompareTag(Constants.SE_SALINE_TAG))
-            {
-                // convert current element to steam
-                this.ConvertElement(Constants.SE_STEAM_TAG, true);
-                // also create a salt as a by-product
-                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
-                if (saltGO != null)
-                {
-                    saltGO.transform.position = new Vector3(
-                        this.transform.position.x,
-                        this.transform.position.y,
-                        this.transform.position.z
-                    );
-                    saltGO.transform.rotation = Quaternion.identity;
-                    saltGO.SetActive(true);
-                    var seScript = saltGO.GetComponent<ScienceElementScript>();
-                    seScript.ConvertElement(Constants.SE_SALT_TAG);
-                }
-            }
-        }
-        else if (this.lastTemperature <= GAS_THRESHOLD && this.temperature < GAS_THRESHOLD)
-        {
-            if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
-            {
-                this.ConvertElement(Constants.SE_WATER_TAG);
-            }
-        }
-        this.lastTemperature = this.temperature;
-    }
-
-    private void ConvertElement(string seTag, bool isGas = false)
-    {
-        this.gameObject.tag = seTag;
-        float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
-        this.constantF.force = new Vector3(0, forceUp, 0);
-        this.procDiscovered();
-    }
-
-    private void procDiscovered()
-    {
-        if (this.gameObject.tag != Constants.SE_NONE_TAG)
-        {
-            LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
         }
     }
 
