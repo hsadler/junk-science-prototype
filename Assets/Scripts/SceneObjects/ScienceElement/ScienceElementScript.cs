@@ -84,6 +84,9 @@ public class ScienceElementScript : MonoBehaviour
             case Constants.SE_WATER_TAG:
                 this.WaterCollisionHandler(collision.gameObject);
                 break;
+            case Constants.SE_LAVA_TAG:
+                this.LavaCollisionHandler(collision.gameObject);
+                break;
             default:
                 break;
         }
@@ -106,11 +109,17 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_MUD_TAG);
         }
-        // water + lava = stone & steam
-        else if (collisionOtherGO.CompareTag(Constants.SE_LAVA_TAG))
+    }
+
+    private void LavaCollisionHandler(GameObject collisionOtherGO)
+    {
+        // lava + water = stone & steam
+        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG))
         {
-            this.ConvertElement(Constants.SE_STEAM_TAG);
-            this.CreateByProduct(Constants.SE_STONE_TAG, this.transform.position);
+            this.ConvertElement(Constants.SE_STONE_TAG);
+            collisionOtherGO.SetActive(false);
+            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true);
         }
     }
 
@@ -213,7 +222,7 @@ public class ScienceElementScript : MonoBehaviour
             byProdGO.transform.rotation = Quaternion.identity;
             byProdGO.SetActive(true);
             var seScript = byProdGO.GetComponent<ScienceElementScript>();
-            seScript.ConvertElement(seTag);
+            seScript.ConvertElement(seTag, isGas);
         }
         return byProdGO;
     }
