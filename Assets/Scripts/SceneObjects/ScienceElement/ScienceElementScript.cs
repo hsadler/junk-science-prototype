@@ -57,29 +57,24 @@ public class ScienceElementScript : MonoBehaviour
     {
         this.SetScienceElementMappings();
         this.lastTemperature = this.temperature;
+        this.meshF = GetComponent<MeshFilter>();
+        this.meshR = GetComponent<MeshRenderer>();
+        this.constantF = GetComponent<ConstantForce>();
     }
 
     void Start()
     {
-        this.meshF = GetComponent<MeshFilter>();
-        this.meshR = GetComponent<MeshRenderer>();
-        this.constantF = GetComponent<ConstantForce>();
         Transform parent = transform.parent;
         transform.parent = null;
         transform.parent = parent;
         InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
     }
 
-    void Update()
-    {
-        CheckMaterial();
-        CheckMesh();
-        CheckCollider();
-        CheckScale();
-    }
+    void Update() { }
+
     void OnEnable()
     {
-        this.procDiscovered();
+        this.ProcActivated();
     }
 
     void OnCollisionEnter(Collision collision)
@@ -177,10 +172,19 @@ public class ScienceElementScript : MonoBehaviour
         this.gameObject.tag = seTag;
         float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
         this.constantF.force = new Vector3(0, forceUp, 0);
-        this.procDiscovered();
+        this.ProcActivated();
     }
 
-    private void procDiscovered()
+    private void ProcActivated()
+    {
+        this.CheckMaterial();
+        this.CheckMesh();
+        this.CheckCollider();
+        this.CheckScale();
+        this.ProcDiscovered();
+    }
+
+    private void ProcDiscovered()
     {
         if (this.gameObject.tag != Constants.SE_NONE_TAG)
         {
