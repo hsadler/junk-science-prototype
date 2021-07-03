@@ -2,6 +2,7 @@
 public static class Constants
 {
 
+
     public const string SE_NONE_TAG = "science-element-none";
     public const string SE_NONE_DISPLAY_NAME = "none";
 
@@ -47,7 +48,12 @@ public static class Constants
     public const string SE_BRICK_TAG = "science-element-brick";
     public const string SE_BRICK_DISPLAY_NAME = "brick";
 
-    public const float GAS_THRESHOLD = 100f;
+
+    public const float MIN_TEMPERATURE = 0f;
+    public const float MAX_TEMPERATURE = 60f;
+    public const float WATER_BOILING_POINT = 30f;
+    public const float EARTH_MELTING_POINT = 50F;
+
 
     public const int DISCOVERY_DISPLAY_DURATION = 2;
 

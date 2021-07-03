@@ -94,12 +94,23 @@ public class ScienceElementScript : MonoBehaviour
     // collision handlers
     private void WaterCollisionHandler(GameObject collisionOtherGO)
     {
+        // water + salt = saline
         if (collisionOtherGO.CompareTag(Constants.SE_SALT_TAG))
         {
-            // turn water to saline and make salt disappear
             this.ConvertElement(Constants.SE_SALINE_TAG);
             collisionOtherGO.SetActive(false);
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+        }
+        // water + earth = mud
+        else if (collisionOtherGO.CompareTag(Constants.SE_EARTH_TAG))
+        {
+            this.ConvertElement(Constants.SE_MUD_TAG);
+        }
+        // water + lava = stone & steam
+        else if (collisionOtherGO.CompareTag(Constants.SE_LAVA_TAG))
+        {
+            this.ConvertElement(Constants.SE_STEAM_TAG);
+            this.CreateByProduct(Constants.SE_STONE_TAG, this.transform.position);
         }
     }
 
@@ -108,13 +119,20 @@ public class ScienceElementScript : MonoBehaviour
         // set new temperature
         if (this.receivingHeat)
         {
-            this.temperature += this.receivingHeatAmount;
+            float newTemp = this.temperature + this.receivingHeatAmount;
+            if (newTemp >= Constants.MIN_TEMPERATURE && newTemp <= Constants.MAX_TEMPERATURE)
+            {
+                this.temperature = newTemp;
+            }
         }
         // run heat change handler
         switch (this.gameObject.tag)
         {
             case Constants.SE_WATER_TAG:
                 this.WaterHeatChangeHandler();
+                break;
+            case Constants.SE_EARTH_TAG:
+                this.EarthHeatChangeHandler();
                 break;
             case Constants.SE_SALINE_TAG:
                 this.SalineHeatChangeHandler();
@@ -132,39 +150,72 @@ public class ScienceElementScript : MonoBehaviour
     // heat change handlers
     private void WaterHeatChangeHandler()
     {
-        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
+        // boil water = steam
+        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
+        }
+    }
+    private void EarthHeatChangeHandler()
+    {
+        // melt earth = lava
+        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.EARTH_MELTING_POINT))
+        {
+            this.ConvertElement(Constants.SE_LAVA_TAG);
         }
     }
     private void SalineHeatChangeHandler()
     {
-        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
+        // boil saline = steam & salt
+        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
         {
-            // convert current element to steam
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
-            // also create a salt as a by-product
-            var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
-            if (saltGO != null)
-            {
-                saltGO.transform.position = new Vector3(
-                    this.transform.position.x,
-                    this.transform.position.y,
-                    this.transform.position.z
-                );
-                saltGO.transform.rotation = Quaternion.identity;
-                saltGO.SetActive(true);
-                var seScript = saltGO.GetComponent<ScienceElementScript>();
-                seScript.ConvertElement(Constants.SE_SALT_TAG);
-            }
+            this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position);
         }
     }
     private void SteamHeatChangeHandler()
     {
-        if (this.lastTemperature >= Constants.GAS_THRESHOLD && this.temperature < Constants.GAS_THRESHOLD)
+        // cool steam = water
+        if (this.CondensationPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
         {
             this.ConvertElement(Constants.SE_WATER_TAG);
         }
+    }
+
+    // science element state change evaluators
+    private bool MeltingPointReached(float lastTemp, float currTemp, float meltingPoint)
+    {
+        return lastTemp < meltingPoint && currTemp >= meltingPoint;
+    }
+    private bool BoilingPointReached(float lastTemp, float currTemp, float boilingPoint)
+    {
+        return this.MeltingPointReached(lastTemp, currTemp, boilingPoint);
+    }
+    private bool CondensationPointReached(float lastTemp, float currTemp, float condensationPoint)
+    {
+        return lastTemp >= condensationPoint && currTemp < condensationPoint;
+    }
+    private bool FreezingPointReached(float lastTemp, float currTemp, float freezingPoint)
+    {
+        return this.CondensationPointReached(lastTemp, currTemp, freezingPoint);
+    }
+
+    private GameObject CreateByProduct(string seTag, Vector3 position, bool isGas = false)
+    {
+        var byProdGO = LabSceneManager.instance.GetScienceElementFromPool();
+        if (byProdGO != null)
+        {
+            byProdGO.transform.position = new Vector3(
+                position.x,
+                position.y,
+                position.z
+            );
+            byProdGO.transform.rotation = Quaternion.identity;
+            byProdGO.SetActive(true);
+            var seScript = byProdGO.GetComponent<ScienceElementScript>();
+            seScript.ConvertElement(seTag);
+        }
+        return byProdGO;
     }
 
     private void ConvertElement(string seTag, bool isGas = false)

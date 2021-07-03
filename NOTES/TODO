@@ -25,8 +25,8 @@ X prototype UX:
     - brick
 
 - eng:
-    - refactor
-    - add min/max heat to elements
+    X add min/max heat to elements
+    - add collision and heat-change handlers for new science elements
 
 - refine UX:
     - (maybe) show element type and info display on element hover
