@@ -11,28 +11,29 @@ public class ScienceElementScript : MonoBehaviour
     private MeshRenderer meshR;
     private ConstantForce constantF;
 
-    // meshes
-    public Mesh sphereMesh;
-    public Mesh cubeMesh;
-    private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
-
-    // collider GOs
-    public GameObject sphereColliderGO;
-    public GameObject cubeColliderGO;
-    private GameObject currColliderGO;
-    private IDictionary<string, GameObject> tagToColliderGO = new Dictionary<string, GameObject>();
-
-    // element scale
-    private IDictionary<string, float> tagToScale = new Dictionary<string, float>();
-
-    // element temperature
+    // science element temperature
     public float temperature = 0f;
     private float lastTemperature;
     public bool receivingHeat = false;
     public float receivingHeatAmount = 0f;
     public float secondsPerHeat = 1f;
 
-    // materials
+    // mesh per science element
+    private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
+    public Mesh sphereMesh;
+    public Mesh cubeMesh;
+
+    // collider GOs per science element
+    private IDictionary<string, GameObject> tagToColliderGO = new Dictionary<string, GameObject>();
+    public GameObject sphereColliderGO;
+    public GameObject cubeColliderGO;
+    private GameObject currColliderGO;
+
+    // size scale per science element
+    private IDictionary<string, float> tagToScale = new Dictionary<string, float>();
+
+    // materials per science element
+    private IDictionary<string, Material> tagToMaterial = new Dictionary<string, Material>();
     public Material seNoneMaterial;
     public Material seWaterMaterial;
     public Material seSaltMaterial;
@@ -49,12 +50,187 @@ public class ScienceElementScript : MonoBehaviour
     public Material seClayMaterial;
     public Material seBrickMaterial;
 
-    private IDictionary<string, Material> tagToMaterial = new Dictionary<string, Material>();
-
 
     // UNITY HOOKS
 
     void Awake()
+    {
+        this.SetScienceElementMappings();
+        this.lastTemperature = this.temperature;
+    }
+
+    void Start()
+    {
+        this.meshF = GetComponent<MeshFilter>();
+        this.meshR = GetComponent<MeshRenderer>();
+        this.constantF = GetComponent<ConstantForce>();
+        Transform parent = transform.parent;
+        transform.parent = null;
+        transform.parent = parent;
+        InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
+    }
+
+    void Update()
+    {
+        CheckMaterial();
+        CheckMesh();
+        CheckCollider();
+        CheckScale();
+    }
+    void OnEnable()
+    {
+        this.procDiscovered();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        switch (this.gameObject.tag)
+        {
+            case Constants.SE_WATER_TAG:
+                this.WaterCollisionHandler(collision.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    // IMPLEMENTATION METHODS
+
+    // collision handlers
+    private void WaterCollisionHandler(GameObject collisionOtherGO)
+    {
+        if (collisionOtherGO.CompareTag(Constants.SE_SALT_TAG))
+        {
+            // turn water to saline and make salt disappear
+            this.ConvertElement(Constants.SE_SALINE_TAG);
+            collisionOtherGO.SetActive(false);
+            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+        }
+    }
+
+    private void CheckHeatChange()
+    {
+        // set new temperature
+        if (this.receivingHeat)
+        {
+            this.temperature += this.receivingHeatAmount;
+        }
+        // run heat change handler
+        switch (this.gameObject.tag)
+        {
+            case Constants.SE_WATER_TAG:
+                this.WaterHeatChangeHandler();
+                break;
+            case Constants.SE_SALINE_TAG:
+                this.SalineHeatChangeHandler();
+                break;
+            case Constants.SE_STEAM_TAG:
+                this.SteamHeatChangeHandler();
+                break;
+            default:
+                break;
+        }
+        // set last temperature for comparison checks
+        this.lastTemperature = this.temperature;
+    }
+
+    // heat change handlers
+    private void WaterHeatChangeHandler()
+    {
+        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
+        {
+            this.ConvertElement(Constants.SE_STEAM_TAG, true);
+        }
+    }
+    private void SalineHeatChangeHandler()
+    {
+        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
+        {
+            // convert current element to steam
+            this.ConvertElement(Constants.SE_STEAM_TAG, true);
+            // also create a salt as a by-product
+            var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
+            if (saltGO != null)
+            {
+                saltGO.transform.position = new Vector3(
+                    this.transform.position.x,
+                    this.transform.position.y,
+                    this.transform.position.z
+                );
+                saltGO.transform.rotation = Quaternion.identity;
+                saltGO.SetActive(true);
+                var seScript = saltGO.GetComponent<ScienceElementScript>();
+                seScript.ConvertElement(Constants.SE_SALT_TAG);
+            }
+        }
+    }
+    private void SteamHeatChangeHandler()
+    {
+        if (this.lastTemperature >= Constants.GAS_THRESHOLD && this.temperature < Constants.GAS_THRESHOLD)
+        {
+            this.ConvertElement(Constants.SE_WATER_TAG);
+        }
+    }
+
+    private void ConvertElement(string seTag, bool isGas = false)
+    {
+        this.gameObject.tag = seTag;
+        float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
+        this.constantF.force = new Vector3(0, forceUp, 0);
+        this.procDiscovered();
+    }
+
+    private void procDiscovered()
+    {
+        if (this.gameObject.tag != Constants.SE_NONE_TAG)
+        {
+            LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
+        }
+    }
+
+    private void CheckMaterial()
+    {
+        Material applyMat = tagToMaterial[this.gameObject.tag];
+        if (this.meshR != applyMat)
+        {
+            this.meshR.material = applyMat;
+        }
+    }
+
+    private void CheckMesh()
+    {
+        Mesh applyMesh = tagToMesh[this.gameObject.tag];
+        if (this.meshF != applyMesh)
+        {
+            this.meshF.mesh = applyMesh;
+        }
+    }
+
+    private void CheckCollider()
+    {
+        GameObject colliderGO = tagToColliderGO[this.gameObject.tag];
+        if (currColliderGO != colliderGO)
+        {
+            if (currColliderGO != null)
+            {
+                currColliderGO.SetActive(false);
+            }
+            colliderGO.SetActive(true);
+            currColliderGO = colliderGO;
+        }
+    }
+
+    private void CheckScale()
+    {
+        float scale = tagToScale[this.gameObject.tag];
+        Vector3 newScale = Vector3.one * scale;
+        if (transform.localScale != newScale)
+        {
+            transform.localScale = newScale;
+        }
+    }
+
+    private void SetScienceElementMappings()
     {
         // tag to material map
         this.tagToMaterial.Add(Constants.SE_NONE_TAG, seNoneMaterial);
@@ -123,151 +299,6 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToScale.Add(Constants.SE_LAVA_TAG, 1.7f);
         this.tagToScale.Add(Constants.SE_CLAY_TAG, 2f);
         this.tagToScale.Add(Constants.SE_BRICK_TAG, 2f);
-
-        this.lastTemperature = this.temperature;
-    }
-
-    void Start()
-    {
-        this.meshF = GetComponent<MeshFilter>();
-        this.meshR = GetComponent<MeshRenderer>();
-        this.constantF = GetComponent<ConstantForce>();
-        Transform parent = transform.parent;
-        transform.parent = null;
-        transform.parent = parent;
-        InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
-    }
-
-    void Update()
-    {
-        CheckMaterial();
-        CheckMesh();
-        CheckCollider();
-        CheckScale();
-    }
-    void OnEnable()
-    {
-        this.procDiscovered();
-    }
-
-    // TODO: convert this to use a tag->collision_handler map
-    void OnCollisionEnter(Collision collision)
-    {
-        if (
-            this.gameObject.CompareTag(Constants.SE_WATER_TAG) &&
-            collision.gameObject.CompareTag(Constants.SE_SALT_TAG)
-        )
-        {
-            // turn water to saline and make salt disappear
-            this.ConvertElement(Constants.SE_SALINE_TAG);
-            collision.gameObject.SetActive(false);
-            LabSceneManager.instance.GiveScienceElementBackToPool(collision.gameObject);
-        }
-    }
-
-    // IMPLEMENTATION METHODS
-
-    // TODO: convert this to use a tag->heat_change_handler map
-    private void CheckHeatChange()
-    {
-        if (this.receivingHeat)
-        {
-            this.temperature += this.receivingHeatAmount;
-        }
-        // do water type boil changes
-        if (this.lastTemperature < Constants.GAS_THRESHOLD && this.temperature >= Constants.GAS_THRESHOLD)
-        {
-            // handle water and saline differently
-            if (this.gameObject.CompareTag(Constants.SE_WATER_TAG))
-            {
-                this.ConvertElement(Constants.SE_STEAM_TAG, true);
-            }
-            else if (this.gameObject.CompareTag(Constants.SE_SALINE_TAG))
-            {
-                // convert current element to steam
-                this.ConvertElement(Constants.SE_STEAM_TAG, true);
-                // also create a salt as a by-product
-                var saltGO = LabSceneManager.instance.GetScienceElementFromPool();
-                if (saltGO != null)
-                {
-                    saltGO.transform.position = new Vector3(
-                        this.transform.position.x,
-                        this.transform.position.y,
-                        this.transform.position.z
-                    );
-                    saltGO.transform.rotation = Quaternion.identity;
-                    saltGO.SetActive(true);
-                    var seScript = saltGO.GetComponent<ScienceElementScript>();
-                    seScript.ConvertElement(Constants.SE_SALT_TAG);
-                }
-            }
-        }
-        else if (this.lastTemperature <= Constants.GAS_THRESHOLD && this.temperature < Constants.GAS_THRESHOLD)
-        {
-            if (this.gameObject.CompareTag(Constants.SE_STEAM_TAG))
-            {
-                this.ConvertElement(Constants.SE_WATER_TAG);
-            }
-        }
-        this.lastTemperature = this.temperature;
-    }
-
-    private void ConvertElement(string seTag, bool isGas = false)
-    {
-        this.gameObject.tag = seTag;
-        float forceUp = isGas ? Mathf.Abs(Physics.gravity.y) / 19f : 0f;
-        this.constantF.force = new Vector3(0, forceUp, 0);
-        this.procDiscovered();
-    }
-
-    private void procDiscovered()
-    {
-        if (this.gameObject.tag != Constants.SE_NONE_TAG)
-        {
-            LabSceneManager.instance.scienceElementDiscoveredEvent.Invoke(this.gameObject.tag);
-        }
-    }
-
-    private void CheckMaterial()
-    {
-        Material applyMat = tagToMaterial[this.gameObject.tag];
-        if (this.meshR != applyMat)
-        {
-            this.meshR.material = applyMat;
-        }
-    }
-
-    private void CheckMesh()
-    {
-        Mesh applyMesh = tagToMesh[this.gameObject.tag];
-        if (this.meshF != applyMesh)
-        {
-            this.meshF.mesh = applyMesh;
-        }
-    }
-
-    private void CheckCollider()
-    {
-        GameObject colliderGO = tagToColliderGO[this.gameObject.tag];
-        if (currColliderGO != colliderGO)
-        {
-            if (currColliderGO != null)
-            {
-                currColliderGO.SetActive(false);
-            }
-            colliderGO.SetActive(true);
-            currColliderGO = colliderGO;
-        }
-    }
-
-    private void CheckScale()
-    {
-        float scale = tagToScale[this.gameObject.tag];
-        Vector3 newScale = Vector3.one * scale;
-        if (transform.localScale != newScale)
-        {
-            transform.localScale = newScale;
-        }
     }
 
 
