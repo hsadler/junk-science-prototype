@@ -49,10 +49,14 @@ public static class Constants
     public const string SE_BRICK_DISPLAY_NAME = "brick";
 
 
-    public const float MIN_TEMPERATURE = 0f;
+    public const float MIN_TEMPERATURE = -60f;
     public const float MAX_TEMPERATURE = 60f;
     public const float WATER_BOILING_POINT = 30f;
-    public const float EARTH_MELTING_POINT = 50F;
+    public const float EARTH_MELTING_POINT = 50f;
+    public const float MUD_FREEZING_POINT = -30f;
+    public const float MUD_DRYING_POINT = 20f;
+    public const float CLAY_BOILING_POINT = 50f;
+    public const float METAL_MELTING_POINT = 50f;
 
 
     public const int DISCOVERY_DISPLAY_DURATION = 2;

@@ -26,24 +26,31 @@ X prototype UX:
 
 - eng:
     X add min/max heat to elements
-    - add collision and heat-change handlers for new science elements:
-        - collisions:
+    X add collision and heat-change handlers for new science elements:
+        X collisions:
             X water + salt = saline
             X lava + water = stone & steam
-            - water + earth = 70% mud, 20% stone, 10% ore
-        - heat:
+            X water + earth = 70% mud, 20% stone, 10% ore
+        X heat:
             X boil water = steam
             X melt earth = lava
             X boil saline = steam & salt
             X cool steam = water
-            - cool lava = stone
-            - cool mud = clay
-            - heat clay = brick & steam
-            - heat ore = slag & molten metal
-            - cool molten metal = metal
+            X cool lava = stone
+            X cool mud = clay
+            X heat mud = earth
+            X heat clay = brick & steam
+            X heat ore = slag & molten metal
+            X cool molten metal = metal
 
 - refine UX:
+    - toy around with meshes for science element distinction
+    - toy around with physical materials for science element distinction
+    - add message when all discoveries have been made
+    - hide cursor immediately (only allow esc->cursor show in editor)
     - add button for cooler on/off
+    - add reset scene ability
+    - add controls instructions
     - (maybe) show element type and info display on element hover
 
 - take more videos

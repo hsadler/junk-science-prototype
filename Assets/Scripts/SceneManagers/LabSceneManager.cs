@@ -11,7 +11,7 @@ public class LabSceneManager : MonoBehaviour
     public ScienceElementData scienceElementData = new ScienceElementData();
 
     // player
-    public bool playerActive = true;
+    public bool playerActive = false;
     public UnityEvent playerSetActive;
     public UnityEvent playerSetInactive;
 
@@ -58,6 +58,7 @@ public class LabSceneManager : MonoBehaviour
     {
         SetSceneGravity();
         this.FillSpawnPool();
+        this.TogglePlayerActive();
     }
 
     void Update()

@@ -84,6 +84,9 @@ public class ScienceElementScript : MonoBehaviour
             case Constants.SE_WATER_TAG:
                 this.WaterCollisionHandler(collision.gameObject);
                 break;
+            case Constants.SE_EARTH_TAG:
+                this.EarthCollisionHandler(collision.gameObject);
+                break;
             case Constants.SE_LAVA_TAG:
                 this.LavaCollisionHandler(collision.gameObject);
                 break;
@@ -103,6 +106,12 @@ public class ScienceElementScript : MonoBehaviour
         this.secondsPerHeat = 1f;
     }
 
+    public void SetInitialTemperature(float temperature)
+    {
+        this.temperature = temperature;
+        this.lastTemperature = temperature;
+    }
+
     // IMPLEMENTATION METHODS
 
     // collision handlers
@@ -114,13 +123,28 @@ public class ScienceElementScript : MonoBehaviour
             this.ConvertElement(Constants.SE_SALINE_TAG);
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
         }
-        // water + earth = mud
-        else if (collisionOtherGO.CompareTag(Constants.SE_EARTH_TAG))
+    }
+    private void EarthCollisionHandler(GameObject collisionOtherGO)
+    {
+        // water + earth = 70% mud, 20% stone, 10% ore
+        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG))
         {
-            this.ConvertElement(Constants.SE_MUD_TAG);
+            float randNum = Random.Range(0f, 1f);
+            if (randNum < 0.7f)
+            {
+                this.ConvertElement(Constants.SE_MUD_TAG);
+            }
+            else if (randNum < 0.9f)
+            {
+                this.ConvertElement(Constants.SE_STONE_TAG);
+            }
+            else
+            {
+                this.ConvertElement(Constants.SE_ORE_TAG);
+            }
+            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
         }
     }
-
     private void LavaCollisionHandler(GameObject collisionOtherGO)
     {
         // lava + water = stone & steam
@@ -128,7 +152,7 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_STONE_TAG);
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
-            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true);
+            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT);
         }
     }
 
@@ -173,6 +197,9 @@ public class ScienceElementScript : MonoBehaviour
             case Constants.SE_MOLTEN_METAL_TAG:
                 this.MoltenMetalHeatChangeHandler();
                 break;
+            case Constants.SE_METAL_TAG:
+                this.MetalHeatChangeHandler();
+                break;
             default:
                 break;
         }
@@ -195,7 +222,7 @@ public class ScienceElementScript : MonoBehaviour
         if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
-            this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position);
+            this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
         }
     }
     private void SteamHeatChangeHandler()
@@ -217,27 +244,57 @@ public class ScienceElementScript : MonoBehaviour
     private void LavaHeatChangeHandler()
     {
         // cool lava = stone
-        // TODO: stub
+        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.EARTH_MELTING_POINT))
+        {
+            this.ConvertElement(Constants.SE_STONE_TAG);
+        }
     }
     private void MudHeatChangeHandler()
     {
         // cool mud = clay
-        // TODO: stub
+        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.MUD_FREEZING_POINT))
+        {
+            this.ConvertElement(Constants.SE_CLAY_TAG);
+        }
+        // heat mud = earth
+        else if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.MUD_DRYING_POINT))
+        {
+            this.ConvertElement(Constants.SE_EARTH_TAG);
+        }
     }
     private void ClayHeatChangeHandler()
     {
         // heat clay = brick & steam
-        // TODO: stub
+        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.CLAY_BOILING_POINT))
+        {
+            this.ConvertElement(Constants.SE_BRICK_TAG);
+            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, this.temperature);
+        }
     }
     private void OreHeatChangeHandler()
     {
         // heat ore = slag & molten metal
-        // TODO: stub
+        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        {
+            this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
+            this.CreateByProduct(Constants.SE_SLAG_TAG, this.transform.position, false, this.temperature);
+        }
     }
     private void MoltenMetalHeatChangeHandler()
     {
         // cool molten metal = metal
-        // TODO: stub
+        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        {
+            this.ConvertElement(Constants.SE_METAL_TAG);
+        }
+    }
+    private void MetalHeatChangeHandler()
+    {
+        // heat metal = molten metal
+        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        {
+            this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
+        }
     }
 
     // science element state change evaluators
@@ -258,7 +315,7 @@ public class ScienceElementScript : MonoBehaviour
         return this.CondensationPointReached(lastTemp, currTemp, freezingPoint);
     }
 
-    private GameObject CreateByProduct(string seTag, Vector3 position, bool isGas = false)
+    private GameObject CreateByProduct(string seTag, Vector3 position, bool isGas = false, float temperature = 0f)
     {
         var byProdGO = LabSceneManager.instance.GetScienceElementFromPool();
         if (byProdGO != null)
@@ -272,6 +329,7 @@ public class ScienceElementScript : MonoBehaviour
             byProdGO.SetActive(true);
             var seScript = byProdGO.GetComponent<ScienceElementScript>();
             seScript.ConvertElement(seTag, isGas);
+            seScript.SetInitialTemperature(temperature);
         }
         return byProdGO;
     }
