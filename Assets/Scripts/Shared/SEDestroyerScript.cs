@@ -24,7 +24,6 @@ public class SEDestroyerScript : MonoBehaviour
         if (seColliderScript != null)
         {
             var seGO = seColliderScript.seScript.gameObject;
-            seGO.SetActive(false);
             LabSceneManager.instance.GiveScienceElementBackToPool(seGO);
         }
     }
