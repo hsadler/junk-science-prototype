@@ -29,7 +29,6 @@ public class LabSceneManager : MonoBehaviour
 
     // science element game object pool
     public GameObject spawnObject;
-    public int spawnPoolSize = 10000;
     private Stack<GameObject> scienceElementPool = new Stack<GameObject>();
 
     // unity events
@@ -146,7 +145,7 @@ public class LabSceneManager : MonoBehaviour
 
     private void FillSpawnPool()
     {
-        for (int i = 0; i < this.spawnPoolSize; i++)
+        for (int i = 0; i < Constants.SCIENCE_ELEMENT_SPAWN_POOL_SIZE; i++)
         {
             GameObject go = Instantiate(
                 this.spawnObject,

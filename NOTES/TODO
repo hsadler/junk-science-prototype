@@ -2,60 +2,20 @@
 
 TODO
 
-X prototype UX:
-    X fills container with water
-    X transfers container to beaker and dumps
-    X fills container with salt
-    X transfers container to beaker and dumps
-    X mixes contents in beaker to produce saline
-    X takes beaker to heater
-    X heats saline to produce steam and salt
-    X cool steam to produce water
-
-- add more science elements:
-    - earth
-    - mud
-    - stone
-    - ore
-    - slag
-    - molten metal
-    - metal
-    - lava
-    - clay
-    - brick
-
-- eng:
-    X add min/max heat to elements
-    X add collision and heat-change handlers for new science elements:
-        X collisions:
-            X water + salt = saline
-            X lava + water = stone & steam
-            X water + earth = 70% mud, 20% stone, 10% ore
-        X heat:
-            X boil water = steam
-            X melt earth = lava
-            X boil saline = steam & salt
-            X cool steam = water
-            X cool lava = stone
-            X cool mud = clay
-            X heat mud = earth
-            X heat clay = brick & steam
-            X heat ore = slag & molten metal
-            X cool molten metal = metal
-
 - refine UX:
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
+    - show science element types in scene with either text label or image
     - add message when all discoveries have been made
-    - hide cursor immediately (only allow esc->cursor show in editor)
-    - add button for cooler on/off
-    - add reset scene ability
+    - add ability to reset scene
     - add controls instructions
+    - (maybe) add button for cooler on/off
     - (maybe) show element type and info display on element hover
 
-- take more videos
-
 - bugs:
+    - hide cursor immediately (only allow esc->cursor show in editor)
+
+- take more videos
 
 - last minute features (for fun):
     - rage throw
@@ -69,22 +29,9 @@ X prototype UX:
     - buggy physical-button interaction (only on iOS?)
 
 - refine UX:
-    
     - try images for science elements instead of color texture
-    - add upper bound and lower bounds for heat of elements 
-        (so that water isn't allowed to be less than freezing, for instance)
     - destroy science-elements when they hit the floor or ceiling
-    - lower max amount of science elements in global pool to 3k
 
 - more element "state" behaviors:
     - solid
-
-- more POC reactions:
-    - water cooled makes ice
-    - saline cooled makes iceberg
-
-- more prototype UX:
-    - fills container with water
-    - tranfers to cooler
-    - produces ice
 
