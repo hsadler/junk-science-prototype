@@ -26,7 +26,11 @@ public class LabSceneManager : MonoBehaviour
 
     // scene telemetry
     public int scienceElementSpawnCount = 0;
-    private Rect guiRect = new Rect(10, 10, 210, 110);
+    private Rect guiSceneTelemetryRect = new Rect(10, 10, 210, 110);
+
+    // scene controls display
+    private Rect guiControlsDisplay = new Rect(10, 50, 300, 300);
+
 
     // science element game object pool
     public GameObject spawnObject;
@@ -79,13 +83,24 @@ public class LabSceneManager : MonoBehaviour
 
     void OnGUI()
     {
+        // show scene telemetry
         int fps = (int)(1.0f / Time.smoothDeltaTime);
         string displayText =
             "Spawn count: " + this.scienceElementSpawnCount.ToString() +
             ", FPS: " + fps.ToString();
         GUI.Label(
-            this.guiRect,
+            this.guiSceneTelemetryRect,
             displayText
+        );
+        // show player controls
+        string playerControlsDisplayText =
+            "Movement: W, A, S, D\n" +
+            "Aim Interaction: Left Mouse Button\n" +
+            "Reload Lab Scene: R\n" +
+            "Quit Game: Q";
+        GUI.Label(
+            this.guiControlsDisplay,
+            playerControlsDisplayText
         );
     }
 

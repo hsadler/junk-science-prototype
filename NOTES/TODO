@@ -4,7 +4,7 @@ TODO
 
 - refine UX:
     X add ability to reset scene
-    - add controls instructions
+    X add controls instructions
     - add message when all discoveries have been made
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
