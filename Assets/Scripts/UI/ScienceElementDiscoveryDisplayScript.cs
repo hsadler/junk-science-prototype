@@ -14,6 +14,8 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
     private Queue<string> seTagQueue = new Queue<string>();
     private IDictionary<string, bool> tagToUnlockStatus = new Dictionary<string, bool>();
 
+    private int countScienceElementsDiscovered = 0;
+
 
     // UNITY HOOKS
 
@@ -37,6 +39,7 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
         {
             this.tagToUnlockStatus.Add(scienceElementTag, true);
             QueueSETag(scienceElementTag);
+            this.countScienceElementsDiscovered += 1;
         }
     }
 
@@ -62,6 +65,20 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
         yield return new WaitForSeconds(Constants.DISCOVERY_DISPLAY_DURATION);
         this.textDisplay.text = "";
         this.displayIsInUse = false;
+        if (this.countScienceElementsDiscovered == Constants.COUNT_DISCOVERABLE_SCIENCE_ELEMENTS)
+        {
+            this.ShowFinishedGameDisplay();
+        }
+    }
+
+    private void ShowFinishedGameDisplay()
+    {
+        LabSceneManager.instance.DeactivatePlayer();
+        this.textDisplay.text =
+            "YOU'VE DISCOVERED\n" +
+            "ALL THE ELEMENTS!\n\n" +
+            "press \"Q\" to quit\n" +
+            "press\"R\" to play again";
     }
 
 

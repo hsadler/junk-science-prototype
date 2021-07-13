@@ -69,7 +69,8 @@ public class LabSceneManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // allow esc press action only if inside Unity editor
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.Escape))
         {
             this.TogglePlayerActive();
         }
@@ -132,6 +133,36 @@ public class LabSceneManager : MonoBehaviour
         this.scienceElementSpawnCount -= 1;
     }
 
+    public void TogglePlayerActive()
+    {
+        this.playerActive = !this.playerActive;
+        if (this.playerActive)
+        {
+            this.ActivatePlayer();
+        }
+        else
+        {
+            this.DeactivatePlayer();
+        }
+    }
+
+    public void ActivatePlayer()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        this.playerSetActive.Invoke();
+    }
+
+    public void DeactivatePlayer()
+    {
+        if (Application.isEditor)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        this.playerSetInactive.Invoke();
+    }
+
     // IMPLEMENTATION METHODS
 
     private void SetSceneGravity()
@@ -146,23 +177,6 @@ public class LabSceneManager : MonoBehaviour
             grav = -70f;
         }
         Physics.gravity = new Vector3(0, grav, 0);
-    }
-
-    private void TogglePlayerActive()
-    {
-        this.playerActive = !this.playerActive;
-        if (this.playerActive)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            this.playerSetActive.Invoke();
-        }
-        else
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            this.playerSetInactive.Invoke();
-        }
     }
 
     private void FillSpawnPool()

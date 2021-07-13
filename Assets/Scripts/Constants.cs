@@ -3,6 +3,9 @@ public static class Constants
 {
 
 
+    public const int COUNT_DISCOVERABLE_SCIENCE_ELEMENTS = 14;
+
+
     public const string SE_NONE_TAG = "science-element-none";
     public const string SE_NONE_DISPLAY_NAME = "none";
 

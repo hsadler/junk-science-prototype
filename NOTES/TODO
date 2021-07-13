@@ -5,7 +5,7 @@ TODO
 - refine UX:
     X add ability to reset scene
     X add controls instructions
-    - add message when all discoveries have been made
+    X add message when all discoveries have been made
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
     - show science element types in scene with either text label or image
@@ -17,7 +17,7 @@ TODO
 - polish
 
 - bugs:
-    - hide cursor immediately (only allow esc->cursor show in editor)
+    X hide cursor immediately (only allow esc->cursor show in editor)
 
 - take more videos
 

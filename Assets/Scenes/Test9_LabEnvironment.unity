@@ -597,6 +597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestSceneLighting
       objectReference: {fileID: 0}
+    - target: {fileID: 9125259213426044472, guid: aa9a06ecf6bee4588b1d3c61ebd6f6b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa9a06ecf6bee4588b1d3c61ebd6f6b1, type: 3}
 --- !u!1 &774672801
