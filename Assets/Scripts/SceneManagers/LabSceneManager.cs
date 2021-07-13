@@ -62,6 +62,8 @@ public class LabSceneManager : MonoBehaviour
     {
         SetSceneGravity();
         this.FillSpawnPool();
+        // toggle twice to make sure the player starts in the active state
+        this.TogglePlayerActive();
         this.TogglePlayerActive();
     }
 
