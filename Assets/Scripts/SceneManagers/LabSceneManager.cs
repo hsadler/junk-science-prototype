@@ -31,6 +31,9 @@ public class LabSceneManager : MonoBehaviour
     // scene controls display
     private Rect guiControlsDisplay = new Rect(10, 50, 300, 300);
 
+    // science element discovery list display
+    private Rect guiScienceElementDiscoveryStatusList = new Rect(10, 100, 500, 2000);
+
 
     // science element game object pool
     public GameObject spawnObject;
@@ -87,6 +90,7 @@ public class LabSceneManager : MonoBehaviour
     void OnGUI()
     {
         // show scene telemetry
+        GUI.contentColor = Color.green;
         int fps = (int)(1.0f / Time.smoothDeltaTime);
         string displayText =
             "Spawn count: " + this.scienceElementSpawnCount.ToString() +
@@ -96,6 +100,7 @@ public class LabSceneManager : MonoBehaviour
             displayText
         );
         // show player controls
+        GUI.contentColor = Color.white;
         string playerControlsDisplayText =
             "Movement: W, A, S, D\n" +
             "Aim Interaction: Left Mouse Button\n" +
@@ -105,6 +110,9 @@ public class LabSceneManager : MonoBehaviour
             this.guiControlsDisplay,
             playerControlsDisplayText
         );
+        // TODO: show elements discovered and undiscovered
+        // GUI.contentColor = Color.white;
+        // GUI.Label(this.guiScienceElementDiscoveryStatusList, "SOME TEASAAAXXXT!");
     }
 
     // INTERFACE METHODS
