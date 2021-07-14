@@ -60,7 +60,9 @@ public class PlayerInteractionScript : MonoBehaviour
         Vector3 direction = this.playerCamera.transform.forward;
         float distance = Mathf.Infinity;
         int playerInteractableMask = 1 << 8;
-        if (Physics.Raycast(cameraPos, direction, out hit, distance, playerInteractableMask))
+        int scienceElementMask = 1 << 10;
+        int raycastMask = playerInteractableMask | scienceElementMask;
+        if (Physics.Raycast(cameraPos, direction, out hit, distance, raycastMask))
         {
             GameObject objectHit = hit.transform.gameObject;
             var playerInteractionMessage = new PlayerInteractionMessage(
@@ -99,12 +101,12 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
         // TODO: Use this for element display on hover
-        // RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, playerInteractableMask);
-        // Debug.Log("hits length: " + hits.Length.ToString());
-        // foreach (RaycastHit currHit in hits)
-        // {
-        // 	Debug.Log("current hit object name: " + currHit.transform.gameObject.name);
-        // }
+        RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, raycastMask);
+        Debug.Log("hits length: " + hits.Length.ToString());
+        foreach (RaycastHit currHit in hits)
+        {
+            Debug.Log("current hit object name: " + currHit.transform.gameObject.name);
+        }
     }
 
     private void CheckPickup()

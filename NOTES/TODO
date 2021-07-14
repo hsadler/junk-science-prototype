@@ -3,9 +3,6 @@
 TODO
 
 - refine UX:
-    X add ability to reset scene
-    X add controls instructions
-    X add message when all discoveries have been made
     - show element type and info display on element hover
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
@@ -17,7 +14,6 @@ TODO
 - polish
 
 - bugs:
-    X hide cursor immediately (only allow esc->cursor show in editor)
 
 - take more videos
 
