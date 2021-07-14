@@ -112,6 +112,16 @@ public class ScienceElementScript : MonoBehaviour
         this.lastTemperature = temperature;
     }
 
+    public void DisplayInfo()
+    {
+        Debug.Log("Displaying info for science element: " + this.gameObject.tag);
+    }
+
+    public void StopDisplayInfo()
+    {
+        Debug.Log("Stop displaying info for science element: " + this.gameObject.tag);
+    }
+
     // IMPLEMENTATION METHODS
 
     // collision handlers

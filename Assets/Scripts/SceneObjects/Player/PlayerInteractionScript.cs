@@ -18,8 +18,9 @@ public class PlayerInteractionScript : MonoBehaviour
     private bool isCarrying = false;
     private float carryDistance;
     private GameObject carriedObject;
-
     private Quaternion lastRotation = Quaternion.identity;
+
+    private ScienceElementScript closestSEScript;
 
 
     // UNITY HOOKS
@@ -61,6 +62,7 @@ public class PlayerInteractionScript : MonoBehaviour
         float distance = Mathf.Infinity;
         int playerInteractableMask = 1 << 8;
         int scienceElementMask = 1 << 10;
+        // EXAMPLE: Bitwise OR operator to achieve a mutiple mask check
         int raycastMask = playerInteractableMask | scienceElementMask;
         if (Physics.Raycast(cameraPos, direction, out hit, distance, raycastMask))
         {
@@ -100,12 +102,26 @@ public class PlayerInteractionScript : MonoBehaviour
                 );
             }
         }
-        // TODO: Use this for element display on hover
-        RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, raycastMask);
-        Debug.Log("hits length: " + hits.Length.ToString());
+        // science element info display on hover
+        if (this.closestSEScript != null)
+        {
+            this.closestSEScript.StopDisplayInfo();
+            this.closestSEScript = null;
+        }
+        float closestSEDistance = Mathf.Infinity;
+        RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, scienceElementMask);
         foreach (RaycastHit currHit in hits)
         {
-            Debug.Log("current hit object name: " + currHit.transform.gameObject.name);
+            var currSeScript = currHit.transform.gameObject.GetComponent<ScienceElementScript>();
+            float seDistance = Vector3.Distance(currHit.transform.position, this.playerCameraGO.transform.position);
+            if (seDistance < closestSEDistance)
+            {
+                this.closestSEScript = currSeScript;
+            }
+        }
+        if (this.closestSEScript != null)
+        {
+            this.closestSEScript.DisplayInfo();
         }
     }
 
