@@ -38,6 +38,7 @@ public class PlayerInteractionScript : MonoBehaviour
     void Update()
     {
         // aim and clicks
+        this.seInfoUIGO.SetActive(false);
         if (LabSceneManager.instance.playerActive)
         {
             this.CheckAimInteractions();
@@ -107,7 +108,6 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
         // science element info display on hover
-        this.seInfoUIGO.SetActive(false);
         this.closestSEScript = null;
         float closestSEDistance = Mathf.Infinity;
         RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, scienceElementMask);
@@ -118,6 +118,7 @@ public class PlayerInteractionScript : MonoBehaviour
             if (seDistance < closestSEDistance)
             {
                 this.closestSEScript = currSeScript;
+                closestSEDistance = seDistance;
             }
         }
         if (this.closestSEScript != null)

@@ -143,7 +143,6 @@ public class LabSceneManager : MonoBehaviour
 
     public void TogglePlayerActive()
     {
-        this.playerActive = !this.playerActive;
         if (this.playerActive)
         {
             this.ActivatePlayer();
@@ -156,6 +155,7 @@ public class LabSceneManager : MonoBehaviour
 
     public void ActivatePlayer()
     {
+        this.playerActive = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         this.playerSetActive.Invoke();
@@ -163,6 +163,7 @@ public class LabSceneManager : MonoBehaviour
 
     public void DeactivatePlayer()
     {
+        this.playerActive = false;
         if (Application.isEditor)
         {
             Cursor.visible = true;

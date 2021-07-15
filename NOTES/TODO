@@ -3,9 +3,10 @@
 TODO
 
 - refine UX:
-    - show element type and info display on element hover
+    X show element type and info display on element hover
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
+    - (maybe) ability to pickup science element for inspection
     - (maybe) show what items have been discovered
     - (maybe) add button for cooler on/off
 

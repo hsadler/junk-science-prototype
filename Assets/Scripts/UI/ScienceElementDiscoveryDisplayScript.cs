@@ -65,6 +65,7 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
         yield return new WaitForSeconds(Constants.DISCOVERY_DISPLAY_DURATION);
         this.textDisplay.text = "";
         this.displayIsInUse = false;
+        // if (this.countScienceElementsDiscovered == 1) // TESTING
         if (this.countScienceElementsDiscovered == Constants.COUNT_DISCOVERABLE_SCIENCE_ELEMENTS)
         {
             this.ShowFinishedGameDisplay();

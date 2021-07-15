@@ -114,9 +114,10 @@ public class ScienceElementScript : MonoBehaviour
 
     public string GetDisplayInfo()
     {
+        // TODO: replace tag with element display name
         return
             this.gameObject.tag +
-            "\nheat: " + this.temperature;
+            "\ntempurature: " + this.temperature;
     }
 
     // IMPLEMENTATION METHODS
