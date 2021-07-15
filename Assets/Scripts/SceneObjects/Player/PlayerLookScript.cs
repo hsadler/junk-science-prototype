@@ -20,7 +20,7 @@ public class PlayerLookScript : MonoBehaviour
     public float sensHorizontal = 10.0f;
     public float sensVertical = 10.0f;
 
-    private float _rotationX = 0;
+    private float _rotationX = 22;
 
     public Camera playerCameraComponent;
 
