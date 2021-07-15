@@ -4,7 +4,7 @@ TODO
 
 - refine UX:
     X show element type and info display on element hover
-    - show element display name instead of tag on element hover
+    X show element display name instead of tag on element hover
     - toy around with meshes for science element distinction
     - toy around with physical materials for science element distinction
     - (maybe) ability to pickup science element for inspection
