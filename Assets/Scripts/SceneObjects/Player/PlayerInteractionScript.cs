@@ -20,6 +20,9 @@ public class PlayerInteractionScript : MonoBehaviour
     private GameObject carriedObject;
     private Quaternion lastRotation = Quaternion.identity;
 
+    public GameObject seInfoUIGO;
+    private ScienceElementInfoScript seInfoScript;
+
     private ScienceElementScript closestSEScript;
 
 
@@ -28,6 +31,7 @@ public class PlayerInteractionScript : MonoBehaviour
     void Start()
     {
         this.playerCamera = playerCameraGO.GetComponent<Camera>();
+        this.seInfoScript = seInfoUIGO.GetComponent<ScienceElementInfoScript>();
         this.carriedObjectPositionIndicatorGO.SetActive(false);
     }
 
@@ -103,11 +107,8 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
         // science element info display on hover
-        if (this.closestSEScript != null)
-        {
-            this.closestSEScript.StopDisplayInfo();
-            this.closestSEScript = null;
-        }
+        this.seInfoUIGO.SetActive(false);
+        this.closestSEScript = null;
         float closestSEDistance = Mathf.Infinity;
         RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, scienceElementMask);
         foreach (RaycastHit currHit in hits)
@@ -121,7 +122,8 @@ public class PlayerInteractionScript : MonoBehaviour
         }
         if (this.closestSEScript != null)
         {
-            this.closestSEScript.DisplayInfo();
+            this.seInfoUIGO.SetActive(true);
+            this.seInfoScript.SetSEInfo(this.closestSEScript.GetDisplayInfo());
         }
     }
 
