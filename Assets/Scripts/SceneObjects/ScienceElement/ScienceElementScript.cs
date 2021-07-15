@@ -117,7 +117,7 @@ public class ScienceElementScript : MonoBehaviour
         // TODO: replace tag with element display name
         return
             this.gameObject.tag +
-            "\ntempurature: " + this.temperature;
+            "\ntemperature: " + this.temperature;
     }
 
     // IMPLEMENTATION METHODS
