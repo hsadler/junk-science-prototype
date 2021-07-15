@@ -7,8 +7,10 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
 {
 
 
-    public GameObject textDisplayGO;
-    private TextMeshProUGUI textDisplay;
+    public GameObject seDiscoveryTextDisplayGO;
+    private TextMeshProUGUI seDiscoveryTextDisplay;
+
+    public GameObject finishGameTextDisplayGO;
 
     private bool displayIsInUse = false;
     private Queue<string> seTagQueue = new Queue<string>();
@@ -21,8 +23,9 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
 
     void Start()
     {
-        this.textDisplay = textDisplayGO.GetComponent<TextMeshProUGUI>();
-        this.textDisplay.text = "";
+        this.seDiscoveryTextDisplay = this.seDiscoveryTextDisplayGO.GetComponent<TextMeshProUGUI>();
+        this.seDiscoveryTextDisplay.text = "";
+        this.finishGameTextDisplayGO.SetActive(false);
         LabSceneManager.instance.scienceElementDiscoveredEvent.AddListener(ReceiveElementDiscoveredEvent);
     }
 
@@ -54,7 +57,7 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
         {
             string seTag = this.seTagQueue.Dequeue();
             string seDisplayName = LabSceneManager.instance.scienceElementData.tagToDisplayName[seTag];
-            this.textDisplay.text = seDisplayName + " discovered";
+            this.seDiscoveryTextDisplay.text = seDisplayName + " discovered";
             this.displayIsInUse = true;
             StartCoroutine(WaitThenClearDisplay());
         }
@@ -63,7 +66,7 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
     private IEnumerator WaitThenClearDisplay()
     {
         yield return new WaitForSeconds(Constants.DISCOVERY_DISPLAY_DURATION);
-        this.textDisplay.text = "";
+        this.seDiscoveryTextDisplay.text = "";
         this.displayIsInUse = false;
         // if (this.countScienceElementsDiscovered == 1) // TESTING
         if (this.countScienceElementsDiscovered == Constants.COUNT_DISCOVERABLE_SCIENCE_ELEMENTS)
@@ -75,11 +78,7 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
     private void ShowFinishedGameDisplay()
     {
         LabSceneManager.instance.DeactivatePlayer();
-        this.textDisplay.text =
-            "YOU'VE DISCOVERED\n" +
-            "ALL THE ELEMENTS!\n\n" +
-            "press \"Q\" to quit\n" +
-            "press\"R\" to play again";
+        this.finishGameTextDisplayGO.SetActive(true);
     }
 
 
