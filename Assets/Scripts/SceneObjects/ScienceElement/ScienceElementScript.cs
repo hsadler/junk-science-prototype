@@ -467,7 +467,7 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToScale.Add(Constants.SE_WATER_TAG, 2f);
         this.tagToScale.Add(Constants.SE_SALT_TAG, 1.2f);
         this.tagToScale.Add(Constants.SE_SALINE_TAG, 2.4f);
-        this.tagToScale.Add(Constants.SE_STEAM_TAG, 4f);
+        this.tagToScale.Add(Constants.SE_STEAM_TAG, 4.4f);
         this.tagToScale.Add(Constants.SE_EARTH_TAG, 2f);
         this.tagToScale.Add(Constants.SE_MUD_TAG, 2.6f);
         this.tagToScale.Add(Constants.SE_STONE_TAG, 2.8f);
