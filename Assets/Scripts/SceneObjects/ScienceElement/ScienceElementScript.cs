@@ -26,6 +26,7 @@ public class ScienceElementScript : MonoBehaviour
     // collider GOs per science element
     private IDictionary<string, GameObject> tagToColliderGO = new Dictionary<string, GameObject>();
     public GameObject sphereColliderGO;
+    public GameObject stickySphereColliderGO;
     public GameObject cubeColliderGO;
     private GameObject currColliderGO;
 
@@ -437,7 +438,7 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToMesh.Add(Constants.SE_MUD_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_STONE_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_ORE_TAG, sphereMesh);
-        this.tagToMesh.Add(Constants.SE_SLAG_TAG, sphereMesh);
+        this.tagToMesh.Add(Constants.SE_SLAG_TAG, cubeMesh);
         this.tagToMesh.Add(Constants.SE_MOLTEN_METAL_TAG, sphereMesh);
         this.tagToMesh.Add(Constants.SE_METAL_TAG, cubeMesh);
         this.tagToMesh.Add(Constants.SE_LAVA_TAG, sphereMesh);
@@ -446,35 +447,35 @@ public class ScienceElementScript : MonoBehaviour
 
         // tag to colliderGO map
         this.tagToColliderGO.Add(Constants.SE_NONE_TAG, sphereColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_WATER_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_WATER_TAG, stickySphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_SALT_TAG, cubeColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_SALINE_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_SALINE_TAG, stickySphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_STEAM_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_EARTH_TAG, sphereColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_MUD_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_MUD_TAG, stickySphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_STONE_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_ORE_TAG, sphereColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_SLAG_TAG, sphereColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_MOLTEN_METAL_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_SLAG_TAG, cubeColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_MOLTEN_METAL_TAG, stickySphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_METAL_TAG, cubeColliderGO);
-        this.tagToColliderGO.Add(Constants.SE_LAVA_TAG, sphereColliderGO);
+        this.tagToColliderGO.Add(Constants.SE_LAVA_TAG, stickySphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_CLAY_TAG, sphereColliderGO);
         this.tagToColliderGO.Add(Constants.SE_BRICK_TAG, cubeColliderGO);
 
         // tag to scale map
         this.tagToScale.Add(Constants.SE_NONE_TAG, 1.7f);
-        this.tagToScale.Add(Constants.SE_WATER_TAG, 1.7f);
-        this.tagToScale.Add(Constants.SE_SALT_TAG, 1f);
-        this.tagToScale.Add(Constants.SE_SALINE_TAG, 1.7f);
-        this.tagToScale.Add(Constants.SE_STEAM_TAG, 3f);
-        this.tagToScale.Add(Constants.SE_EARTH_TAG, 1.7f);
-        this.tagToScale.Add(Constants.SE_MUD_TAG, 2f);
-        this.tagToScale.Add(Constants.SE_STONE_TAG, 1.5f);
+        this.tagToScale.Add(Constants.SE_WATER_TAG, 2f);
+        this.tagToScale.Add(Constants.SE_SALT_TAG, 1.2f);
+        this.tagToScale.Add(Constants.SE_SALINE_TAG, 2.4f);
+        this.tagToScale.Add(Constants.SE_STEAM_TAG, 4f);
+        this.tagToScale.Add(Constants.SE_EARTH_TAG, 2f);
+        this.tagToScale.Add(Constants.SE_MUD_TAG, 2.6f);
+        this.tagToScale.Add(Constants.SE_STONE_TAG, 2.8f);
         this.tagToScale.Add(Constants.SE_ORE_TAG, 2f);
-        this.tagToScale.Add(Constants.SE_SLAG_TAG, 1.5f);
-        this.tagToScale.Add(Constants.SE_MOLTEN_METAL_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_SLAG_TAG, 1.4f);
+        this.tagToScale.Add(Constants.SE_MOLTEN_METAL_TAG, 2.4f);
         this.tagToScale.Add(Constants.SE_METAL_TAG, 1.7f);
-        this.tagToScale.Add(Constants.SE_LAVA_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_LAVA_TAG, 2.2f);
         this.tagToScale.Add(Constants.SE_CLAY_TAG, 2f);
         this.tagToScale.Add(Constants.SE_BRICK_TAG, 2f);
     }

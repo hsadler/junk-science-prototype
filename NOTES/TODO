@@ -3,13 +3,7 @@
 TODO
 
 - refine UX:
-    X show element type and info display on element hover
-    X show element display name instead of tag on element hover
-    - toy around with meshes for science element distinction
-    - toy around with physical materials for science element distinction
-    - (maybe) ability to pickup science element for inspection
-    - (maybe) show what items have been discovered
-    - (maybe) add button for cooler on/off
+    - toy around with materials for science element distinction
 
 - music and sfx
 
@@ -28,11 +22,13 @@ TODO
 /////// defer ///////
 
 - bugs:
-    - buggy physical-button interaction (only on iOS?)
 
 - refine UX:
     - try images for science elements instead of color texture
     - destroy science-elements when they hit the floor or ceiling
+    - ability to pickup science element for inspection
+    - show what items have been discovered
+    - add button for cooler on/off
 
 - more element "state" behaviors:
     - solid
