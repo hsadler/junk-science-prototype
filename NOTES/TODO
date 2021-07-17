@@ -2,14 +2,19 @@
 
 TODO
 
-- refine UX:
-    - toy around with materials for science element distinction
-
-- music and sfx
-
-- polish
+- polish:
+    - tweak molten metal to be more yellow and glow more than lava
+    - all saline collision based reactions should produce the same effect as 
+        water (plus a salt by-product)
+    - tweak heat min and max to be a smaller window
+    - do heat checks more often and with a smaller heat change (basically higher granularity)
+    - make base elements have starting heat
 
 - bugs:
+    - finish game display is appearing on top of last element discovery display
+    - not all heat changes are taking effect
+
+- music and sfx
 
 - take more videos
 
