@@ -3,12 +3,13 @@
 TODO
 
 - polish:
-    - tweak molten metal to be more yellow and glow more than lava
+    X tweak molten metal to be more yellow and glow more than lava
     - all saline collision based reactions should produce the same effect as 
         water (plus a salt by-product)
     - tweak heat min and max to be a smaller window
     - do heat checks more often and with a smaller heat change (basically higher granularity)
     - make base elements have starting heat
+    - LIGHTING PASS!
 
 - bugs:
     - finish game display is appearing on top of last element discovery display
@@ -17,11 +18,6 @@ TODO
 - music and sfx
 
 - take more videos
-
-- last minute features (for fun):
-    - rage throw
-    - rage table flip
-    - beakers break when dropped
 
 
 /////// defer ///////
@@ -34,6 +30,9 @@ TODO
     - ability to pickup science element for inspection
     - show what items have been discovered
     - add button for cooler on/off
+    - rage throw
+    - rage table flip
+    - beakers break when dropped
 
 - more element "state" behaviors:
     - solid

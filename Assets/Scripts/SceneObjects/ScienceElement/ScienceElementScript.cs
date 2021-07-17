@@ -470,11 +470,11 @@ public class ScienceElementScript : MonoBehaviour
         this.tagToScale.Add(Constants.SE_STEAM_TAG, 4.4f);
         this.tagToScale.Add(Constants.SE_EARTH_TAG, 2f);
         this.tagToScale.Add(Constants.SE_MUD_TAG, 2.6f);
-        this.tagToScale.Add(Constants.SE_STONE_TAG, 2.8f);
+        this.tagToScale.Add(Constants.SE_STONE_TAG, 2.6f);
         this.tagToScale.Add(Constants.SE_ORE_TAG, 2f);
         this.tagToScale.Add(Constants.SE_SLAG_TAG, 1.4f);
         this.tagToScale.Add(Constants.SE_MOLTEN_METAL_TAG, 2.4f);
-        this.tagToScale.Add(Constants.SE_METAL_TAG, 1.7f);
+        this.tagToScale.Add(Constants.SE_METAL_TAG, 2.4f);
         this.tagToScale.Add(Constants.SE_LAVA_TAG, 2.2f);
         this.tagToScale.Add(Constants.SE_CLAY_TAG, 2f);
         this.tagToScale.Add(Constants.SE_BRICK_TAG, 2f);
