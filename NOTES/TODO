@@ -2,19 +2,17 @@
 
 TODO
 
+- bugs:
+    X not all heat changes are taking effect
+        (likely due to check of temperature threshold pass rather than if above or below)
+    - finish game display is appearing on top of last element discovery display
+        (not happening, may be intermittent)
+
 - polish:
-    X tweak molten metal to be more yellow and glow more than lava
-    X all saline collision based reactions should produce the same effect as 
-        water (plus a salt by-product)
     - tweak heat min and max to be a smaller window
     - do heat checks more often and with a smaller heat change (basically higher granularity)
     - make base elements have starting heat
     - LIGHTING PASS!
-
-- bugs:
-    - finish game display is appearing on top of last element discovery display
-        (not happening, may be intermittent)
-    - not all heat changes are taking effect
 
 - music and sfx
 

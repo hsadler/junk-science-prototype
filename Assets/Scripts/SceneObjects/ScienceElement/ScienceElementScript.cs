@@ -13,7 +13,6 @@ public class ScienceElementScript : MonoBehaviour
 
     // science element temperature
     public float temperature;
-    private float lastTemperature;
     public bool receivingHeat;
     public float receivingHeatAmount;
     public float secondsPerHeat;
@@ -101,7 +100,6 @@ public class ScienceElementScript : MonoBehaviour
     public void InitializeTemperatureProperties()
     {
         this.temperature = 0f;
-        this.lastTemperature = 0f;
         this.receivingHeat = false;
         this.receivingHeatAmount = 0f;
         this.secondsPerHeat = 1f;
@@ -110,7 +108,6 @@ public class ScienceElementScript : MonoBehaviour
     public void SetInitialTemperature(float temperature)
     {
         this.temperature = temperature;
-        this.lastTemperature = temperature;
     }
 
     public string GetDisplayInfo()
@@ -221,15 +218,13 @@ public class ScienceElementScript : MonoBehaviour
             default:
                 break;
         }
-        // set last temperature for comparison checks
-        this.lastTemperature = this.temperature;
     }
 
     // heat change handlers
     private void WaterHeatChangeHandler()
     {
         // boil water = steam
-        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
+        if (this.temperature > Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
         }
@@ -237,7 +232,7 @@ public class ScienceElementScript : MonoBehaviour
     private void SalineHeatChangeHandler()
     {
         // boil saline = steam & salt
-        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
+        if (this.temperature > Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
             this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
@@ -246,7 +241,7 @@ public class ScienceElementScript : MonoBehaviour
     private void SteamHeatChangeHandler()
     {
         // cool steam = water
-        if (this.CondensationPointReached(this.lastTemperature, this.temperature, Constants.WATER_BOILING_POINT))
+        if (this.temperature <= Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_WATER_TAG);
         }
@@ -254,7 +249,7 @@ public class ScienceElementScript : MonoBehaviour
     private void EarthHeatChangeHandler()
     {
         // melt earth = lava
-        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.EARTH_MELTING_POINT))
+        if (this.temperature > Constants.EARTH_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_LAVA_TAG);
         }
@@ -262,7 +257,7 @@ public class ScienceElementScript : MonoBehaviour
     private void LavaHeatChangeHandler()
     {
         // cool lava = stone
-        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.EARTH_MELTING_POINT))
+        if (this.temperature <= Constants.EARTH_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_STONE_TAG);
         }
@@ -270,12 +265,12 @@ public class ScienceElementScript : MonoBehaviour
     private void MudHeatChangeHandler()
     {
         // cool mud = clay
-        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.MUD_FREEZING_POINT))
+        if (this.temperature <= Constants.MUD_FREEZING_POINT)
         {
             this.ConvertElement(Constants.SE_CLAY_TAG);
         }
         // heat mud = earth
-        else if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.MUD_DRYING_POINT))
+        if (this.temperature > Constants.MUD_DRYING_POINT)
         {
             this.ConvertElement(Constants.SE_EARTH_TAG);
         }
@@ -283,7 +278,7 @@ public class ScienceElementScript : MonoBehaviour
     private void ClayHeatChangeHandler()
     {
         // heat clay = brick & steam
-        if (this.BoilingPointReached(this.lastTemperature, this.temperature, Constants.CLAY_BOILING_POINT))
+        if (this.temperature > Constants.CLAY_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_BRICK_TAG);
             this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, this.temperature);
@@ -292,7 +287,7 @@ public class ScienceElementScript : MonoBehaviour
     private void OreHeatChangeHandler()
     {
         // heat ore = slag & molten metal
-        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        if (this.temperature > Constants.METAL_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
             this.CreateByProduct(Constants.SE_SLAG_TAG, this.transform.position, false, this.temperature);
@@ -301,7 +296,7 @@ public class ScienceElementScript : MonoBehaviour
     private void MoltenMetalHeatChangeHandler()
     {
         // cool molten metal = metal
-        if (this.FreezingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        if (this.temperature <= Constants.METAL_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_METAL_TAG);
         }
@@ -309,28 +304,10 @@ public class ScienceElementScript : MonoBehaviour
     private void MetalHeatChangeHandler()
     {
         // heat metal = molten metal
-        if (this.MeltingPointReached(this.lastTemperature, this.temperature, Constants.METAL_MELTING_POINT))
+        if (this.temperature > Constants.METAL_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
         }
-    }
-
-    // science element state change evaluators
-    private bool MeltingPointReached(float lastTemp, float currTemp, float meltingPoint)
-    {
-        return lastTemp < meltingPoint && currTemp >= meltingPoint;
-    }
-    private bool BoilingPointReached(float lastTemp, float currTemp, float boilingPoint)
-    {
-        return this.MeltingPointReached(lastTemp, currTemp, boilingPoint);
-    }
-    private bool CondensationPointReached(float lastTemp, float currTemp, float condensationPoint)
-    {
-        return lastTemp >= condensationPoint && currTemp < condensationPoint;
-    }
-    private bool FreezingPointReached(float lastTemp, float currTemp, float freezingPoint)
-    {
-        return this.CondensationPointReached(lastTemp, currTemp, freezingPoint);
     }
 
     private GameObject CreateByProduct(string seTag, Vector3 position, bool isGas = false, float temperature = 0f)
