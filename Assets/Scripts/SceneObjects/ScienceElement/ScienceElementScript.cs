@@ -135,7 +135,8 @@ public class ScienceElementScript : MonoBehaviour
     private void EarthCollisionHandler(GameObject collisionOtherGO)
     {
         // water + earth = 70% mud, 20% stone, 10% ore
-        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG))
+        // saline + earth = (70% mud, 20% stone, 10% ore) & salt
+        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
             float randNum = Random.Range(0f, 1f);
             if (randNum < 0.7f)
@@ -151,16 +152,25 @@ public class ScienceElementScript : MonoBehaviour
                 this.ConvertElement(Constants.SE_ORE_TAG);
             }
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+            if (collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
+            {
+                this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
+            }
         }
     }
     private void LavaCollisionHandler(GameObject collisionOtherGO)
     {
         // lava + water = stone & steam
-        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG))
+        // lava + saline = stone & steam & salt
+        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
             this.ConvertElement(Constants.SE_STONE_TAG);
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
             this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT);
+            if (collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
+            {
+                this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
+            }
         }
     }
 
