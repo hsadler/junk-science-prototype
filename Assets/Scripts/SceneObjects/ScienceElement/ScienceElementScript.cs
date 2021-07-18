@@ -173,13 +173,10 @@ public class ScienceElementScript : MonoBehaviour
     private void CheckHeatChange()
     {
         // set new temperature
+        float newTemp = 0f;
         if (this.isReceivingHeat)
         {
-            float newTemp = this.temperature + this.receivingHeatAmount;
-            if (newTemp >= Constants.MIN_TEMPERATURE && newTemp <= Constants.MAX_TEMPERATURE)
-            {
-                this.temperature = newTemp;
-            }
+            newTemp = this.temperature + this.receivingHeatAmount;
         }
         else
         {
@@ -192,7 +189,13 @@ public class ScienceElementScript : MonoBehaviour
             {
                 heatToAdd = 0.01f;
             }
-            this.temperature += heatToAdd;
+            newTemp = this.temperature + heatToAdd;
+        }
+        if (newTemp >= Constants.MIN_TEMPERATURE && newTemp <= Constants.MAX_TEMPERATURE)
+        {
+            float tempChange = newTemp - this.temperature;
+            float adjustedTempChange = Random.Range(0, (tempChange * 2));
+            this.temperature += adjustedTempChange;
         }
         // run heat change handler
         switch (this.gameObject.tag)

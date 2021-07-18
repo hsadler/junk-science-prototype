@@ -7,9 +7,9 @@ TODO
 - polish:
     X do heat checks more often and with a smaller heat change (basically higher granularity)
     X make base elements have starting heat
-    - make element heat go towards default when not in any heat field
+    X make element heat go towards default when not in any heat field
+    X make heat change be a bit random 
     - LIGHTING PASS!
-    - tweak heat min and max to be a smaller window
 
 - music and sfx
 
