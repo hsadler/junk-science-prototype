@@ -13,9 +13,8 @@ public class ScienceElementScript : MonoBehaviour
 
     // science element temperature
     public float temperature;
-    public bool receivingHeat;
+    public bool isReceivingHeat;
     public float receivingHeatAmount;
-    public float secondsPerHeat;
 
     // mesh per science element
     private IDictionary<string, Mesh> tagToMesh = new Dictionary<string, Mesh>();
@@ -67,7 +66,7 @@ public class ScienceElementScript : MonoBehaviour
         Transform parent = transform.parent;
         transform.parent = null;
         transform.parent = parent;
-        InvokeRepeating("CheckHeatChange", 0f, this.secondsPerHeat);
+        InvokeRepeating("CheckHeatChange", 0f, Constants.SECONDS_PER_HEAT);
     }
 
     void Update() { }
@@ -100,9 +99,8 @@ public class ScienceElementScript : MonoBehaviour
     public void InitializeTemperatureProperties()
     {
         this.temperature = 0f;
-        this.receivingHeat = false;
+        this.isReceivingHeat = false;
         this.receivingHeatAmount = 0f;
-        this.secondsPerHeat = 1f;
     }
 
     public void SetInitialTemperature(float temperature)
@@ -112,9 +110,10 @@ public class ScienceElementScript : MonoBehaviour
 
     public string GetDisplayInfo()
     {
+        int displayTemperature = (int)Mathf.RoundToInt(this.temperature + 60);
         return
             LabSceneManager.instance.scienceElementData.tagToDisplayName[this.gameObject.tag] +
-            "\ntemperature: " + this.temperature;
+            "\ntemperature: " + displayTemperature;
     }
 
     // IMPLEMENTATION METHODS
@@ -174,13 +173,26 @@ public class ScienceElementScript : MonoBehaviour
     private void CheckHeatChange()
     {
         // set new temperature
-        if (this.receivingHeat)
+        if (this.isReceivingHeat)
         {
             float newTemp = this.temperature + this.receivingHeatAmount;
             if (newTemp >= Constants.MIN_TEMPERATURE && newTemp <= Constants.MAX_TEMPERATURE)
             {
                 this.temperature = newTemp;
             }
+        }
+        else
+        {
+            float heatToAdd = 0f;
+            if (this.temperature > Constants.INITIAL_SCIENCE_ELEMENT_TEMPERATURE)
+            {
+                heatToAdd = -0.01f;
+            }
+            else if (this.temperature < Constants.INITIAL_SCIENCE_ELEMENT_TEMPERATURE)
+            {
+                heatToAdd = 0.01f;
+            }
+            this.temperature += heatToAdd;
         }
         // run heat change handler
         switch (this.gameObject.tag)

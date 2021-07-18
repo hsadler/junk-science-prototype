@@ -6,32 +6,34 @@ public class HeatAreaScript : MonoBehaviour
 {
 
 
-    public float heatApplied = 10f;
+    public float heatApplied = 0f;
 
 
     // UNITY HOOKS
 
-    void Start() {}
+    void Start() { }
 
-    void Update() {}
+    void Update() { }
 
     void OnTriggerEnter(Collider other)
     {
         var seColliderScript = other.gameObject.GetComponent<ScienceElementColliderScript>();
-        if (seColliderScript == null) {
+        if (seColliderScript == null)
+        {
             return;
         }
-        seColliderScript.seScript.receivingHeat = true;
+        seColliderScript.seScript.isReceivingHeat = true;
         seColliderScript.seScript.receivingHeatAmount = this.heatApplied;
     }
 
     void OnTriggerExit(Collider other)
     {
         var seColliderScript = other.gameObject.GetComponent<ScienceElementColliderScript>();
-        if (seColliderScript == null) {
+        if (seColliderScript == null)
+        {
             return;
         }
-        seColliderScript.seScript.receivingHeat = false;
+        seColliderScript.seScript.isReceivingHeat = false;
         seColliderScript.seScript.receivingHeatAmount = 0f;
     }
 

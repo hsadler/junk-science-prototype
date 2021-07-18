@@ -55,8 +55,12 @@ public static class Constants
     public const int SCIENCE_ELEMENT_SPAWN_POOL_SIZE = 3000;
 
 
+    public const float INITIAL_SCIENCE_ELEMENT_TEMPERATURE = 0f;
+    public const float SECONDS_PER_HEAT = 0.1f;
     public const float MIN_TEMPERATURE = -60f;
     public const float MAX_TEMPERATURE = 60f;
+
+
     public const float WATER_BOILING_POINT = 30f;
     public const float EARTH_MELTING_POINT = 50f;
     public const float MUD_FREEZING_POINT = -30f;

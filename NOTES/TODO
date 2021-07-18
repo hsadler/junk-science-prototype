@@ -3,16 +3,13 @@
 TODO
 
 - bugs:
-    X not all heat changes are taking effect
-        (likely due to check of temperature threshold pass rather than if above or below)
-    - finish game display is appearing on top of last element discovery display
-        (not happening, may be intermittent)
 
 - polish:
-    - tweak heat min and max to be a smaller window
-    - do heat checks more often and with a smaller heat change (basically higher granularity)
-    - make base elements have starting heat
+    X do heat checks more often and with a smaller heat change (basically higher granularity)
+    X make base elements have starting heat
+    - make element heat go towards default when not in any heat field
     - LIGHTING PASS!
+    - tweak heat min and max to be a smaller window
 
 - music and sfx
 
