@@ -8,7 +8,10 @@ public class LabSceneManager : MonoBehaviour
 {
 
 
-    // manager components
+    // unity manager components
+    public GameSound gameSound;
+
+    // data manager components
     public ScienceElementData scienceElementData = new ScienceElementData();
 
     // player
@@ -102,8 +105,9 @@ public class LabSceneManager : MonoBehaviour
         // show player controls
         GUI.contentColor = Color.white;
         string playerControlsDisplayText =
-            "Movement: W, A, S, D\n" +
             "Aim Interaction: Left Mouse Button\n" +
+            "Movement: W, A, S, D\n" +
+            "Walk: Shift\n" +
             "Reload Lab Scene: R\n" +
             "Quit Game: Q";
         GUI.Label(

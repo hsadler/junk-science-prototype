@@ -54,7 +54,6 @@ public class PlayerInteractionScript : MonoBehaviour
         {
             this.CheckPickup();
         }
-
     }
 
     // IMPLEMENTATION METHODS

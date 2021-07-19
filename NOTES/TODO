@@ -6,7 +6,23 @@ TODO
 
 - polish:
 
-- music and sfx
+- music and sfx:
+    X music
+    - button press
+    - machine spin-up
+    - machine spin-down
+    - dispenser running
+    - mixer running
+    - heater running
+    - beaker picked up
+    - beaker set down
+    - beaker being mixed
+    - beaker contact with cooler field
+    - walking
+    - science element created
+    - science element distroyed
+    - science element converted
+    - end game celebration
 
 - take more videos
 
