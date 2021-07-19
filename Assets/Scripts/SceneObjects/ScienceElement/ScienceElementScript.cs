@@ -110,7 +110,7 @@ public class ScienceElementScript : MonoBehaviour
 
     public string GetDisplayInfo()
     {
-        int displayTemperature = (int)Mathf.RoundToInt(this.temperature + 60);
+        string displayTemperature = (this.temperature + 60).ToString("F2");
         return
             LabSceneManager.instance.scienceElementData.tagToDisplayName[this.gameObject.tag] +
             "\ntemperature: " + displayTemperature;
