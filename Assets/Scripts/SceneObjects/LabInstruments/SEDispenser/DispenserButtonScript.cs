@@ -24,10 +24,7 @@ public class DispenserButtonScript : MonoBehaviour
         _mr.material = this.materialOff;
     }
 
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // INTERFACE METHODS
 

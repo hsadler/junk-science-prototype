@@ -9,6 +9,8 @@ public class DispenserButtonManagerScript : MonoBehaviour
     public List<DispenserButtonScript> dispenserButtons;
     public SEInletScript seInletScript;
 
+    public AudioSource buttonPressAS;
+
 
     // UNITY HOOKS
 
@@ -31,6 +33,7 @@ public class DispenserButtonManagerScript : MonoBehaviour
             dbScript.TurnButtonOff();
         }
         button.TurnButtonOn();
+        this.buttonPressAS.Play();
         seInletScript.TurnOn(
             scienceElementTag: button.scienceElementTag,
             spawnRowLength: 2,
@@ -44,6 +47,7 @@ public class DispenserButtonManagerScript : MonoBehaviour
     public void TurnOffButton(DispenserButtonScript button)
     {
         button.TurnButtonOff();
+        this.buttonPressAS.Play();
         seInletScript.TurnOff();
     }
 
