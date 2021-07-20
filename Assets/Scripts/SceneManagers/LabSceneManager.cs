@@ -9,7 +9,7 @@ public class LabSceneManager : MonoBehaviour
 
 
     // unity manager components
-    public GameSound gameSound;
+    public GameAudio gameAudio;
 
     // data manager components
     public ScienceElementData scienceElementData = new ScienceElementData();

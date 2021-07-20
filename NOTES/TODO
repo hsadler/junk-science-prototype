@@ -8,19 +8,19 @@ TODO
 
 - music and sfx:
     X music
-    - button press
-    - machine spin-up
-    - machine spin-down
-    - dispenser running
-    - mixer running
-    - heater running
-    - beaker picked up
-    - beaker set down
-    - beaker being mixed
-    - beaker contact with cooler field
-    - walking
+    X button press
+    X machine spin-up
+    X machine spin-down
+    X dispenser running
+    X mixer running
+    X heater running
+    X beaker picked up
+    X beaker set down
+    O beaker being mixed
+    X beaker contact with cooler field
+    X walking
     - science element created
-    - science element distroyed
+    - science element distroyedw
     - science element converted
     - end game celebration
 
