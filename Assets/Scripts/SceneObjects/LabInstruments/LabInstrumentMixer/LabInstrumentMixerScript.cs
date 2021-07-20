@@ -21,6 +21,9 @@ public class LabInstrumentMixerScript : MonoBehaviour
     private float rotateSmooth = 3f;
     private Vector3 currentRotationVector = Vector3.zero;
 
+    // sounds
+    public AudioSource mixerRunningAS;
+
 
     // UNITY HOOKS
 
@@ -43,12 +46,14 @@ public class LabInstrumentMixerScript : MonoBehaviour
     {
         this.isOn = true;
         this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOnMaterial;
+        this.mixerRunningAS.Play();
     }
 
     public void TurnOff()
     {
         this.isOn = false;
         this.labInstrumentMixerButtonScript.meshRenderer.material = this.buttonOffMaterial;
+        this.mixerRunningAS.Stop();
     }
 
     public void ToggleOnOff()

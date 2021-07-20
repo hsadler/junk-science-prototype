@@ -9,6 +9,8 @@ public class LabInstrumentMixerButtonScript : MonoBehaviour
     public LabInstrumentMixerScript labInstrumentMixerScript;
     public MeshRenderer meshRenderer;
 
+    public AudioSource buttonPushAS;
+
 
     // UNITY HOOKS
 
@@ -18,10 +20,7 @@ public class LabInstrumentMixerButtonScript : MonoBehaviour
         this.meshRenderer.material = labInstrumentMixerScript.buttonOffMaterial;
     }
 
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // INTERFACE METHODS
 
@@ -30,6 +29,7 @@ public class LabInstrumentMixerButtonScript : MonoBehaviour
         if (gameObject == message.hit.collider.gameObject)
         {
             this.labInstrumentMixerScript.ToggleOnOff();
+            this.buttonPushAS.Play();
         }
     }
 
