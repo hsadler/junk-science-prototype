@@ -31,16 +31,25 @@ public class GameAudio : MonoBehaviour
 
     void Start()
     {
-        this.PlaySoundByName("music");
+        GameSound music = this.GetSoundByName("music");
+        music.audioSource.volume = 0.15f;
+        music.audioSource.loop = true;
+        music.audioSource.Play();
     }
+
+    void Update() { }
 
     // INTERFACE METHODS
 
-    public void PlaySoundByName(string name)
+    public GameSound GetSoundByName(string name)
     {
         if (nameToGameSound.ContainsKey(name))
         {
-            nameToGameSound[name].Play();
+            return nameToGameSound[name];
+        }
+        else
+        {
+            return null;
         }
     }
 

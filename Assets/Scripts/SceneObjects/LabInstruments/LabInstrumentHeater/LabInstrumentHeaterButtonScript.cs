@@ -9,8 +9,12 @@ public class LabInstrumentHeaterButtonScript : MonoBehaviour
     public LabInstrumentHeaterScript labInstrumentHeaterScript;
     public MeshRenderer meshRenderer;
 
+    public AudioSource buttonPushAS;
+
 
     // UNITY HOOKS
+
+    void Awake() { }
 
     void Start()
     {
@@ -18,10 +22,7 @@ public class LabInstrumentHeaterButtonScript : MonoBehaviour
         this.meshRenderer.material = labInstrumentHeaterScript.buttonOffMaterial;
     }
 
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // INTERFACE METHODS
 
@@ -30,6 +31,7 @@ public class LabInstrumentHeaterButtonScript : MonoBehaviour
         if (gameObject == message.hit.collider.gameObject)
         {
             this.labInstrumentHeaterScript.ToggleOnOff();
+            this.buttonPushAS.Play();
         }
     }
 

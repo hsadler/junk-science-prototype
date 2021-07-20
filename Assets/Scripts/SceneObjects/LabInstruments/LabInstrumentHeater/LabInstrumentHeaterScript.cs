@@ -23,6 +23,9 @@ public class LabInstrumentHeaterScript : MonoBehaviour
     public GameObject heatAreaGO;
     private HeatAreaScript heatAreaScript;
 
+    // sounds
+    public AudioSource heatRunningAS;
+
 
     // UNITY HOOKS
 
@@ -46,6 +49,7 @@ public class LabInstrumentHeaterScript : MonoBehaviour
         this.labInstrumentHeaterButtonScript.meshRenderer.material = this.buttonOnMaterial;
         this.heatSurfaceMeshRenderer.material = this.heatSurfaceOnMaterial;
         this.heatAreaGO.SetActive(true);
+        this.heatRunningAS.Play();
     }
 
     public void TurnOff()
@@ -54,6 +58,7 @@ public class LabInstrumentHeaterScript : MonoBehaviour
         this.labInstrumentHeaterButtonScript.meshRenderer.material = this.buttonOffMaterial;
         this.heatSurfaceMeshRenderer.material = this.heatSurfaceOffMaterial;
         this.heatAreaGO.SetActive(false);
+        this.heatRunningAS.Stop();
     }
 
     public void ToggleOnOff()
