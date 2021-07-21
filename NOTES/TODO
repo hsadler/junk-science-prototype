@@ -7,22 +7,17 @@ TODO
 - polish:
 
 - music and sfx:
-    X music
-    X button press
-    X machine spin-up
-    X machine spin-down
-    X dispenser running
-    X mixer running
-    X heater running
-    X beaker picked up
-    X beaker set down
-    O beaker being mixed
-    X beaker contact with cooler field
-    X walking
-    - science element created
-    - science element distroyedw
-    - science element converted
-    - end game celebration
+    - cooler field beaker enter and exit
+    - beaker pickup/putdown:
+        - find better sfx for this (can be more electronic/symbolic than realistic)
+    - dispenser running
+    - science element:
+        - create
+        - destroy
+        - impact
+        - collision reaction
+        - heat reaction
+        - cool reaction
 
 - take more videos
 

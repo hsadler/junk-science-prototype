@@ -25,6 +25,9 @@ public class PlayerInteractionScript : MonoBehaviour
 
     private ScienceElementScript closestSEScript;
 
+    public AudioSource beakerPickupAS;
+    public AudioSource beakerPutdownAS;
+
 
     // UNITY HOOKS
 
@@ -145,6 +148,7 @@ public class PlayerInteractionScript : MonoBehaviour
                     this.carryDistance = hit.distance;
                     this.carriedObject = hit.transform.gameObject;
                     this.carriedObject.GetComponent<Rigidbody>().isKinematic = true;
+                    this.beakerPickupAS.Play();
                 }
             }
         }
@@ -217,6 +221,7 @@ public class PlayerInteractionScript : MonoBehaviour
         this.carriedObject = null;
         this.lastRotation = Quaternion.identity;
         this.carriedObjectPositionIndicatorGO.SetActive(false);
+        this.beakerPutdownAS.Play();
     }
 
 

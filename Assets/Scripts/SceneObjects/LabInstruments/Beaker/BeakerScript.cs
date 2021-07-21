@@ -8,22 +8,16 @@ public class BeakerScript : MonoBehaviour
 
     // UNITY HOOKS
 
-    void Start()
-    {
+    void Start() { }
 
-    }
-
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // INTERFACE METHODS
 
-    public void PlayerLeftClickInteraction(PlayerInteractionMessage message)
-    {
-        //Debug.Log("player clicked a beaker");
-    }
+    // public void PlayerLeftClickInteraction(PlayerInteractionMessage message)
+    // {
+    //     Debug.Log("player clicked a beaker");
+    // }
 
 
 }

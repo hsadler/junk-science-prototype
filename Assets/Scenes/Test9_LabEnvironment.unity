@@ -1035,6 +1035,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeakerCubeLarge (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4275987888147107624, guid: 2c77ca44ba46e4dd5ac43352726a588e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8135472252696752286, guid: 2c77ca44ba46e4dd5ac43352726a588e,
         type: 3}
       propertyPath: m_RootOrder

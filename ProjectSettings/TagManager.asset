@@ -19,6 +19,7 @@ TagManager:
   - science-element-lava
   - science-element-clay
   - science-element-brick
+  - beaker
   layers:
   - Default
   - TransparentFX
