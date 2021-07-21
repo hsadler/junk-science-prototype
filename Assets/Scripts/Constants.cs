@@ -55,8 +55,6 @@ public static class Constants
     public const int SCIENCE_ELEMENT_SPAWN_POOL_SIZE = 3000;
     public const int SCIENCE_ELEMENT_DISPENSER_SPAWN_ROW_LENGTH = 1;
     public const int SCIENCE_ELEMENT_DISPENSER_SPAWN_COL_LENGTH = 1;
-    // TODO: remove since this doesn't change the spawn rate
-    public const float SCIENCE_ELEMENT_DISPENSER_SECONDS_PER_SPAWN = 1f;
 
 
     public const float INITIAL_SCIENCE_ELEMENT_TEMPERATURE = 0f;

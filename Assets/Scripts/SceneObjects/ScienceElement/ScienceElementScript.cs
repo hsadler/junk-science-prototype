@@ -179,6 +179,23 @@ public class ScienceElementScript : MonoBehaviour
         }
     }
 
+    private void MoltenMetalCollisionHandler(GameObject collisionOtherGO)
+    {
+        // TODO: implement
+        // molten metal + water = metal & steam
+        // molten metal + saline = metal & steam & salt
+        if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
+        {
+            this.ConvertElement(Constants.SE_METAL_TAG);
+            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT);
+            if (collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
+            {
+                this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
+            }
+        }
+    }
+
     private void CheckHeatChange()
     {
         // set new temperature

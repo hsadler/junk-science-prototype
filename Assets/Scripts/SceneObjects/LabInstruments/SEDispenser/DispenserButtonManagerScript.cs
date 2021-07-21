@@ -34,8 +34,7 @@ public class DispenserButtonManagerScript : MonoBehaviour
             spawnRowLength: Constants.SCIENCE_ELEMENT_DISPENSER_SPAWN_ROW_LENGTH,
             spawnColumnLength: Constants.SCIENCE_ELEMENT_DISPENSER_SPAWN_COL_LENGTH,
             itemSpread: 1f,
-            propulsionForce: 20f,
-            secondsPerSpawn: Constants.SCIENCE_ELEMENT_DISPENSER_SECONDS_PER_SPAWN
+            propulsionForce: 20f
         );
         this.dispenserRunningAS.Play();
     }

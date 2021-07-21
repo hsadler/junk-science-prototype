@@ -25,6 +25,7 @@ public class ScienceElementSoundsScript : MonoBehaviour
     {
         if (this.popAudioClips.Length > 0)
         {
+            // select a random pop clip, randomly adjust pitch within a variation window 
             AudioClip randPopClip = popAudioClips[Random.Range(0, this.popAudioClips.Length)];
             float adjustValue = Random.Range(-this.popPitchVariation / 2, this.popPitchVariation / 2);
             float adjustedPitch = this.popPitch + adjustValue;
@@ -39,8 +40,25 @@ public class ScienceElementSoundsScript : MonoBehaviour
 
     public void PlayDestroySound()
     {
-        // STUB
-        Debug.Log("PlayDestroySound...");
+        // Debug.Log("PlayDestroySound...");
+    }
+
+    public void PlayCollisionReactionSound()
+    {
+        // TODO: implement stub
+        Debug.Log("PlayCollisionReactionSound...");
+    }
+
+    public void PlayHeatingReactionSound()
+    {
+        // TODO: implement stub
+        Debug.Log("PlayHeatingReactionSound...");
+    }
+
+    public void PlayCoolingReactionSound()
+    {
+        // TODO: implement stub
+        Debug.Log("PlayCoolingReactionSound...");
     }
 
 

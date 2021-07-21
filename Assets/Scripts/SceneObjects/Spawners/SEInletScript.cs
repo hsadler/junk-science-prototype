@@ -74,8 +74,7 @@ public class SEInletScript : MonoBehaviour
         int spawnRowLength = 1,
         int spawnColumnLength = 1,
         float itemSpread = 1f,
-        float propulsionForce = 0f,
-        float secondsPerSpawn = 1f
+        float propulsionForce = 0f
     )
     {
         this.scienceElementTag = scienceElementTag;
@@ -83,7 +82,6 @@ public class SEInletScript : MonoBehaviour
         this.spawnColumnLength = spawnColumnLength;
         this.itemSpread = itemSpread;
         this.propulsionForce = propulsionForce;
-        this.secondsPerSpawn = secondsPerSpawn;
         this.spawnOn = true;
     }
 
