@@ -14,6 +14,8 @@ public class PlayerMovementScript : MonoBehaviour
     private CharacterController _charCont;
     private Vector3 _moveDirection = Vector3.zero;
 
+    public AudioSource playerWalkAS;
+
 
     void Start()
     {
@@ -34,7 +36,15 @@ public class PlayerMovementScript : MonoBehaviour
 
     private void HandlePlayerMove()
     {
-        float calcMoveSpeed = this.moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? 0.5f : 1f);
+        float calcMoveSpeed = 0f;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            calcMoveSpeed = this.moveSpeed * 0.5f;
+        }
+        else
+        {
+            calcMoveSpeed = this.moveSpeed;
+        }
         // Move direction directly from axes
         float deltaX = Input.GetAxis("Horizontal") * calcMoveSpeed;
         float deltaZ = Input.GetAxis("Vertical") * calcMoveSpeed;
@@ -50,16 +60,19 @@ public class PlayerMovementScript : MonoBehaviour
             {
                 _moveDirection.y = 0f;
             }
-            // STUB: Handle movement processes, such as footsteps SFX
             if (deltaX != 0 || deltaZ != 0)
             {
-                // Do handling here...
+                // Handle movement processes, such as footsteps SFX
+                if (!this.playerWalkAS.isPlaying)
+                {
+                    this.playerWalkAS.Play();
+                }
             }
         }
         else
         {
-            // STUB: Handle movement stop processes, such as footsteps SFX
-            // Do handling here...
+            // Handle movement stop processes, such as footsteps SFX
+            this.playerWalkAS.Stop();
         }
         ApplyMovement();
     }
