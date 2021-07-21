@@ -12,12 +12,5 @@ public class BeakerScript : MonoBehaviour
 
     void Update() { }
 
-    // INTERFACE METHODS
-
-    // public void PlayerLeftClickInteraction(PlayerInteractionMessage message)
-    // {
-    //     Debug.Log("player clicked a beaker");
-    // }
-
 
 }
