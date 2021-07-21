@@ -32,7 +32,7 @@ public class GameAudio : MonoBehaviour
     void Start()
     {
         GameSound music = this.GetSoundByName("music");
-        music.audioSource.volume = 0.15f;
+        music.audioSource.volume = 0.1f;
         music.audioSource.loop = true;
         music.audioSource.Play();
     }
