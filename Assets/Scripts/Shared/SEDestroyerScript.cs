@@ -8,15 +8,9 @@ public class SEDestroyerScript : MonoBehaviour
 
     // UNITY HOOKS
 
-    void Start()
-    {
+    void Start() { }
 
-    }
-
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     void OnTriggerEnter(Collider other)
     {

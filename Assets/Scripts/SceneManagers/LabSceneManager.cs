@@ -137,10 +137,11 @@ public class LabSceneManager : MonoBehaviour
 
     public void GiveScienceElementBackToPool(GameObject go)
     {
-        go.SetActive(false);
-        go.GetComponent<Rigidbody>().velocity = Vector3.zero;
         var seScript = go.GetComponent<ScienceElementScript>();
         seScript.InitializeTemperatureProperties();
+        seScript.OnDestroyProcs();
+        go.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        go.SetActive(false);
         this.scienceElementPool.Push(go);
         this.scienceElementSpawnCount -= 1;
     }

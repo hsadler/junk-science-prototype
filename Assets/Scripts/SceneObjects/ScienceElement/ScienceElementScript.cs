@@ -10,6 +10,7 @@ public class ScienceElementScript : MonoBehaviour
     private MeshFilter meshF;
     private MeshRenderer meshR;
     private ConstantForce constantF;
+    public ScienceElementSoundsScript seSoundsScript;
 
     // science element temperature
     public float temperature;
@@ -74,7 +75,10 @@ public class ScienceElementScript : MonoBehaviour
     void OnEnable()
     {
         this.ProcActivated();
+        this.seSoundsScript.PlayCreateSound();
     }
+
+    void OnDisable() { }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -95,6 +99,11 @@ public class ScienceElementScript : MonoBehaviour
     }
 
     // INTERFACE METHODS
+
+    public void OnDestroyProcs()
+    {
+        this.seSoundsScript.PlayDestroySound();
+    }
 
     public void InitializeTemperatureProperties()
     {
