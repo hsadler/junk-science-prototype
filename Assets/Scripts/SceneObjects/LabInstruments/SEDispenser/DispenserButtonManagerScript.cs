@@ -10,19 +10,14 @@ public class DispenserButtonManagerScript : MonoBehaviour
     public SEInletScript seInletScript;
 
     public AudioSource buttonPressAS;
+    public AudioSource dispenserRunningAS;
 
 
     // UNITY HOOKS
 
-    void Start()
-    {
+    void Start() { }
 
-    }
-
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     // INTERFACE METHODS
 
@@ -34,7 +29,7 @@ public class DispenserButtonManagerScript : MonoBehaviour
         }
         button.TurnButtonOn();
         this.buttonPressAS.Play();
-        seInletScript.TurnOn(
+        this.seInletScript.TurnOn(
             scienceElementTag: button.scienceElementTag,
             spawnRowLength: 2,
             spawnColumnLength: 2,
@@ -42,13 +37,15 @@ public class DispenserButtonManagerScript : MonoBehaviour
             propulsionForce: 20f,
             secondsPerSpawn: 0.2f
         );
+        this.dispenserRunningAS.Play();
     }
 
     public void TurnOffButton(DispenserButtonScript button)
     {
         button.TurnButtonOff();
         this.buttonPressAS.Play();
-        seInletScript.TurnOff();
+        this.seInletScript.TurnOff();
+        this.dispenserRunningAS.Stop();
     }
 
 
