@@ -88,6 +88,10 @@ public class LabSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("Test9_LabEnvironment");
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            this.gameAudio.ToggleMuteMusic();
+        }
     }
 
     void OnGUI()
@@ -108,7 +112,8 @@ public class LabSceneManager : MonoBehaviour
             "Aim Interaction: Left Mouse Button\n" +
             "Movement: W, A, S, D\n" +
             "Walk: Shift\n" +
-            "Reload Lab Scene: R\n" +
+            "Mute Music: M\n" +
+            "Start Over: R\n" +
             "Quit Game: Q";
         GUI.Label(
             this.guiControlsDisplay,

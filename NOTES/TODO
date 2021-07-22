@@ -5,19 +5,31 @@ TODO
 - bugs:
 
 - polish:
-    - add molten-metal + water = steam + metal reaction
+    X add mute music feature
 
 - music and sfx:
-    X cooler field beaker enter and exit
-    X beaker pickup/putdown
-    - dispenser running
     - science element:
-        - create
-        - destroy
-        - impact
-        - collision reaction
-        - heat reaction
-        - cool reaction
+        X create
+        - collision reaction:
+            - sounds found
+            - sounds imported
+            - sounds implemented
+        - heat reaction:
+            X sounds found
+            - sounds imported
+            - sounds implemented
+        - cool reaction:
+            X sounds found
+            - sounds imported
+            - sounds implemented
+        - impact:
+            - sounds found
+            - sounds imported
+            - sounds implemented
+        - destroy (maybe, hard to implement):
+            - sounds found
+            - sounds imported
+            - sounds implemented
 
 - take more videos
 

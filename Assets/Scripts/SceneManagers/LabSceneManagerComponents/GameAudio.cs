@@ -9,6 +9,9 @@ public class GameAudio : MonoBehaviour
     public GameSound[] gameSounds;
     private IDictionary<string, GameSound> nameToGameSound = new Dictionary<string, GameSound>();
 
+    public float musicVolume;
+    public bool musicMuted = false;
+
 
     // UNITY HOOKS
 
@@ -32,7 +35,7 @@ public class GameAudio : MonoBehaviour
     void Start()
     {
         GameSound music = this.GetSoundByName("music");
-        music.audioSource.volume = 0.1f;
+        music.audioSource.volume = this.musicVolume;
         music.audioSource.loop = true;
         music.audioSource.Play();
     }
@@ -50,6 +53,32 @@ public class GameAudio : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    public void MuteMusic()
+    {
+        GameSound music = this.GetSoundByName("music");
+        music.audioSource.volume = 0f;
+        this.musicMuted = true;
+    }
+
+    public void UnmuteMusic()
+    {
+        GameSound music = this.GetSoundByName("music");
+        music.audioSource.volume = this.musicVolume;
+        this.musicMuted = false;
+    }
+
+    public void ToggleMuteMusic()
+    {
+        if (this.musicMuted)
+        {
+            this.UnmuteMusic();
+        }
+        else
+        {
+            this.MuteMusic();
         }
     }
 
