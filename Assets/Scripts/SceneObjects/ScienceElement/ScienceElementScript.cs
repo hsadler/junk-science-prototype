@@ -93,6 +93,9 @@ public class ScienceElementScript : MonoBehaviour
             case Constants.SE_LAVA_TAG:
                 this.LavaCollisionHandler(collision.gameObject);
                 break;
+            case Constants.SE_MOLTEN_METAL_TAG:
+                this.MoltenMetalCollisionHandler(collision.gameObject);
+                break;
             default:
                 break;
         }
@@ -169,30 +172,19 @@ public class ScienceElementScript : MonoBehaviour
         // lava + saline = stone & steam & salt
         if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
-            this.ConvertElement(Constants.SE_STONE_TAG);
-            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
-            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT);
-            if (collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
-            {
-                this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
-            }
+            this.temperature -= 5f;
+            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 20f;
         }
     }
 
     private void MoltenMetalCollisionHandler(GameObject collisionOtherGO)
     {
-        // TODO: implement
         // molten metal + water = metal & steam
         // molten metal + saline = metal & steam & salt
         if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
-            this.ConvertElement(Constants.SE_METAL_TAG);
-            LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
-            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT);
-            if (collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
-            {
-                this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
-            }
+            this.temperature -= 5f;
+            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 20f;
         }
     }
 
