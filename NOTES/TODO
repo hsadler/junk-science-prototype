@@ -11,21 +11,22 @@ TODO
     - science element:
         X create
         - collision reaction:
-            - sounds found
-            - sounds imported
-            - sounds implemented
-        - heat reaction:
             X sounds found
             - sounds imported
             - sounds implemented
+        X heat reaction:
+            X sounds found
+            X sounds imported
+            X sounds implemented
         - cool reaction:
             X sounds found
-            - sounds imported
-            - sounds implemented
-        - impact:
-            - sounds found
-            - sounds imported
-            - sounds implemented
+            X sounds imported
+            X sounds implemented
+            - separate drip or condensation sound for steam->water?
+        X impact:
+            X sounds found
+            X sounds imported
+            X sounds implemented
         - destroy (maybe, hard to implement):
             - sounds found
             - sounds imported

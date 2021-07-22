@@ -99,6 +99,11 @@ public class ScienceElementScript : MonoBehaviour
             default:
                 break;
         }
+        // play impact sound when sufficient impact occurs
+        if (collision.relativeVelocity.magnitude > 50)
+        {
+            this.seSoundsScript.PlayImpactSound();
+        }
     }
 
     // INTERFACE METHODS
@@ -138,6 +143,7 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_SALINE_TAG);
             LabSceneManager.instance.GiveScienceElementBackToPool(collisionOtherGO);
+            this.seSoundsScript.PlayCollisionReactionSound();
         }
     }
     private void EarthCollisionHandler(GameObject collisionOtherGO)
@@ -164,6 +170,7 @@ public class ScienceElementScript : MonoBehaviour
             {
                 this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
             }
+            this.seSoundsScript.PlayCollisionReactionSound();
         }
     }
     private void LavaCollisionHandler(GameObject collisionOtherGO)
@@ -194,10 +201,12 @@ public class ScienceElementScript : MonoBehaviour
         float newTemp = 0f;
         if (this.isReceivingHeat)
         {
+            // recieving head from heat field
             newTemp = this.temperature + this.receivingHeatAmount;
         }
         else
         {
+            // slow heat change towards room temperature
             float heatToAdd = 0f;
             if (this.temperature > Constants.INITIAL_SCIENCE_ELEMENT_TEMPERATURE)
             {
@@ -209,6 +218,7 @@ public class ScienceElementScript : MonoBehaviour
             }
             newTemp = this.temperature + heatToAdd;
         }
+        // random adjustment of temperature to apply
         if (newTemp >= Constants.MIN_TEMPERATURE && newTemp <= Constants.MAX_TEMPERATURE)
         {
             float tempChange = newTemp - this.temperature;
@@ -248,6 +258,9 @@ public class ScienceElementScript : MonoBehaviour
             case Constants.SE_METAL_TAG:
                 this.MetalHeatChangeHandler();
                 break;
+            case Constants.SE_STONE_TAG:
+                this.StoneHeatChangeHandler();
+                break;
             default:
                 break;
         }
@@ -260,6 +273,7 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature > Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void SalineHeatChangeHandler()
@@ -269,6 +283,7 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_STEAM_TAG, true);
             this.CreateByProduct(Constants.SE_SALT_TAG, this.transform.position, false, this.temperature);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void SteamHeatChangeHandler()
@@ -277,6 +292,8 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature <= Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_WATER_TAG);
+            // TODO: drip or condensation sound instead here?
+            this.seSoundsScript.PlayCoolingReactionSound();
         }
     }
     private void EarthHeatChangeHandler()
@@ -285,6 +302,7 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature > Constants.EARTH_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_LAVA_TAG);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void LavaHeatChangeHandler()
@@ -293,6 +311,7 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature <= Constants.EARTH_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_STONE_TAG);
+            this.seSoundsScript.PlayCoolingReactionSound();
         }
     }
     private void MudHeatChangeHandler()
@@ -301,11 +320,14 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature <= Constants.MUD_FREEZING_POINT)
         {
             this.ConvertElement(Constants.SE_CLAY_TAG);
+            this.seSoundsScript.PlayCoolingReactionSound();
         }
-        // heat mud = earth
+        // heat mud = earth + steam
         if (this.temperature > Constants.MUD_DRYING_POINT)
         {
             this.ConvertElement(Constants.SE_EARTH_TAG);
+            this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, Constants.WATER_BOILING_POINT + 10f);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void ClayHeatChangeHandler()
@@ -315,6 +337,7 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_BRICK_TAG);
             this.CreateByProduct(Constants.SE_STEAM_TAG, this.transform.position, true, this.temperature);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void OreHeatChangeHandler()
@@ -324,6 +347,7 @@ public class ScienceElementScript : MonoBehaviour
         {
             this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
             this.CreateByProduct(Constants.SE_SLAG_TAG, this.transform.position, false, this.temperature);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
     private void MoltenMetalHeatChangeHandler()
@@ -332,6 +356,7 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature <= Constants.METAL_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_METAL_TAG);
+            this.seSoundsScript.PlayCoolingReactionSound();
         }
     }
     private void MetalHeatChangeHandler()
@@ -340,6 +365,17 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature > Constants.METAL_MELTING_POINT)
         {
             this.ConvertElement(Constants.SE_MOLTEN_METAL_TAG);
+            this.seSoundsScript.PlayHeatingReactionSound();
+        }
+    }
+
+    private void StoneHeatChangeHandler()
+    {
+        // heat stone = slag
+        if (this.temperature > Constants.EARTH_MELTING_POINT)
+        {
+            this.ConvertElement(Constants.SE_SLAG_TAG);
+            this.seSoundsScript.PlayHeatingReactionSound();
         }
     }
 
