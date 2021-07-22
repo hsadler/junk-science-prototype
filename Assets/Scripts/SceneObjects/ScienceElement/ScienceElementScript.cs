@@ -172,8 +172,8 @@ public class ScienceElementScript : MonoBehaviour
         // lava + saline = stone & steam & salt
         if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
-            this.temperature -= 5f;
-            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 20f;
+            this.temperature -= 1f;
+            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 30f;
         }
     }
 
@@ -183,8 +183,8 @@ public class ScienceElementScript : MonoBehaviour
         // molten metal + saline = metal & steam & salt
         if (collisionOtherGO.CompareTag(Constants.SE_WATER_TAG) || collisionOtherGO.CompareTag(Constants.SE_SALINE_TAG))
         {
-            this.temperature -= 5f;
-            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 20f;
+            this.temperature -= 1f;
+            collisionOtherGO.GetComponent<ScienceElementScript>().temperature += 30f;
         }
     }
 
