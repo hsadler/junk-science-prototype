@@ -5,16 +5,9 @@ TODO
 - bugs:
 
 - polish:
-    X lower walking volume
-    X lower SE pop volume
-    X (needs testing) stop walking sfx if player is deactivated
-    X make endgame text not transparent and maybe bold
-    X (no) give the option to keep playing same scene once all SEs found
-
-- music and sfx:
-    - beaker:
-        - remove pickup/putdown
-        - add impact clink
+    X increase cooling reaction sfx
+    - add more nuance to beaker clinks with SEs, 
+        SEs colliding with beaker are currently causing sfx spam
 
 - take more videos
 

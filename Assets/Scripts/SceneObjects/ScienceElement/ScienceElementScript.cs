@@ -292,7 +292,6 @@ public class ScienceElementScript : MonoBehaviour
         if (this.temperature <= Constants.WATER_BOILING_POINT)
         {
             this.ConvertElement(Constants.SE_WATER_TAG);
-            // TODO: drip or condensation sound instead here?
             this.seSoundsScript.PlayCoolingReactionSound();
         }
     }
