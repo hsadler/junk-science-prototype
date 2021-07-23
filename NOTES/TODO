@@ -5,16 +5,13 @@ TODO
 - bugs:
 
 - polish:
-    X add mute music feature
-    X increase size of salt and slag
+    - lower walking volume
+    - lower SE pop volume
+    - stop walking sfx if player is deactivated
+    - give the option to keep playing same scene once all SEs found
+    - make endgame text not transparent and maybe bold
 
 - music and sfx:
-    - science element:
-        - collision reaction:
-            - always water+another_element, perhaps drop sound or suction sound
-            - sounds found
-            - sounds imported
-            - sounds implemented
     - beaker:
         - remove pickup/putdown
         - add impact clink
