@@ -6,31 +6,18 @@ TODO
 
 - polish:
     X add mute music feature
+    X increase size of salt and slag
 
 - music and sfx:
     - science element:
-        X create
         - collision reaction:
-            X sounds found
-            - sounds imported
-            - sounds implemented
-        X heat reaction:
-            X sounds found
-            X sounds imported
-            X sounds implemented
-        - cool reaction:
-            X sounds found
-            X sounds imported
-            X sounds implemented
-            - separate drip or condensation sound for steam->water?
-        X impact:
-            X sounds found
-            X sounds imported
-            X sounds implemented
-        - destroy (maybe, hard to implement):
+            - always water+another_element, perhaps drop sound or suction sound
             - sounds found
             - sounds imported
             - sounds implemented
+    - beaker:
+        - remove pickup/putdown
+        - add impact clink
 
 - take more videos
 
