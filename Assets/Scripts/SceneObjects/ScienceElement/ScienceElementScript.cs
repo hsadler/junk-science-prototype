@@ -99,8 +99,12 @@ public class ScienceElementScript : MonoBehaviour
             default:
                 break;
         }
-        // play impact sound when sufficient impact occurs
-        if (collision.relativeVelocity.magnitude > 50)
+        // play impact sound when sufficient impact occurs with non-beaker and non-SE
+        if (
+            collision.relativeVelocity.magnitude > 50 &&
+            !collision.gameObject.CompareTag("beaker") &&
+            collision.gameObject.GetComponent<ScienceElementScript>() == null
+        )
         {
             this.seSoundsScript.PlayImpactSound();
         }

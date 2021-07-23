@@ -20,6 +20,7 @@ TagManager:
   - science-element-clay
   - science-element-brick
   - beaker
+  - beaker-collider
   layers:
   - Default
   - TransparentFX
