@@ -5,8 +5,8 @@ TODO
 - bugs:
 
 - polish:
-    - lower walking volume
-    - lower SE pop volume
+    X lower walking volume
+    X lower SE pop volume
     - stop walking sfx if player is deactivated
     - give the option to keep playing same scene once all SEs found
     - make endgame text not transparent and maybe bold
