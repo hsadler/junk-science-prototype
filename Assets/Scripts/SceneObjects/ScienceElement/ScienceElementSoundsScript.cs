@@ -14,12 +14,6 @@ public class ScienceElementSoundsScript : MonoBehaviour
     public float popPitch;
     public float popPitchVariation;
 
-    // collision sounds for SE+SE collisions
-    public AudioClip[] collisionAudioClips;
-    public float collisionVolume;
-    public float collisionPitch;
-    public float collisionPitchVariation;
-
     // sizzle sounds for SE heating reactions
     public AudioClip[] sizzleAudioClips;
     public float sizzleVolume;
@@ -37,6 +31,18 @@ public class ScienceElementSoundsScript : MonoBehaviour
     public float impactVolume;
     public float impactPitch;
     public float impactPitchVariation;
+
+    // drip sounds for SE+SE collision reactions
+    public AudioClip[] dripAudioClips;
+    public float dripVolume;
+    public float dripPitch;
+    public float dripPitchVariation;
+
+    // suction sounds for SE+SE collision reactions
+    public AudioClip[] suctionAudioClips;
+    public float suctionVolume;
+    public float suctionPitch;
+    public float suctionPitchVariation;
 
 
     // UNITY HOOKS
@@ -71,8 +77,18 @@ public class ScienceElementSoundsScript : MonoBehaviour
 
     public void PlayCollisionReactionSound()
     {
-        // TODO: implement stub
-        Debug.Log("PlayCollisionReactionSound...");
+        if (this.suctionAudioClips.Length > 0)
+        {
+            // select a random suction clip, randomly adjust pitch within a variation window 
+            AudioClip clip = this.GetRandomClipFromCollection(this.suctionAudioClips);
+            this.audioSource.pitch = this.GetRandomAdjustedPitch(this.suctionPitch, this.suctionPitchVariation);
+            this.audioSource.volume = this.suctionVolume;
+            this.audioSource.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.LogWarning("There are no science-element suction audio clips to choose from");
+        }
     }
 
     public void PlayHeatingReactionSound()
