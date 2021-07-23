@@ -31,6 +31,7 @@ public class PlayerMovementScript : MonoBehaviour
         else
         {
             HandlePlayerInactiveMove();
+            this.playerWalkAS.Stop();
         }
     }
 
