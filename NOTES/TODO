@@ -2,7 +2,11 @@
 
 TODO
 
-- add hide-UI control
+X add hide-UI control
+
+- bugs:
+    - heat addition to elements gets in a runaway state if heat field is 
+        turned off while elements are within field
 
 - take more videos and prepare other sharables:
     - boil water
