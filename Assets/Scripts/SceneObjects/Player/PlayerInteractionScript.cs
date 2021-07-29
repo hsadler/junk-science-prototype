@@ -110,23 +110,26 @@ public class PlayerInteractionScript : MonoBehaviour
             }
         }
         // science element info display on hover
-        this.closestSEScript = null;
-        float closestSEDistance = Mathf.Infinity;
-        RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, scienceElementMask);
-        foreach (RaycastHit currHit in hits)
+        if (LabSceneManager.instance.uiVisible)
         {
-            var currSeScript = currHit.transform.gameObject.GetComponent<ScienceElementScript>();
-            float seDistance = Vector3.Distance(currHit.transform.position, this.playerCameraGO.transform.position);
-            if (seDistance < closestSEDistance)
+            this.closestSEScript = null;
+            float closestSEDistance = Mathf.Infinity;
+            RaycastHit[] hits = Physics.RaycastAll(cameraPos, direction, distance, scienceElementMask);
+            foreach (RaycastHit currHit in hits)
             {
-                this.closestSEScript = currSeScript;
-                closestSEDistance = seDistance;
+                var currSeScript = currHit.transform.gameObject.GetComponent<ScienceElementScript>();
+                float seDistance = Vector3.Distance(currHit.transform.position, this.playerCameraGO.transform.position);
+                if (seDistance < closestSEDistance)
+                {
+                    this.closestSEScript = currSeScript;
+                    closestSEDistance = seDistance;
+                }
             }
-        }
-        if (this.closestSEScript != null)
-        {
-            this.seInfoUIGO.SetActive(true);
-            this.seInfoScript.SetSEInfo(this.closestSEScript.GetDisplayInfo());
+            if (this.closestSEScript != null)
+            {
+                this.seInfoUIGO.SetActive(true);
+                this.seInfoScript.SetSEInfo(this.closestSEScript.GetDisplayInfo());
+            }
         }
     }
 

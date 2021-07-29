@@ -45,6 +45,9 @@ public class LabSceneManager : MonoBehaviour
     // unity events
     public ScienceElementDiscoveredEvent scienceElementDiscoveredEvent = new ScienceElementDiscoveredEvent();
 
+    // ui display
+    public bool uiVisible = true;
+
 
     // the static reference to the singleton instance
     public static LabSceneManager instance { get; private set; }
@@ -92,36 +95,44 @@ public class LabSceneManager : MonoBehaviour
         {
             this.gameAudio.ToggleMuteMusic();
         }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            this.uiVisible = !this.uiVisible;
+        }
     }
 
     void OnGUI()
     {
-        // show scene telemetry
-        GUI.contentColor = Color.green;
-        int fps = (int)(1.0f / Time.smoothDeltaTime);
-        string displayText =
-            "Spawn count: " + this.scienceElementSpawnCount.ToString() +
-            ", FPS: " + fps.ToString();
-        GUI.Label(
-            this.guiSceneTelemetryRect,
-            displayText
-        );
-        // show player controls
-        GUI.contentColor = Color.white;
-        string playerControlsDisplayText =
-            "Aim Interaction: Left Mouse Button\n" +
-            "Movement: W, A, S, D\n" +
-            "Walk: Shift\n" +
-            "Mute Music: M\n" +
-            "Start Over: R\n" +
-            "Quit Game: Q";
-        GUI.Label(
-            this.guiControlsDisplay,
-            playerControlsDisplayText
-        );
-        // TODO: show elements discovered and undiscovered
-        // GUI.contentColor = Color.white;
-        // GUI.Label(this.guiScienceElementDiscoveryStatusList, "SOME TEASAAAXXXT!");
+        if (this.uiVisible)
+        {
+            // show scene telemetry
+            GUI.contentColor = Color.green;
+            int fps = (int)(1.0f / Time.smoothDeltaTime);
+            string displayText =
+                "Spawn count: " + this.scienceElementSpawnCount.ToString() +
+                ", FPS: " + fps.ToString();
+            GUI.Label(
+                this.guiSceneTelemetryRect,
+                displayText
+            );
+            // show player controls
+            GUI.contentColor = Color.white;
+            string playerControlsDisplayText =
+                "Aim Interaction: Left Mouse Button\n" +
+                "Movement: W, A, S, D\n" +
+                "Walk: Shift\n" +
+                "Mute Music: M\n" +
+                "Hide UI: H\n" +
+                "Start Over: R\n" +
+                "Quit Game: Q";
+            GUI.Label(
+                this.guiControlsDisplay,
+                playerControlsDisplayText
+            );
+            // TODO: show elements discovered and undiscovered
+            // GUI.contentColor = Color.white;
+            // GUI.Label(this.guiScienceElementDiscoveryStatusList, "SOME TEASAAAXXXT!");
+        }
     }
 
     // INTERFACE METHODS

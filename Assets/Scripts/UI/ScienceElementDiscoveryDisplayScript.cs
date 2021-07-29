@@ -31,7 +31,10 @@ public class ScienceElementDiscoveryDisplayScript : MonoBehaviour
 
     void Update()
     {
-        CheckAndDisplay();
+        if (LabSceneManager.instance.uiVisible)
+        {
+            CheckAndDisplay();
+        }
     }
 
     // IMPLEMENTATION METHODS
