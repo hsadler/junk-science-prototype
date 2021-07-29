@@ -122,7 +122,6 @@ public class LabSceneManager : MonoBehaviour
                 "Movement: W, A, S, D\n" +
                 "Walk: Shift\n" +
                 "Mute Music: M\n" +
-                "Hide UI: H\n" +
                 "Start Over: R\n" +
                 "Quit Game: Q";
             GUI.Label(
