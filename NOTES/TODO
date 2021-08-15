@@ -8,8 +8,8 @@ X add hide-UI control
     - heat addition to elements gets in a runaway state if heat field is 
         turned off while elements are within field
 
-- take more videos and prepare other sharables:
-    - boil water
+- take more videos and prepare edits:
+    X boil water
     - beaker pickup, pour
     - water + salt = saline, boil saline = steam & salt
     - mixer and cooler
@@ -17,7 +17,9 @@ X add hide-UI control
     - lava + water dazzle
     - lots of steam resulting in rain
 
-- post game videos on reddit about ideas, features, and systems
+- post teaser video edits to youtube
+
+- incrementally share to twitter and reddit
 
 - prepare game for release:
     - rename game to Lab Phyzz
@@ -25,7 +27,7 @@ X add hide-UI control
     - publisher info
     - splash image
     - game settings
-    - installers for Windows, Linux, Mac, Web Browser
+    - builds for Windows, Linux, Mac, Web Browser
 
 - put prototype on itch.io
 
